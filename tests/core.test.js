@@ -280,6 +280,25 @@ test("manual edits, including age and custom occupation, are reflected in export
   assert.throws(()=>buildCharacter(completeAnswers(),templates,questions,{age:{value:42}}),/Profile age must be/);
   assert.throws(()=>updateCharacterField(c,"profile","age",false),/Age must be/);
 });
+test("JSON export validates the complete version-1 contract and ignores extra character data", () => {
+  const character = buildCharacter(completeAnswers(), templates, questions, {
+    name: "測試角色", occupation: "研究員", age: 42, birthplace: "臺北", residence: "臺北"
+  });
+  character.rawAnswers = completeAnswers();
+  character.stats = { STR: 99 };
+  character.skills = ["occult"];
+  character.background.unexpected = "must not export";
+  const exported = JSON.parse(exportJSON(character, "2026-10-28T00:00:00.000Z"));
+  assert.deepEqual(Object.keys(exported).sort(), ["background", "meta", "profile", "version"]);
+  assert.deepEqual(Object.keys(exported.profile).sort(), ["age", "birthplace", "name", "occupation", "residence"]);
+  assert.deepEqual(Object.keys(exported.background).sort(), Object.keys(templates.fieldLabels).sort());
+  assert.equal(exported.meta.created_at, "2026-10-28T00:00:00.000Z");
+  assert.equal(exported.profile.age, 42);
+  assert.equal("rawAnswers" in exported, false);
+  assert.equal("stats" in exported, false);
+  assert.equal("skills" in exported, false);
+  assert.equal("unexpected" in exported.background, false);
+});
 test("invalid answers and invalid template field references fail explicitly", () => {
   assert.throws(()=>buildCharacter(completeAnswers({Q3b:"wrong_branch"}),templates,questions),/Cannot build character/);
   const badTemplates={...templates,generationRules:{...templates.generationRules,appearance:{parts:[{answerFrom:"Q404"}]}}};
