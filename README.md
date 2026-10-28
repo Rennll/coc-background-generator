@@ -75,6 +75,10 @@ npm run test:e2e
 
 ## 驗收紀錄（2026-10-28）
 
+- JSON 時間戳記驗證提交 `744f829`：核心測試 18/18、Playwright／Chromium E2E 10/10 通過。`exportJSON()` 現在驗證 `created_at` 為有效 ISO 8601 日期時間或 `null`，支援 UTC `Z` 與明確時區偏移，並拒絕無效日期、非字串及不合法時間；新增時區偏移、無效日期與預設 `null` 的回歸測試。CI 視覺截圖已上傳：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40633649877)。
+
+
+
 - 最新完整驗收基準 `5c580e0`：核心測試 18/18、Playwright／Chromium E2E（含響應式視覺檢查）10/10 通過；手機與桌面截圖已上傳為 CI Artifact。這次提交只更新驗收文件，兩個 workflow run 均成功：[功能與瀏覽器測試](https://github.com/Rennll/coc-background-generator/actions/runs/40631654316)、[文件提交測試](https://github.com/Rennll/coc-background-generator/actions/runs/40631648515)。PR #1 目前仍為 Draft，尚未合併或部署；實體手機觸控行為尚未獨立驗證。
 
 
