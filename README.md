@@ -19,7 +19,7 @@ python -m http.server 8000
 需要 Node.js 20 或更新版本。核心邏輯使用 Node.js 內建測試；瀏覽器端到端測試使用 Playwright 與 Chromium。
 
 ```bash
-npm install
+npm ci
 npm test
 npx playwright install --with-deps chromium
 npm run test:e2e
