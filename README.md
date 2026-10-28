@@ -133,3 +133,5 @@ npm run test:e2e
 - 已通過的基準包含核心測試、模板句末標點／分支組合測試、職業資料結構、Q8–Q11 標題對齊、官方職業範例佐證與 Chromium E2E。後續將「有意義的地點」改為完整句子，並新增核心測試及瀏覽器預覽斷言；另新增重新產生確認的取消／接受兩條路徑測試。提交 `322fdd6` 的核心測試 16/16 與 Chromium E2E 6/6 已通過；其中包含重新產生確認取消／接受路徑：[workflow run](https://github.com/Rennll/coc-background-generator/actions/runs/40621000286)。後續發現 `Aviator`、`Gun Moll` 別名遺漏 `[Classic]` 標籤，已補回資料並加入回歸測試。另將全部 21 筆交叉參照名稱同步到各自的主要職業資料，避免選單只顯示部分 `see` 參照；核心測試與 Chromium E2E 新增了相應檢查，最新 CI 執行中。
 
 - 職業清單來源說明修正後的驗收提交 `0ea1ade486ce3e481931f73421356a848234335c`（PR #1 HEAD）：GitHub Actions run `40638838702` 已完成且成功，核心測試與 Playwright／Chromium E2E 步驟均成功，`chromium-visual-review` Artifact 已上傳（保留至 2026-11-11）。核心測試新增斷言，固定職業資料須明確記錄使用者確認已逐字核對實體 Investigator Handbook、而專案未獨立重做實體書核對。此 workflow 使用 PR merge ref；PR head 為 `0ea1ade486ce3e481931f73421356a848234335c`。本次 CI 通過不代表語意人工審查或實體手機觸控驗收已完成。
+
+- 自訂職業空白輸入驗證提交 `471ca70`：GitHub Actions run [40649656384](https://github.com/Rennll/coc-background-generator/actions/runs/40649656384) 成功；核心測試 31/31、Playwright／Chromium E2E 12/12 通過。新增測試確認自訂職業名稱會修整前後空白、純空白職業會被驗證拒絕，且通用 Q11 調查動機不依賴自由輸入的職業名稱。PR #1 仍為 Draft；本次 CI 不代表已完成真人語意審閱或實體手機觸控驗收。
