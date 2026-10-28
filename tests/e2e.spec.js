@@ -595,6 +595,8 @@ test("capture real name-generator screenshots for CI artifacts", async ({ page }
     await expect(page.locator("[data-name-candidate]")).toBeVisible();
     await page.screenshot({ path: filename, fullPage: true, animations: "disabled" });
     await page.locator("[data-name-cancel]").click();
+  }
+});
 
 test("saved generated and manual names survive candidate cancellation and culture changes", async ({ page }) => {
   await page.goto("/");
