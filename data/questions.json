@@ -1,42 +1,636 @@
 {
- "schemaVersion":1,"project":"CoC Investigator Background Generator","locale":"zh-TW",
- "notes":["Question and option IDs are stable identifiers; logic must not depend on display labels or option order.","Conditional questions use optionsByParentOption keyed by selected parent option ID.","Q10 controls Q11 branching; customOccupation stores a free-text occupation.","Q3b and Q7 are narrative supplements and must not automatically become personality traits."],
- "flow":["Q1","Q2","Q3a","Q3b","Q4","Q5","Q6","Q7","Q8","Q9","Q10","Q11"],
- "dependencies":[{"parentQuestionId":"Q3a","childQuestionId":"Q3b"},{"parentQuestionId":"Q4","childQuestionId":"Q5"},{"parentQuestionId":"Q6","childQuestionId":"Q7"},{"parentQuestionId":"Q10","childQuestionId":"Q11"}],
- "questions":[
- {"id":"Q1","title":"你的角色長什麼樣子？","type":"single_choice","required":true,"outputField":"appearance","options":[{"id":"neat_reliable","label":"衣著整齊，第一印象讓人覺得可靠。"},{"id":"rugged_honest","label":"外表粗獷，不太容易親近，但眼神坦率。"},{"id":"pale_bookish","label":"蒼白而有書卷氣，常給人沉浸在思緒中的印象。"},{"id":"fashionable_unobtrusive","label":"打扮入時，擅長融入人群，不引人注意。"},{"id":"practical_traveler","label":"穿著實用、不講究外表，看得出經常在外奔波。"}]},
- {"id":"Q2","title":"他／她相信什麼？","type":"single_choice","required":true,"outputField":"belief","options":[{"id":"order_and_effort","label":"努力和秩序能解決大多數問題。"},{"id":"family_and_community","label":"人不能只靠自己，家人與社群才是生活的根基。"},{"id":"truth_above_comfort","label":"真相值得追求，即使它會帶來痛苦。"},{"id":"change_what_is_possible","label":"世界並不公平，但至少可以從自己能影響的地方開始改變。"},{"id":"humility_before_unknown","label":"人的理解有限，有些事情應該保持敬畏。"},{"id":"live_in_the_present","label":"沒有什麼是永恆的，能把握的只有當下。"}]},
- {"id":"Q3a","title":"對他／她來說，最重要的人是誰？","type":"single_choice","required":true,"outputField":"significant_person","options":[{"id":"family_member","label":"父母或手足。"},{"id":"mentor","label":"曾經的老師或恩人。"},{"id":"close_friend","label":"摯友或舊識。"},{"id":"romantic_partner","label":"伴侶或曾經的愛人。"},{"id":"person_harmed","label":"某個他／她曾經傷害過的人。"}]},
- {"id":"Q3b","title":"你們之間發生過什麼？","type":"conditional_single_choice","required":true,"outputField":"significant_person","dependsOn":{"questionId":"Q3a","operator":"equals_option_id"},"optionsByParentOption":{
- "family_member":[{"id":"family_caretaker","label":"他／她一直是家裡負責照顧其他人的那個人。"},{"id":"family_disappointment","label":"他／她曾讓家人失望，至今仍想彌補。"},{"id":"family_secret","label":"他／她和家人共同經歷過一件從未對外人提起的事。"}],
- "mentor":[{"id":"mentor_unthanked","label":"那個人改變了他／她人生的方向，但他／她從未當面道謝。"},{"id":"mentor_repayment_failed","label":"他／她曾試圖回報恩情，卻在關鍵時刻出了差錯。"},{"id":"mentor_needs_help","label":"那個人現在需要幫助，而他／她還沒決定是否伸出援手。"}],
- "close_friend":[{"id":"friend_shared_secret","label":"兩人曾一起經歷一件從未對外說起的事。"},{"id":"friend_absence","label":"他／她曾在那個朋友最需要自己的時候缺席。"},{"id":"friendship_uncertain","label":"他／她不確定那段友誼是否還能回到從前。"}],
- "romantic_partner":[{"id":"romance_unresolved_end","label":"兩人的關係已經結束，但原因始終沒有說清楚。"},{"id":"romance_sacrifice","label":"他／她曾為那個人放棄某件重要的事。"},{"id":"romance_uncertain_breakup","label":"他／她至今仍不確定，當初分開究竟是誰的決定。"}],
- "person_harmed":[{"id":"harm_no_apology","label":"他／她知道自己做了什麼，卻始終沒有道歉。"},{"id":"harm_lost_contact","label":"他／她試圖彌補，但對方已經失去聯絡。"},{"id":"harm_no_choice","label":"他／她認為當時別無選擇，卻偶爾仍會想起那件事。"}]}},
- {"id":"Q4","title":"他／她珍藏著什麼？","type":"single_choice","required":true,"outputField":"treasured_possession","options":[{"id":"profession_item","label":"與職業有關的工具、證書或紀念品。"},{"id":"deceased_person_relic","label":"逝者留下的遺物，例如照片、戒指或未寄出的信。"},{"id":"childhood_memento","label":"童年留下的小東西，例如懷錶、幸運硬幣或舊玩具。"},{"id":"mysterious_object","label":"一件來歷不明、仍想查清楚的物品。"},{"id":"meaningful_weapon","label":"一件有特殊意義的武器。"},{"id":"personal_collection","label":"一套自己長年收集的物品，例如書籍、唱片、車票或古董。"}]},
- {"id":"Q5","title":"那樣東西為什麼重要？","type":"conditional_single_choice","required":true,"outputField":"treasured_possession","dependsOn":{"questionId":"Q4","operator":"equals_option_id"},"optionsByParentOption":{
- "profession_item":[{"id":"profession_first_recognition","label":"那是他／她第一次獲得正式認可時留下的紀念。"},{"id":"profession_pride_and_mistake","label":"他／她曾用它完成一件引以為傲的事，也曾因它犯下錯誤。"}],
- "deceased_person_relic":[{"id":"relic_unspoken_words","label":"那個人離開得太突然，有些話永遠來不及說。"},{"id":"relic_shared_life","label":"他／她保留著它，因為這是與那個人共同生活過的證明。"}],
- "childhood_memento":[{"id":"childhood_comfort","label":"那是某段艱難日子裡，少數能帶來安慰的東西。"},{"id":"childhood_gift","label":"那是某個人送的，他／她不知道對方是否還記得。"}],
- "mysterious_object":[{"id":"mystery_wrongness","label":"他／她第一次見到它時，就覺得有些地方不對勁。"},{"id":"mystery_investigate_origin","label":"他／她曾想把它丟掉，最後卻決定留下來查清來歷。"}],
- "meaningful_weapon":[{"id":"weapon_saved_life","label":"那件武器曾在危急時刻救過他／她。"},{"id":"weapon_reminder","label":"他／她帶著它，是為了提醒自己不要重蹈某次錯誤。"}],
- "personal_collection":[{"id":"collection_people_and_journeys","label":"每一件收藏都與某段旅程或某個重要的人有關。"},{"id":"collection_order_and_goal","label":"收集它們讓他／她感到生活仍有秩序，也讓他／她有持續追尋的目標。"}]}},
- {"id":"Q6","title":"他／她最不希望發生什麼事？","type":"single_choice","required":true,"outputField":"fear_or_concern","options":[{"id":"helpless_witness","label":"看著身邊的人受苦，自己卻無能為力。"},{"id":"secret_exposed","label":"自己隱瞞的事情被公開。"},{"id":"deceived_again","label":"再次相信某件後來證明是謊言的事。"},{"id":"lose_grip_on_reality","label":"失去對局勢的掌握，不知道眼前發生的事是否真實。"},{"id":"abandoned_when_needed","label":"在需要幫助時發現自己孤立無援。"},{"id":"effort_wasted","label":"花費多年追求某個目標，最後卻一無所獲。"}]},
- {"id":"Q7","title":"這份擔憂從何而來？","type":"conditional_single_choice","required":true,"outputField":"fear_or_concern","dependsOn":{"questionId":"Q6","operator":"equals_option_id"},"optionsByParentOption":{
- "helpless_witness":[{"id":"helpless_could_not_help","label":"他／她曾經在場，卻不知道該怎麼幫助對方。"},{"id":"helpless_made_worse","label":"他／她曾試圖幫忙，結果反而讓情況更糟。"}],
- "secret_exposed":[{"id":"secret_protect_another","label":"那件事牽涉另一個人，他／她不想讓對方受到牽連。"},{"id":"secret_betrayal","label":"他／她曾因秘密曝光而失去信任。"}],
- "deceived_again":[{"id":"deceived_belief_shattered","label":"他／她曾深信某件事，後來才發現事實並非如此。"},{"id":"deceived_trusted_person","label":"他／她曾相信一個重要的人，卻發現對方隱瞞了真相。"}],
- "lose_grip_on_reality":[{"id":"reality_unexplained_event","label":"他／她曾經歷無法合理解釋的事件。"},{"id":"reality_memory_gap","label":"他／她有一段記憶始終無法拼湊完整。"}],
- "abandoned_when_needed":[{"id":"abandoned_no_one_came","label":"在最需要幫助時，沒有任何人出現。"},{"id":"abandoned_rejected_help","label":"他／她曾拒絕求助，事後才明白自己無法獨自承擔。"}],
- "effort_wasted":[{"id":"effort_lost_everything","label":"他／她曾投入一切，最後仍失去成果。"},{"id":"effort_truth_too_late","label":"他／她找到真相時，已經無法改變結果。"}]}},
- {"id":"Q8","title":"他／她的個性如何？","type":"single_choice","required":true,"outputField":"personality","options":[{"id":"quiet_listener","label":"安靜而善於傾聽，通常先觀察再開口。"},{"id":"stubborn_principled","label":"固執而有原則，不容易被說服。"},{"id":"quick_suspicious","label":"反應敏捷，對可疑之處格外敏感。"},{"id":"warm_practical","label":"待人友善而務實，習慣先處理眼前問題。"}]},
- {"id":"Q9","title":"哪裡對他／她有特殊意義？","type":"single_choice","required":true,"outputField":"meaningful_location","options":[{"id":"private_corner","label":"一處安靜的私人角落，讓他／她能整理思緒。"},{"id":"hometown","label":"成長的家鄉，既熟悉又藏著不願回想的往事。"},{"id":"library_study","label":"圖書館或書房，知識讓他／她感到安心。"},{"id":"incident_site","label":"曾發生重大事件的地方，他／她始終無法忘記。"}]},
- {"id":"Q10","title":"他／她以什麼維生？","type":"single_choice","required":true,"outputField":"occupation","options":[{"id":"knowledge_research","label":"教育、研究或知識相關工作。"},{"id":"investigation_law","label":"調查、法律或執法相關工作。"},{"id":"health_care","label":"醫療或照護相關工作。"},{"id":"business_trade","label":"商業、技術或其他謀生工作。"},{"id":"other_custom","label":"其他：自行填寫職業。"}]},
- {"id":"Q11","title":"這份工作如何牽連到調查？","type":"conditional_single_choice","required":true,"outputField":"investigation_hook","dependsOn":{"questionId":"Q10","operator":"equals_option_id"},"optionsByParentOption":{
- "knowledge_research":[{"id":"research_contradiction","label":"他／她在資料中發現互相矛盾的記載。"},{"id":"research_missing_record","label":"某份關鍵紀錄不合理地消失了。"}],
- "investigation_law":[{"id":"law_case_anomaly","label":"一宗案件留下了無法解釋的細節。"},{"id":"law_witness_disappeared","label":"重要證人突然失去聯絡。"}],
- "health_care":[{"id":"care_patient_story","label":"一名病患描述了難以理解的經歷。"},{"id":"care_medical_anomaly","label":"病歷中出現無法解釋的異常。"}],
- "business_trade":[{"id":"trade_unusual_transaction","label":"一筆交易的細節顯得不尋常。"},{"id":"trade_customer_secret","label":"一名客戶帶來了無法忽視的秘密。"}],
- "other_custom":[{"id":"custom_work_unusual_detail","label":"日常工作中出現了一個不尋常的細節。"},{"id":"custom_work_strange_request","label":"某項工作委託牽涉到無法合理解釋的要求。"}]}}
- ]
+  "schemaVersion": 1,
+  "project": "CoC Investigator Background Generator",
+  "locale": "zh-TW",
+  "notes": [
+    "Question and option IDs are stable identifiers; logic must not depend on display labels or option order.",
+    "Conditional questions use optionsByParentOption keyed by selected parent option ID.",
+    "Q10 controls Q11 branching; customOccupation stores a free-text occupation.",
+    "Q3b and Q7 are narrative supplements and must not automatically become personality traits.",
+    "Q7、Q8、Q9、Q10、Q11 options aligned to the confirmed Notion specification; other_custom is the shared Q11 fallback branch."
+  ],
+  "flow": [
+    "Q1",
+    "Q2",
+    "Q3a",
+    "Q3b",
+    "Q4",
+    "Q5",
+    "Q6",
+    "Q7",
+    "Q8",
+    "Q9",
+    "Q10",
+    "Q11"
+  ],
+  "dependencies": [
+    {
+      "parentQuestionId": "Q3a",
+      "childQuestionId": "Q3b"
+    },
+    {
+      "parentQuestionId": "Q4",
+      "childQuestionId": "Q5"
+    },
+    {
+      "parentQuestionId": "Q6",
+      "childQuestionId": "Q7"
+    },
+    {
+      "parentQuestionId": "Q10",
+      "childQuestionId": "Q11"
+    }
+  ],
+  "questions": [
+    {
+      "id": "Q1",
+      "title": "你的角色長什麼樣子？",
+      "type": "single_choice",
+      "required": true,
+      "outputField": "appearance",
+      "options": [
+        {
+          "id": "neat_reliable",
+          "label": "衣著整齊，第一印象讓人覺得可靠。"
+        },
+        {
+          "id": "rugged_honest",
+          "label": "外表粗獷，不太容易親近，但眼神坦率。"
+        },
+        {
+          "id": "pale_bookish",
+          "label": "蒼白而有書卷氣，常給人沉浸在思緒中的印象。"
+        },
+        {
+          "id": "fashionable_unobtrusive",
+          "label": "打扮入時，擅長融入人群，不引人注意。"
+        },
+        {
+          "id": "practical_traveler",
+          "label": "穿著實用、不講究外表，看得出經常在外奔波。"
+        }
+      ]
+    },
+    {
+      "id": "Q2",
+      "title": "他／她相信什麼？",
+      "type": "single_choice",
+      "required": true,
+      "outputField": "belief",
+      "options": [
+        {
+          "id": "order_and_effort",
+          "label": "努力和秩序能解決大多數問題。"
+        },
+        {
+          "id": "family_and_community",
+          "label": "人不能只靠自己，家人與社群才是生活的根基。"
+        },
+        {
+          "id": "truth_above_comfort",
+          "label": "真相值得追求，即使它會帶來痛苦。"
+        },
+        {
+          "id": "change_what_is_possible",
+          "label": "世界並不公平，但至少可以從自己能影響的地方開始改變。"
+        },
+        {
+          "id": "humility_before_unknown",
+          "label": "人的理解有限，有些事情應該保持敬畏。"
+        },
+        {
+          "id": "live_in_the_present",
+          "label": "沒有什麼是永恆的，能把握的只有當下。"
+        }
+      ]
+    },
+    {
+      "id": "Q3a",
+      "title": "對他／她來說，最重要的人是誰？",
+      "type": "single_choice",
+      "required": true,
+      "outputField": "significant_person",
+      "options": [
+        {
+          "id": "family_member",
+          "label": "父母或手足。"
+        },
+        {
+          "id": "mentor",
+          "label": "曾經的老師或恩人。"
+        },
+        {
+          "id": "close_friend",
+          "label": "摯友或舊識。"
+        },
+        {
+          "id": "romantic_partner",
+          "label": "伴侶或曾經的愛人。"
+        },
+        {
+          "id": "person_harmed",
+          "label": "某個他／她曾經傷害過的人。"
+        }
+      ]
+    },
+    {
+      "id": "Q3b",
+      "title": "你們之間發生過什麼？",
+      "type": "conditional_single_choice",
+      "required": true,
+      "outputField": "significant_person",
+      "dependsOn": {
+        "questionId": "Q3a",
+        "operator": "equals_option_id"
+      },
+      "optionsByParentOption": {
+        "family_member": [
+          {
+            "id": "family_caretaker",
+            "label": "他／她一直是家裡負責照顧其他人的那個人。"
+          },
+          {
+            "id": "family_disappointment",
+            "label": "他／她曾讓家人失望，至今仍想彌補。"
+          },
+          {
+            "id": "family_secret",
+            "label": "他／她和家人共同經歷過一件從未對外人提起的事。"
+          }
+        ],
+        "mentor": [
+          {
+            "id": "mentor_unthanked",
+            "label": "那個人改變了他／她人生的方向，但他／她從未當面道謝。"
+          },
+          {
+            "id": "mentor_repayment_failed",
+            "label": "他／她曾試圖回報恩情，卻在關鍵時刻出了差錯。"
+          },
+          {
+            "id": "mentor_needs_help",
+            "label": "那個人現在需要幫助，而他／她還沒決定是否伸出援手。"
+          }
+        ],
+        "close_friend": [
+          {
+            "id": "friend_shared_secret",
+            "label": "兩人曾一起經歷一件從未對外說起的事。"
+          },
+          {
+            "id": "friend_absence",
+            "label": "他／她曾在那個朋友最需要自己的時候缺席。"
+          },
+          {
+            "id": "friendship_uncertain",
+            "label": "他／她不確定那段友誼是否還能回到從前。"
+          }
+        ],
+        "romantic_partner": [
+          {
+            "id": "romance_unresolved_end",
+            "label": "兩人的關係已經結束，但原因始終沒有說清楚。"
+          },
+          {
+            "id": "romance_sacrifice",
+            "label": "他／她曾為那個人放棄某件重要的事。"
+          },
+          {
+            "id": "romance_uncertain_breakup",
+            "label": "他／她至今仍不確定，當初分開究竟是誰的決定。"
+          }
+        ],
+        "person_harmed": [
+          {
+            "id": "harm_no_apology",
+            "label": "他／她知道自己做了什麼，卻始終沒有道歉。"
+          },
+          {
+            "id": "harm_lost_contact",
+            "label": "他／她試圖彌補，但對方已經失去聯絡。"
+          },
+          {
+            "id": "harm_no_choice",
+            "label": "他／她認為當時別無選擇，卻偶爾仍會想起那件事。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q4",
+      "title": "他／她珍藏著什麼？",
+      "type": "single_choice",
+      "required": true,
+      "outputField": "treasured_possession",
+      "options": [
+        {
+          "id": "profession_item",
+          "label": "與職業有關的工具、證書或紀念品。"
+        },
+        {
+          "id": "deceased_person_relic",
+          "label": "逝者留下的遺物，例如照片、戒指或未寄出的信。"
+        },
+        {
+          "id": "childhood_memento",
+          "label": "童年留下的小東西，例如懷錶、幸運硬幣或舊玩具。"
+        },
+        {
+          "id": "mysterious_object",
+          "label": "一件來歷不明、仍想查清楚的物品。"
+        },
+        {
+          "id": "meaningful_weapon",
+          "label": "一件有特殊意義的武器。"
+        },
+        {
+          "id": "personal_collection",
+          "label": "一套自己長年收集的物品，例如書籍、唱片、車票或古董。"
+        }
+      ]
+    },
+    {
+      "id": "Q5",
+      "title": "那樣東西為什麼重要？",
+      "type": "conditional_single_choice",
+      "required": true,
+      "outputField": "treasured_possession",
+      "dependsOn": {
+        "questionId": "Q4",
+        "operator": "equals_option_id"
+      },
+      "optionsByParentOption": {
+        "profession_item": [
+          {
+            "id": "profession_first_recognition",
+            "label": "那是他／她第一次獲得正式認可時留下的紀念。"
+          },
+          {
+            "id": "profession_pride_and_mistake",
+            "label": "他／她曾用它完成一件引以為傲的事，也曾因它犯下錯誤。"
+          }
+        ],
+        "deceased_person_relic": [
+          {
+            "id": "relic_unspoken_words",
+            "label": "那個人離開得太突然，有些話永遠來不及說。"
+          },
+          {
+            "id": "relic_shared_life",
+            "label": "他／她保留著它，因為這是與那個人共同生活過的證明。"
+          }
+        ],
+        "childhood_memento": [
+          {
+            "id": "childhood_comfort",
+            "label": "那是某段艱難日子裡，少數能帶來安慰的東西。"
+          },
+          {
+            "id": "childhood_gift",
+            "label": "那是某個人送的，他／她不知道對方是否還記得。"
+          }
+        ],
+        "mysterious_object": [
+          {
+            "id": "mystery_wrongness",
+            "label": "他／她第一次見到它時，就覺得有些地方不對勁。"
+          },
+          {
+            "id": "mystery_investigate_origin",
+            "label": "他／她曾想把它丟掉，最後卻決定留下來查清來歷。"
+          }
+        ],
+        "meaningful_weapon": [
+          {
+            "id": "weapon_saved_life",
+            "label": "那件武器曾在危急時刻救過他／她。"
+          },
+          {
+            "id": "weapon_reminder",
+            "label": "他／她帶著它，是為了提醒自己不要重蹈某次錯誤。"
+          }
+        ],
+        "personal_collection": [
+          {
+            "id": "collection_people_and_journeys",
+            "label": "每一件收藏都與某段旅程或某個重要的人有關。"
+          },
+          {
+            "id": "collection_order_and_goal",
+            "label": "收集它們讓他／她感到生活仍有秩序，也讓他／她有持續追尋的目標。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q6",
+      "title": "他／她最不希望發生什麼事？",
+      "type": "single_choice",
+      "required": true,
+      "outputField": "fear_or_concern",
+      "options": [
+        {
+          "id": "helpless_witness",
+          "label": "看著身邊的人受苦，自己卻無能為力。"
+        },
+        {
+          "id": "secret_exposed",
+          "label": "自己隱瞞的事情被公開。"
+        },
+        {
+          "id": "deceived_again",
+          "label": "再次相信某件後來證明是謊言的事。"
+        },
+        {
+          "id": "lose_grip_on_reality",
+          "label": "失去對局勢的掌握，不知道眼前發生的事是否真實。"
+        },
+        {
+          "id": "abandoned_when_needed",
+          "label": "在需要幫助時發現自己孤立無援。"
+        },
+        {
+          "id": "effort_wasted",
+          "label": "花費多年追求某個目標，最後卻一無所獲。"
+        }
+      ]
+    },
+    {
+      "id": "Q7",
+      "title": "這份擔憂從何而來？",
+      "type": "conditional_single_choice",
+      "required": true,
+      "outputField": "fear_or_concern",
+      "dependsOn": {
+        "questionId": "Q6",
+        "operator": "equals_option_id"
+      },
+      "optionsByParentOption": {
+        "helpless_witness": [
+          {
+            "id": "helpless_could_not_help",
+            "label": "他／她曾經在場，卻不知道該怎麼幫助對方。"
+          },
+          {
+            "id": "helpless_made_worse",
+            "label": "他／她曾試圖幫忙，結果反而讓情況更糟。"
+          }
+        ],
+        "secret_exposed": [
+          {
+            "id": "secret_protect_another",
+            "label": "那件事牽涉另一個人，他／她不想讓對方受到牽連。"
+          },
+          {
+            "id": "secret_doubts_decision",
+            "label": "當時的決定看似合理，如今他／她卻開始懷疑自己。"
+          }
+        ],
+        "deceived_again": [
+          {
+            "id": "deceived_belief_shattered",
+            "label": "他／她曾全心相信某個人或某種理念，後來才發現事實並非如此。"
+          },
+          {
+            "id": "deceived_misunderstood",
+            "label": "他／她至今仍不知道，自己當年究竟是被欺騙，還是誤解了對方。"
+          }
+        ],
+        "lose_grip_on_reality": [
+          {
+            "id": "reality_memory_uncertain",
+            "label": "他／她曾有一段時間無法確定自己的記憶是否可靠。"
+          },
+          {
+            "id": "reality_unexplained_event",
+            "label": "他／她曾目睹一件無法解釋的事，從此不再完全相信自己的判斷。"
+          }
+        ],
+        "abandoned_when_needed": [
+          {
+            "id": "abandoned_no_one_came",
+            "label": "他／她曾在最需要幫助的時候，發現沒有人願意站在自己這邊。"
+          },
+          {
+            "id": "abandoned_rejected_help",
+            "label": "他／她曾主動拒絕他人的幫助，後來才發現自己付出了代價。"
+          }
+        ],
+        "effort_wasted": [
+          {
+            "id": "effort_forced_to_stop",
+            "label": "他／她曾為某個目標犧牲許多，卻被迫半途放棄。"
+          },
+          {
+            "id": "effort_saw_give_up",
+            "label": "他／她看過別人放棄夢想後的生活，因此不願走上同一條路。"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Q8",
+      "title": "他／她的個性如何？",
+      "type": "single_choice",
+      "required": true,
+      "outputField": "personality",
+      "options": [
+        {
+          "id": "quiet_listener",
+          "label": "話不多，但通常會仔細聽完別人說的話。"
+        },
+        {
+          "id": "quick_trust",
+          "label": "容易信任他人，有時候相信得太快。"
+        },
+        {
+          "id": "self_reliant",
+          "label": "習慣把事情扛在自己身上，不太開口求助。"
+        },
+        {
+          "id": "comfortable_away",
+          "label": "在陌生環境裡反而比熟悉的地方更自在。"
+        },
+        {
+          "id": "stubborn_principled",
+          "label": "對自己認定的事情很固執，不容易改變立場。"
+        },
+        {
+          "id": "tension_breaker",
+          "label": "喜歡開玩笑，即使氣氛緊張也試著讓大家放鬆。"
+        },
+        {
+          "id": "detail_observer",
+          "label": "習慣觀察細節，常注意到別人忽略的小事。"
+        }
+      ]
+    },
+    {
+      "id": "Q9",
+      "title": "哪裡對他／她有特殊意義？",
+      "type": "single_choice",
+      "required": true,
+      "outputField": "meaningful_location",
+      "options": [
+        {
+          "id": "hometown",
+          "label": "成長的家鄉或童年住處。"
+        },
+        {
+          "id": "school_library_research",
+          "label": "曾經求學的學校、圖書館或研究機構。"
+        },
+        {
+          "id": "workplace_network",
+          "label": "工作多年、建立人脈的地方。"
+        },
+        {
+          "id": "important_person_place",
+          "label": "某位重要人物曾經居住或工作的地方。"
+        },
+        {
+          "id": "travel_memory",
+          "label": "一個曾經旅行、迷路或意外停留的地方。"
+        },
+        {
+          "id": "private_corner",
+          "label": "一個很少人知道、只有他／她會去的私人角落。"
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "title": "他／她以什麼維生？",
+      "type": "single_choice",
+      "required": true,
+      "outputField": "occupation",
+      "options": [
+        {
+          "id": "knowledge_research",
+          "label": "研究、教學或整理知識，例如教授、教師、圖書館員。"
+        },
+        {
+          "id": "investigation_law",
+          "label": "追查消息或處理案件，例如記者、私家偵探、警察。"
+        },
+        {
+          "id": "health_care",
+          "label": "照顧、治療或服務他人，例如醫師、護士、社工。"
+        },
+        {
+          "id": "business_trade",
+          "label": "經商、銷售或經營事業，例如商人、古董店主、旅館經營者。"
+        },
+        {
+          "id": "technical_manual",
+          "label": "靠技術或體力工作，例如工程師、修理工、司機。"
+        },
+        {
+          "id": "arts_entertainment",
+          "label": "創作或表演，例如作家、畫家、演員、音樂家。"
+        },
+        {
+          "id": "other_livelihood",
+          "label": "學生、退休者、沒有固定工作，或依靠私人財源生活。"
+        },
+        {
+          "id": "other_custom",
+          "label": "其他職業，由玩家自行填寫。"
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "title": "這份工作如何牽連到調查？",
+      "type": "conditional_single_choice",
+      "required": true,
+      "outputField": "investigation_hook",
+      "dependsOn": {
+        "questionId": "Q10",
+        "operator": "equals_option_id"
+      },
+      "optionsByParentOption": {
+        "knowledge_research": [
+          {
+            "id": "research_contradiction",
+            "label": "一份資料出現了無法解釋的矛盾，他／她決定追查來源。"
+          },
+          {
+            "id": "research_impossible_object",
+            "label": "有人帶來一件與研究領域相關、卻不該存在的物品。"
+          }
+        ],
+        "investigation_law": [
+          {
+            "id": "law_case_anomaly",
+            "label": "一件原本普通的案件出現了不合常理的證據。"
+          },
+          {
+            "id": "law_private_commission",
+            "label": "有人私下委託他／她調查一件不願公開的事情。"
+          }
+        ],
+        "health_care": [
+          {
+            "id": "care_unexplained_symptom",
+            "label": "一名熟悉的人出現了無法合理解釋的症狀或行為。"
+          },
+          {
+            "id": "care_strange_statement",
+            "label": "他／她在工作中接觸到一名說出奇怪消息的當事人。"
+          }
+        ],
+        "business_trade": [
+          {
+            "id": "trade_unknown_object",
+            "label": "一筆交易牽涉來歷不明的物品，買賣雙方都隱瞞了事情。"
+          },
+          {
+            "id": "trade_customer_missing",
+            "label": "一名客人留下了奇怪的委託，之後便失去聯絡。"
+          }
+        ],
+        "technical_manual": [
+          {
+            "id": "technical_unusual_trace",
+            "label": "他／她在工作現場發現了不符合常理的痕跡。"
+          },
+          {
+            "id": "technical_secret",
+            "label": "一項原本普通的工作，意外讓他／她接觸到某個秘密。"
+          }
+        ],
+        "arts_entertainment": [
+          {
+            "id": "arts_abnormal_detail",
+            "label": "一份委託或素材中出現了讓他／她難以忘懷的異常細節。"
+          },
+          {
+            "id": "arts_strange_story",
+            "label": "某個熟人提供了奇怪的故事或證據，希望他／她協助查明真相。"
+          }
+        ],
+        "other_livelihood": [
+          {
+            "id": "other_witnessed_event",
+            "label": "他／她在日常生活中偶然目睹了一件無法解釋的事。"
+          },
+          {
+            "id": "other_acquaintance_message",
+            "label": "一個熟人帶來了需要協助的消息，他／她決定親自查明。"
+          }
+        ],
+        "other_custom": [
+          {
+            "id": "custom_work_unusual_detail",
+            "label": "一件與他／她的日常工作有關的事情出現了不尋常的細節。"
+          },
+          {
+            "id": "custom_work_strange_request",
+            "label": "有人找上他／她，提出一項原本不打算接受的委託。"
+          }
+        ]
+      }
+    }
+  ]
 }
