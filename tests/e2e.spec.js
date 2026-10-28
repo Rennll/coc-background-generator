@@ -29,6 +29,14 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   await page.locator("#editor").fill("我只相信能夠查證的事實。");
   await page.locator('[data-save="background:belief"]').click();
   await expect(page.getByText("我只相信能夠查證的事實。")).toBeVisible();
+
+  const occupationField=page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})});
+  await occupationField.getByRole("button",{name:"編輯"}).click();
+  await page.locator("#occupation-select").selectOption("other_custom");
+  await page.locator("#occupation-custom").fill("大學教授");
+  await occupationField.getByRole("button",{name:"儲存"}).click();
+  await expect(occupationField).toContainText("大學教授");
+
   const downloadPromise = page.waitForEvent("download");
   await page.locator("#export").click();
   const download = await downloadPromise;
@@ -38,7 +46,7 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   for await (const chunk of stream) exportedText += chunk.toString("utf8");
   const exported = JSON.parse(exportedText);
   expect(exported.background.belief).toBe("我只相信能夠查證的事實。");
-  expect(exported.profile.occupation).toBe("學者／大學教授");
+  expect(exported.profile.occupation).toBe("大學教授");
   for (const forbidden of ["rawAnswers","answers","stats","skills","Q1"]) expect(exported).not.toHaveProperty(forbidden);
   page.once("dialog", dialog => dialog.dismiss());
   await page.locator("#restart").click();
