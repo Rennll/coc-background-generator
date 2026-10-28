@@ -150,6 +150,14 @@ test("user-edited preview text is rendered as text rather than interpreted as HT
   await expect(belief.locator(".value-button")).toHaveText(payload);
   await expect(page.locator("img")).toHaveCount(0);
   await expect(belief.locator("script")).toHaveCount(0);
+
+  const occupation = page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})});
+  await occupation.locator('[data-edit="profile:occupation"]').click();
+  await page.locator("#occupation-select").selectOption("other_custom");
+  await page.locator("#occupation-custom").fill(payload);
+  await occupation.locator('[data-save="profile:occupation"]').click();
+  await expect(occupation.locator(".value-button")).toHaveText(payload);
+  await expect(page.locator("img")).toHaveCount(0);
 });
 
 test("editing one background field leaves other generated fields unchanged in preview and export", async ({page}) => {
