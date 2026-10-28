@@ -80,6 +80,12 @@ test("changing a parent clears invalid dependent answers and preserves valid one
   assert.equal(q6.Q6,"helpless_witness"); assert.equal("Q7" in q6,false);
   const q6Valid = clearInvalidDependentAnswers("Q6",{Q6:"helpless_witness",Q7:"helpless_could_not_help"},questions);
   assert.equal(q6Valid.Q7,"helpless_could_not_help");
+  // Clearing must follow each question's dependsOn definition, not duplicated summary data.
+  const withoutDependencySummary = {...questions,dependencies:[]};
+  const q3WithoutSummary = clearInvalidDependentAnswers("Q3a",{Q3a:"mentor",Q3b:"family_secret"},withoutDependencySummary);
+  assert.equal("Q3b" in q3WithoutSummary,false);
+  const q4WithoutSummary = clearInvalidDependentAnswers("Q4",{Q4:"profession_item",Q5:"mystery_wrongness"},withoutDependencySummary);
+  assert.equal("Q5" in q4WithoutSummary,false);
   const q10 = clearInvalidDependentAnswers("Q10",{Q10:"other_custom",Q11:"research_contradiction",customOccupation:"Clockmaker"},questions);
   assert.equal("Q11" in q10,false);
   assert.equal(q10.customOccupation,"Clockmaker");
