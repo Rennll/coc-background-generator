@@ -84,6 +84,35 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   await expect(page.getByRole("heading",{name:"你的角色長什麼樣子？"})).toBeVisible();
 });
 
+test("clipboard fallback works without inline styles when Clipboard API is unavailable", async ({page}) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, "clipboard", { configurable: true, value: undefined });
+    document.execCommand = (command) => {
+      if (command !== "copy") return false;
+      window.__copiedText = document.querySelector(".clipboard-fallback")?.value ?? "";
+      window.__fallbackHadInlineStyle = document.querySelector(".clipboard-fallback")?.hasAttribute("style") ?? false;
+      return true;
+    };
+  });
+  await page.goto("/");
+  await answer(page,"neat_reliable");
+  await answer(page,"truth_above_comfort");
+  await answer(page,"family_member");
+  await answer(page,"family_secret");
+  await answer(page,"mysterious_object");
+  await answer(page,"mystery_wrongness");
+  await answer(page,"deceived_again");
+  await answer(page,"deceived_misunderstood");
+  await answer(page,"quiet_listener");
+  await answer(page,"hometown");
+  await answer(page,"knowledge_research");
+  await answer(page,"research_contradiction");
+  await page.locator('[data-copy="background:belief"]').click();
+  await expect.poll(() => page.evaluate(() => window.__copiedText)).not.toBe("");
+  expect(await page.evaluate(() => window.__fallbackHadInlineStyle)).toBe(false);
+  await expect(page.locator(".clipboard-fallback")).toHaveCount(0);
+});
+ 
 test("Content Security Policy is present and allows the app to run without inline scripts", async ({page}) => {
   await page.goto("/");
   const policy = await page.locator('meta[http-equiv="Content-Security-Policy"]').getAttribute("content");
