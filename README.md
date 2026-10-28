@@ -65,7 +65,7 @@ npm run test:e2e
 - `templates.json` 已調整重要之人、珍貴之物的分句標點，並清理恐懼與擔憂的重複句末標點；仍需進行真人閱讀與完整組合抽樣。
 - `occupations.json` 是 22 筆初步資料，不是官方完整職業清單。部分項目僅有官方商品頁範例、類別佐證或尚待核對；補充項目會明確標示，不可宣稱為官方已核實條目。
 - JSON 匯出是本專案自訂格式，不是 Chaosium 官方 JSON 標準。
-- `tests/core.test.js` 覆蓋資料合約、條件分支、答案清除、模板、空白欄位、手動編輯與 JSON 匯出。`tests/e2e.spec.js` 以 Playwright/Chromium 測試標準問卷、自訂職業、預覽編輯、JSON 下載及修改前置答案後清除舊分支。GitHub Actions 的核心測試已通過。三項 E2E 中，標準流程與自訂職業流程曾通過；父題切換回歸測試首次失敗的原因是測試使用了不屬於當前 Q6 分支的 Q7 選項 ID，已修正測試資料並重新執行 CI，須以最新執行結果確認。
+- `tests/core.test.js` 覆蓋資料合約、條件分支、答案清除、模板、空白欄位、手動編輯與 JSON 匯出。`tests/e2e.spec.js` 以 Playwright/Chromium 測試標準問卷、自訂職業、預覽編輯、JSON 下載及修改前置答案後清除舊分支。GitHub Actions 的核心測試及 3 項 Chromium E2E 測試已通過。新增的父題切換回歸測試首次失敗，是因測試使用了不屬於當前 Q6 分支的 Q7 選項 ID；修正測試資料後，完整工作流程通過。驗收紀錄：[workflow run](https://github.com/Rennll/coc-background-generator/actions/runs/40615156170)。
 
 規格文件：[Notion 規格書](https://app.notion.com/p/CoC-4066bb2da397814999b8f86d64fc24e4?pvs=204)
 
@@ -76,3 +76,4 @@ npm run test:e2e
 - 對照 Notion 規格後，已在 `audit/spec-alignment` 分支調整問卷選項、背景模板、核心測試與 Chromium E2E 測試。
 - 職業資料維持 22 筆初步清單；官方商品頁僅能佐證部分範例，不代表逐項核實或官方完整清單。
 - 官方規則 Wiki 已補入職業資料來源。來源頁面可佐證部分英文職業範例，但無法核實完整 1920 年代清單或官方繁中譯名。
+- 最新已完成驗證：核心測試通過，Chromium E2E 3/3 通過；見 [GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40615156170)。
