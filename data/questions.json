@@ -430,7 +430,7 @@
     },
     {
       "id": "Q8",
-      "title": "他／她的個性如何？",
+      "title": "他／她平常是什麼樣的人？",
       "type": "single_choice",
       "required": true,
       "outputField": "personality",
@@ -467,7 +467,7 @@
     },
     {
       "id": "Q9",
-      "title": "哪裡對他／她有特殊意義？",
+      "title": "哪個地方對他／她有特殊意義？",
       "type": "single_choice",
       "required": true,
       "outputField": "meaningful_location",
@@ -500,7 +500,7 @@
     },
     {
       "id": "Q10",
-      "title": "他／她以什麼維生？",
+      "title": "你平常靠什麼維生？",
       "type": "single_choice",
       "required": true,
       "outputField": "occupation",
@@ -541,7 +541,7 @@
     },
     {
       "id": "Q11",
-      "title": "這份工作如何牽連到調查？",
+      "title": "他／她如何捲入這次調查？",
       "type": "conditional_single_choice",
       "required": true,
       "outputField": "investigation_hook",
