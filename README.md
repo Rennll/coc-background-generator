@@ -75,6 +75,10 @@ npm run test:e2e
 
 ## 驗收紀錄（2026-10-28）
 
+- 最新完整驗收基準 `5c580e0`：核心測試 18/18、Playwright／Chromium E2E（含響應式視覺檢查）10/10 通過；手機與桌面截圖已上傳為 CI Artifact。這次提交只更新驗收文件，兩個 workflow run 均成功：[功能與瀏覽器測試](https://github.com/Rennll/coc-background-generator/actions/runs/40631654316)、[文件提交測試](https://github.com/Rennll/coc-background-generator/actions/runs/40631648515)。PR #1 目前仍為 Draft，尚未合併或部署；實體手機觸控行為尚未獨立驗證。
+
+
+
 - 資料結構與模板防呆補強提交 `a299a90`：核心測試 18/18、Chromium E2E 10/10 通過。新增模板題目引用／基本資料欄位 metadata 一致性測試、JSON v1 白名單與建立時間測試，並讓缺少 `parts` 或無效模板 part 的錯誤訊息明確化。CI 已重新產生並上傳視覺截圖：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40631515239)。
 
 
