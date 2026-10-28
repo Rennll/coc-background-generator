@@ -77,6 +77,41 @@ test("narrative templates join the Q3/Q4/Q6 answers without awkward duplicate pu
   assert.match(c.background.fear_or_concern,/事是：再次相信某件後來證明是謊言的事。這份擔憂的來源是：他／她曾全心相信/);
   assert.equal(Object.keys(c.background).length,8);
 });
+test("every option can generate all eight background fields without broken punctuation", () => {
+  const parents = [
+    {parent:"Q3a",child:"Q3b"},
+    {parent:"Q4",child:"Q5"},
+    {parent:"Q6",child:"Q7"},
+    {parent:"Q10",child:"Q11"}
+  ];
+  for (const {parent,child} of parents) {
+    const parentQuestion=questions.questions.find(q=>q.id===parent);
+    for (const option of parentQuestion.options) {
+      const answers=completeAnswers({[parent]:option.id});
+      const childOptions=getQuestionOptions(child,answers,questions);
+      assert.ok(childOptions.length>0, parent+"/"+option.id);
+      answers[child]=childOptions[0].id;
+      const character=buildCharacter(answers,templates,questions);
+      assert.equal(Object.keys(character.background).length,8);
+      for (const [field,value] of Object.entries(character.background)) {
+        assert.equal(typeof value,"string",field);
+        assert.doesNotMatch(value,/。。|；；|。；|；。/u,field+"/"+option.id);
+      }
+    }
+  }
+  for (const [child,parent] of [["Q3b","Q3a"],["Q5","Q4"],["Q7","Q6"],["Q11","Q10"]]) {
+    const parentQuestion=questions.questions.find(q=>q.id===parent);
+    for (const parentOption of parentQuestion.options) {
+      const answers=completeAnswers({[parent]:parentOption.id});
+      for (const option of getQuestionOptions(child,answers,questions)) {
+        const candidate={...answers,[child]:option.id};
+        const character=buildCharacter(candidate,templates,questions);
+        assert.equal(Object.keys(character.background).length,8);
+        assert.ok(Object.values(character.background).every(value=>typeof value==="string"));
+      }
+    }
+  }
+});
 test("Q7/Q8/Q9/Q10 options match the confirmed wording and Q11 custom fallback", () => {
   assert.equal(getQuestionOptions("Q8",{},questions).length,7);
   assert.equal(getQuestionOptions("Q9",{},questions).length,6);
