@@ -69,7 +69,7 @@ test("custom occupation uses the generic Q11 branch and remains editable in prev
   await answer(page,"quick_trust");
   await answer(page,"private_corner");
   await answer(page,"other_custom",{customOccupation:"鐘錶匠"});
-  await expect(page.getByRole("heading",{name:"這份工作如何牽連到調查？"})).toBeVisible();
+  await expect(page.getByRole("heading",{name:"他／她如何捲入這次調查？"})).toBeVisible();
   await answer(page,"custom_work_unusual_detail");
   await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
   await expect(page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})})).toContainText("鐘錶匠");
@@ -89,13 +89,13 @@ test("changing Q10 clears the stale Q11 child answer in a real browser", async (
   await answer(page,"quiet_listener");
   await answer(page,"hometown");
   await answer(page,"other_custom",{customOccupation:"鐘錶匠"});
-  await expect(page.getByRole("heading",{name:"這份工作如何牽連到調查？"})).toBeVisible();
+  await expect(page.getByRole("heading",{name:"他／她如何捲入這次調查？"})).toBeVisible();
   await expect(page.locator('input[name="answer"][value="custom_work_unusual_detail"]')).toBeVisible();
   await page.locator("#prev").click();
-  await expect(page.getByRole("heading",{name:"他／她以什麼維生？"})).toBeVisible();
+  await expect(page.getByRole("heading",{name:"你平常靠什麼維生？"})).toBeVisible();
   await page.locator('input[name="answer"][value="knowledge_research"]').check();
   await page.locator("#next").click();
-  await expect(page.getByRole("heading",{name:"這份工作如何牽連到調查？"})).toBeVisible();
+  await expect(page.getByRole("heading",{name:"他／她如何捲入這次調查？"})).toBeVisible();
   await expect(page.locator('input[name="answer"][value="custom_work_unusual_detail"]')).toHaveCount(0);
   await expect(page.locator('input[name="answer"][value="research_contradiction"]')).toBeVisible();
   await expect(page.locator('input[name="answer"][value="research_contradiction"]')).not.toBeChecked();
