@@ -57,6 +57,31 @@ test("question and option IDs are unique and all conditional branches have valid
     }
   }
 });
+test("question option IDs are globally unique and output fields map to declared background fields", () => {
+  const seenOptionIds = new Map();
+  const backgroundFieldIds = new Set(Object.keys(templates.fieldLabels));
+  for (const question of questions.questions) {
+    assert.ok(backgroundFieldIds.has(question.outputField),
+      question.id + " outputField references a declared background field");
+    const optionGroups = question.options
+      ? [question.options]
+      : Object.values(question.optionsByParentOption ?? {});
+    for (const group of optionGroups) {
+      for (const option of group) {
+        assert.ok(!seenOptionIds.has(option.id),
+          "option ID " + option.id + " must be globally unique (also found in " + seenOptionIds.get(option.id) + ")");
+        seenOptionIds.set(option.id, question.id);
+      }
+    }
+  }
+  for (const fieldId of backgroundFieldIds) {
+    const sourceQuestions = questions.questions.filter(question => question.outputField === fieldId);
+    assert.ok(sourceQuestions.length > 0, fieldId + " is mapped from at least one question");
+    assert.ok(Object.hasOwn(templates.generationRules, fieldId),
+      fieldId + " has a generation rule");
+  }
+});
+
 test("question options and dependency declarations reject malformed or unused data", () => {
   const questionIds = new Set(questions.questions.map(question => question.id));
   for (const question of questions.questions) {
