@@ -247,7 +247,7 @@ test("narrative templates join the Q3/Q4/Q6 answers without awkward duplicate pu
   assert.match(c.background.significant_person,/父母或手足。他／她和家人共同經歷過/);
   assert.doesNotMatch(c.background.significant_person,/。；|。。/);
   assert.match(c.background.treasured_possession,/一件來歷不明、仍想查清楚的物品。他／她第一次見到它時/);
-  assert.match(c.background.fear_or_concern,/他／她最不希望發生的事是再次相信某件後來證明是謊言的事。他／她曾全心相信某個人或某種理念，後來才發現事實並非如此/);
+  assert.match(c.background.fear_or_concern,/他／她最不希望發生的事是再次相信一個後來被證明是謊言的說法。他／她曾全心相信某個人或某種理念，後來才發現事實並非如此/);
   assert.equal(Object.keys(c.background).length,8);
   assert.match(c.background.meaningful_location,/^對他／她而言，特別有意義的地方是.+。$/u);
 });
