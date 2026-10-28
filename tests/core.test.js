@@ -19,6 +19,8 @@ test("data files parse and agree on the eight background fields and five profile
   assert.equal(Object.keys(templates.fieldLabels).length, 8);
   assert.deepEqual(Object.keys(templates.fieldLabels).sort(), Object.keys(templates.generationRules).sort());
   assert.deepEqual(templates.profileFields.map(f => f.id), ["name","occupation","age","birthplace","residence"]);
+  const approvedTitles = {Q1:"你的角色長什麼樣子？",Q2:"他／她相信什麼？",Q3a:"對他／她來說，最重要的人是誰？",Q3b:"你們之間發生過什麼？",Q4:"他／她珍藏著什麼？",Q5:"那樣東西為什麼重要？",Q6:"他／她最不希望發生什麼事？",Q7:"這份擔憂從何而來？",Q8:"他／她平常是什麼樣的人？",Q9:"哪個地方對他／她有特殊意義？",Q10:"你平常靠什麼維生？",Q11:"他／她如何捲入這次調查？"};
+  for (const [id,title] of Object.entries(approvedTitles)) assert.equal(questions.questions.find(q=>q.id===id)?.title,title,id+" title matches spec");
 });
 test("question and option IDs are unique and all conditional branches have valid parent IDs", () => {
   const ids = questions.questions.map(q => q.id);
