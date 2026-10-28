@@ -812,6 +812,17 @@ test("name generation returns a non-empty name and a data-backed classification 
   assert.equal(female.label, "女性常用名");
 });
 
+test("name generation can be constrained to a selected culture without selecting gender", () => {
+  const japanese = generateName(names, { random: () => 0, culture: "japanese" });
+  assert.equal(japanese.culture, "japanese");
+  assert.equal(japanese.cultureLabel, names.pools.japanese.label);
+  assert.equal(japanese.name, names.pools.japanese.surnames[0] + names.pools.japanese.givenNames.male[0]);
+  const femaleJapanese = generateName(names, { random: () => 0.75, culture: "japanese" });
+  assert.equal(femaleJapanese.culture, "japanese");
+  assert.equal(femaleJapanese.label, "女性常用名");
+  assert.throws(() => generateName(names, { culture: "american" }), /不支援的姓名文化/);
+});
+
 test("name generation excludes existing candidates and handles malformed or empty data explicitly", () => {
   const first = generateName(names, { random: () => 0 });
   const second = generateName(names, { random: () => 0, excludeNames: [first.name] });
