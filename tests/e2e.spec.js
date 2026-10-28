@@ -100,6 +100,10 @@ test("all 13 preview editors expose field-specific accessible names", async ({pa
   await answer(page,"research_contradiction");
   await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
 
+  await page.locator('[data-edit-value="background:belief"]').click();
+  await expect(page.locator("#editor")).toHaveAttribute("aria-label","信念");
+  await page.locator('[data-cancel="background:belief"]').click();
+
   const fields=[
     ["profile:name","姓名"],["profile:occupation","職業"],["profile:age","年齡"],
     ["profile:birthplace","出生地"],["profile:residence","居住地"],
