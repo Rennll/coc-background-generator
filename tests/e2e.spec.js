@@ -105,10 +105,10 @@ test("editing one background field leaves other generated fields unchanged in pr
   const hookEditor = page.locator('[data-edit="background:investigation_hook"]');
   await appearanceEditor.click();
   const originalAppearance = await page.locator("#editor").inputValue();
-  await page.locator("#cancel").click();
+  await page.locator('[data-cancel="background:appearance"]').click();
   await hookEditor.click();
   const originalHook = await page.locator("#editor").inputValue();
-  await page.locator("#cancel").click();
+  await page.locator('[data-cancel="background:investigation_hook"]').click();
 
   await page.locator('[data-edit="background:belief"]').click();
   await page.locator("#editor").fill("我只相信能夠查證的事實。");
