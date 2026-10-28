@@ -57,6 +57,35 @@ test("question and option IDs are unique and all conditional branches have valid
     }
   }
 });
+test("question options and dependency declarations reject malformed or unused data", () => {
+  const questionIds = new Set(questions.questions.map(question => question.id));
+  for (const question of questions.questions) {
+    const allOptions = question.options ?? Object.values(question.optionsByParentOption ?? {}).flat();
+    for (const option of allOptions) {
+      assert.equal(typeof option.id, "string", question.id + " option has a string ID");
+      assert.ok(option.id.trim(), question.id + " option ID is not blank");
+      assert.equal(typeof option.label, "string", question.id + "/" + option.id + " has a string label");
+      assert.ok(option.label.trim(), question.id + "/" + option.id + " label is not blank");
+    }
+    if (question.dependsOn) {
+      assert.deepEqual(Object.keys(question.dependsOn).sort(), ["operator", "questionId"].sort(),
+        question.id + " dependency has no unsupported keys");
+      assert.ok(questionIds.has(question.dependsOn.questionId),
+        question.id + " dependency references an existing question");
+      assert.ok(question.optionsByParentOption && Object.keys(question.optionsByParentOption).length > 0,
+        question.id + " conditional question has at least one declared branch");
+      for (const [parentOptionId, branchOptions] of Object.entries(question.optionsByParentOption)) {
+        assert.ok(Array.isArray(branchOptions) && branchOptions.length > 0,
+          question.id + "/" + parentOptionId + " branch is a non-empty option array");
+      }
+    }
+  }
+  for (const dependency of questions.dependencies) {
+    assert.deepEqual(Object.keys(dependency).sort(), ["childQuestionId", "parentQuestionId"].sort(),
+      "dependency summary has only supported fields");
+  }
+});
+
 test("question flow and template formats reject incomplete or unsupported schema declarations", () => {
   const questionIds = questions.questions.map(question => question.id);
   assert.equal(new Set(questions.flow).size, questions.flow.length, "flow IDs are unique");
