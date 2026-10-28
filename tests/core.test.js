@@ -149,6 +149,9 @@ test("Q7/Q8/Q9/Q10 options match the confirmed wording and Q11 custom fallback",
 });
 test("all occupation IDs are unique, source labels are present, and list is not advertised as complete", () => {
   assert.equal(new Set(occupations.occupations.map(o=>o.id)).size,occupations.occupations.length);
+  assert.equal(occupations.occupations.find(o=>o.id==="accountant").name,"會計人員","avoid implying a specific professional certification");
+  assert.equal(occupations.occupations.find(o=>o.id==="deprogrammer").name,"反洗腦專家","preserve the sense of reversing indoctrination, not performing it");
+  assert.equal(occupations.occupations.find(o=>o.id==="union_activist").name,"工會活動人士","use natural Taiwan Traditional Chinese wording");
   assert.match(occupations.scope,/not an official complete list/i);
   assert.ok(occupations.sources.some(source=>source.id==="chaosium_official_rules_wiki_occupations"));
   const sourceIds=new Set(occupations.sources.map(source=>source.id));
