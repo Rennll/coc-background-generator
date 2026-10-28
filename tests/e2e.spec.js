@@ -25,7 +25,9 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
   await expect(page.locator(".field").filter({has:page.getByRole("heading",{name:"有意義的地點",exact:true})})).toContainText("對他／她而言，特別有意義的地方是成長的家鄉或童年住處。");
   for (const label of ["姓名","職業","年齡","出生地","居住地","外貌描述","信念","重要之人","珍貴之物","恐懼與擔憂","個性","有意義的地點","與調查的連結"]) {
-    await expect(page.locator(".field").filter({has:page.getByRole("heading",{name:label,exact:true})})).toBeVisible();
+    const field=page.locator(".field").filter({has:page.getByRole("heading",{name:label,exact:true})});
+    await expect(field).toBeVisible();
+    await expect(field.getByRole("button",{name:"編輯",exact:true})).toBeVisible();
   }
   await page.locator('[data-edit="background:belief"]').click();
   await page.locator("#editor").fill("我只相信能夠查證的事實。");
