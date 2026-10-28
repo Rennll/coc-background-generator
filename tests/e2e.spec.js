@@ -89,6 +89,8 @@ test("Content Security Policy is present and allows the app to run without inlin
   const policy = await page.locator('meta[http-equiv="Content-Security-Policy"]').getAttribute("content");
   expect(policy).toContain("default-src 'self'");
   expect(policy).toContain("script-src 'self'");
+  expect(policy).toContain("style-src 'self'");
+  expect(policy.match(/style-src[^;]*/)?.[0]).not.toContain("'unsafe-inline'");
   expect(policy).toContain("object-src 'none'");
   expect(policy).toContain("base-uri 'none'");
   expect(policy.match(/script-src[^;]*/)?.[0]).not.toContain("'unsafe-inline'");
