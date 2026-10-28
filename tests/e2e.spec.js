@@ -100,9 +100,15 @@ test("editing one background field leaves other generated fields unchanged in pr
   await answer(page,"research_contradiction");
 
   const appearance = page.locator(".field").filter({has:page.getByRole("heading",{name:"外貌描述",exact:true})});
-  const originalAppearance = (await appearance.innerText()).replace(/外貌描述|編輯/g,"").trim();
+  const appearanceEditor = page.locator('[data-edit="background:appearance"]');
   const hook = page.locator(".field").filter({has:page.getByRole("heading",{name:"與調查的連結",exact:true})});
-  const originalHook = (await hook.innerText()).replace(/與調查的連結|編輯/g,"").trim();
+  const hookEditor = page.locator('[data-edit="background:investigation_hook"]');
+  await appearanceEditor.click();
+  const originalAppearance = await page.locator("#editor").inputValue();
+  await page.locator("#cancel").click();
+  await hookEditor.click();
+  const originalHook = await page.locator("#editor").inputValue();
+  await page.locator("#cancel").click();
 
   await page.locator('[data-edit="background:belief"]').click();
   await page.locator("#editor").fill("我只相信能夠查證的事實。");
