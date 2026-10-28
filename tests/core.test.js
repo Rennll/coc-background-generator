@@ -57,6 +57,35 @@ test("question and option IDs are unique and all conditional branches have valid
     }
   }
 });
+test("question flow and template formats reject incomplete or unsupported schema declarations", () => {
+  const questionIds = questions.questions.map(question => question.id);
+  assert.equal(new Set(questions.flow).size, questions.flow.length, "flow IDs are unique");
+  for (const questionId of questions.flow) assert.ok(questionIds.includes(questionId), "flow references known question " + questionId);
+  for (const question of questions.questions) {
+    assert.equal(Boolean(question.dependsOn), Boolean(question.optionsByParentOption),
+      question.id + " must declare both dependsOn and optionsByParentOption, or neither");
+    if (question.dependsOn) {
+      assert.equal(question.dependsOn.operator, "equals_option_id", question.id + " uses the supported branch operator");
+      assert.ok(question.dependsOn.questionId !== question.id, question.id + " cannot depend on itself");
+    }
+  }
+  for (const [fieldId, rule] of Object.entries(templates.generationRules)) {
+    for (const part of rule.parts) {
+      assert.equal(part.format, "optionText", fieldId + " uses a supported template format");
+      if (Object.hasOwn(part, "stripTerminalPunctuation")) {
+        assert.equal(typeof part.stripTerminalPunctuation, "boolean", fieldId + " punctuation flag is boolean");
+      }
+      if (Object.hasOwn(part, "separator")) {
+        assert.equal(typeof part.separator, "string", fieldId + " part separator is a string");
+      }
+    }
+    for (const key of ["prefix", "suffix", "separator"]) {
+      if (Object.hasOwn(rule, key)) assert.equal(typeof rule[key], "string", fieldId + " " + key + " is a string");
+    }
+  }
+  assert.equal(typeof templates.composition.joinNonEmptyPartsWith, "string");
+});
+
 test("all four conditional branches offer the expected number of options", () => {
   const expected = {Q3b:3,Q5:2,Q7:2,Q11:2};
   for (const [id,count] of Object.entries(expected)) {
