@@ -84,7 +84,7 @@ test("narrative templates join the Q3/Q4/Q6 answers without awkward duplicate pu
   assert.match(c.background.significant_person,/父母或手足。他／她和家人共同經歷過/);
   assert.doesNotMatch(c.background.significant_person,/。；|。。/);
   assert.match(c.background.treasured_possession,/一件來歷不明、仍想查清楚的物品。他／她第一次見到它時/);
-  assert.match(c.background.fear_or_concern,/他／她最不希望發生的事是再次相信某件後來證明是謊言的事。他／她曾因相信一項承諾而做出重大決定/);
+  assert.match(c.background.fear_or_concern,/他／她最不希望發生的事是再次相信某件後來證明是謊言的事。他／她曾全心相信某個人或某種理念，後來才發現事實並非如此/);
   assert.equal(Object.keys(c.background).length,8);
   assert.match(c.background.meaningful_location,/^對他／她而言，特別有意義的地方是.+。$/u);
 });
@@ -154,6 +154,10 @@ test("Q7/Q8/Q9/Q10 options match the confirmed wording and Q11 custom fallback",
   assert.equal(getQuestionOptions("Q10",{},questions).length,8);
   assert.equal(getQuestionOptions("Q11",{Q10:"other_custom"},questions)[1].id,"custom_work_strange_request");
   assert.match(getQuestionOptions("Q7",{Q6:"secret_exposed"},questions)[1].label,/開始懷疑自己/);
+  assert.equal(getQuestionOptions("Q7",{Q6:"helpless_witness"},questions)[0].label,"他／她曾經在場，卻不知道該怎麼幫助對方。");
+  assert.equal(getQuestionOptions("Q7",{Q6:"deceived_again"},questions)[0].label,"他／她曾全心相信某個人或某種理念，後來才發現事實並非如此。");
+  assert.equal(getQuestionOptions("Q7",{Q6:"deceived_again"},questions)[1].label,"他／她至今仍不知道，自己當年究竟是被欺騙，還是誤解了對方。");
+  assert.equal(getQuestionOptions("Q7",{Q6:"effort_wasted"},questions)[0].label,"他／她曾為某個目標犧牲許多，卻被迫半途放棄。");
 });
 test("all occupation IDs are unique, source labels are present, and list is not advertised as complete", () => {
   assert.equal(new Set(occupations.occupations.map(o=>o.id)).size,occupations.occupations.length);
