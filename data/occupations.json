@@ -1700,8 +1700,8 @@
       ],
       "sourceStatus": "user_provided_handbook_list",
       "entryStatus": "cross_reference",
-      "notes": "手冊標記為 [Classic]，並指向 Pilot；此標籤屬交叉參照原文，年代適用性仍需按手冊背景理解。",
-      "eraStatus": "inherited_from_referenced_occupation",
+      "notes": "手冊標記為 [Classic]，並指向 Pilot；此標籤屬交叉參照原文，年代適用性仍需按手冊背景理解。 原始清單在此交叉參照名稱上標記 [Classic]；此標籤保留於別名，不代表已完成 1920 年代適用性核實。",
+      "eraStatus": "classic_tag_requires_review",
       "englishCandidate": "Aviator",
       "translationStatus": "not_applicable_alias",
       "handbookTags": [
@@ -1846,11 +1846,13 @@
       ],
       "sourceStatus": "user_provided_handbook_list",
       "entryStatus": "cross_reference",
-      "notes": "手冊清單將此名稱指向「Criminal」；為避免重複職業選項，作為交叉參照保留。",
-      "eraStatus": "inherited_from_referenced_occupation",
+      "notes": "手冊清單將此名稱指向「Criminal」；為避免重複職業選項，作為交叉參照保留。 原始清單在此交叉參照名稱上標記 [Classic]；此標籤保留於別名，不代表已完成 1920 年代適用性核實。",
+      "eraStatus": "classic_tag_requires_review",
       "englishCandidate": "Gun Moll",
       "translationStatus": "not_applicable_alias",
-      "handbookTags": [],
+      "handbookTags": [
+        "Classic"
+      ],
       "aliasOf": "criminal",
       "isAlias": true
     },
