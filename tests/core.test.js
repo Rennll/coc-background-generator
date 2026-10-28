@@ -125,6 +125,8 @@ test("every conditional branch option generates all eight background fields with
       for (const [field,value] of Object.entries(character.background)) {
         assert.equal(typeof value,"string",field);
         assert.doesNotMatch(value,/。。|；；|。；|；。/u,field+"/"+option.id);
+        assert.equal(value,value.trim(),field+"/"+option.id+": no leading or trailing whitespace");
+        assert.doesNotMatch(value,/\b(?:undefined|null)\b|\[object Object\]/u,field+"/"+option.id+": no leaked implementation values");
       }
     }
   }
@@ -163,6 +165,8 @@ test("all generated background fields read as complete sentences with terminal p
       assert.ok(value.trim().length>0,field);
       assert.match(value,/[。！？.!?]$/u,field+": "+value);
       assert.doesNotMatch(value,/。。|；；|。；|；。/u,field+": "+value);
+      assert.equal(value,value.trim(),field+": no leading or trailing whitespace");
+      assert.doesNotMatch(value,/\b(?:undefined|null)\b|\[object Object\]/u,field+": no leaked implementation values");
     }
   }
 });
