@@ -708,13 +708,15 @@ test("custom occupation input is trimmed and blank input never invents an occupa
     templates, questions
   );
   assert.equal(named.profile.occupation, "鐘錶匠");
-  const blank = buildCharacter(
+  assert.throws(() => buildCharacter(
     completeAnswers({Q10:"other_custom",Q11:"custom_work_unusual_detail",customOccupation:"   "}),
     templates, questions
-  );
-  assert.equal(blank.profile.occupation, "");
-  assert.equal(blank.background.investigation_hook,
-    buildCharacter(completeAnswers({Q10:"other_custom",Q11:"custom_work_unusual_detail",customOccupation:"天文觀測員"}),templates,questions).background.investigation_hook);
+  ), /Enter a custom occupation/);
+  const genericHook = buildCharacter(
+    completeAnswers({Q10:"other_custom",Q11:"custom_work_unusual_detail",customOccupation:"天文觀測員"}),
+    templates, questions
+  ).background.investigation_hook;
+  assert.equal(named.background.investigation_hook, genericHook);
 });
 
 test("JSON export reflects edits across profile and background and excludes stale generated extras", () => {
