@@ -75,6 +75,10 @@ npm run test:e2e
 
 ## 驗收紀錄（2026-10-28）
 
+- 使用者核對職業清單的完整性回歸提交 `589348b`：核心測試 18/18、Playwright／Chromium E2E 10/10 通過。新增 112 個英文職業名稱的固定清單斷言，逐一涵蓋 91 筆主要職業與 21 筆 `see` 交叉參照，確保沒有漏項、重複或意外新增。CI 視覺截圖已上傳：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40638004743)。
+
+
+
 - 職業別名資料完整性提交 `e3f4aba`：核心測試 18/18、Playwright／Chromium E2E 10/10 通過。新增 canonical 與 alias 共用 ID 命名空間不得碰撞、alias 英文名稱唯一、每筆 alias 必須指向有效主要職業、附有說明及有效來源 ID 等檢查。截圖 Artifact 已上傳：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40637752658)。
 
 
