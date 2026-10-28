@@ -149,7 +149,7 @@ test("all occupation IDs are unique, source labels are present, and list is not 
   assert.match(occupations.scope,/not an official complete list/i);
   assert.ok(occupations.sources.some(source=>source.id==="chaosium_official_rules_wiki_occupations"));
   const sourceIds=new Set(occupations.sources.map(source=>source.id));
-  const sourceStatuses=new Set(["official_example_or_category_supported","official_product_page_example","official_example","to_verify_against_book","supplementary_unverified"]);
+  const sourceStatuses=new Set(["user_provided_handbook_list","official_example_or_category_supported","official_product_page_example","official_example","to_verify_against_book","supplementary_unverified"]);
   for (const o of occupations.occupations) {
     assert.ok(o.name && o.category && o.sourceStatus && o.eraStatus && o.englishCandidate && o.translationStatus, o.id);
     assert.ok(sourceStatuses.has(o.sourceStatus),o.id+" has recognized source status");
@@ -158,6 +158,10 @@ test("all occupation IDs are unique, source labels are present, and list is not 
     assert.equal(o.translationStatus,"project_candidate_not_verified_against_official_Chinese_edition",o.id+" does not overclaim official translation");
     if (o.sourceStatus === "supplementary_unverified") assert.equal(o.entryStatus,"supplementary");
   }
+  assert.equal(occupations.occupations.length,91,"canonical handbook entries");
+  assert.equal(occupations.aliases.length,21,"cross-reference aliases");
+  const canonicalIds=new Set(occupations.occupations.map(o=>o.id));
+  for(const alias of occupations.aliases){assert.ok(alias.isAlias);assert.ok(canonicalIds.has(alias.aliasOf),alias.id+" points to canonical entry");}
 });
 test("manual edits update character; full background omits blank fields and single-field copy preserves empty string", () => {
   let c=buildCharacter(completeAnswers(),templates,questions,{name:"林先生",age:34});
