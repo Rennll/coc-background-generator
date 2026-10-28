@@ -38,13 +38,12 @@
       "category": "education_research",
       "era": "1920s",
       "sourceIds": [
-        "chaosium_investigator_handbook_7e",
         "chaosium_quick_start_rules_7e",
         "chaosium_official_rules_wiki_occupations"
       ],
       "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
-      "notes": "官方快速入門範例包含 University Professor；中文名稱為本專案譯名。 官方規則 Wiki 可支持相關英文職業概念；本專案繁中譯名仍為編者譯名，非經核實的官方繁中用語。",
+      "notes": "官方快速入門的調查員範例使用 University Professor；官方規則 Wiki 另列 Professor。繁中名稱為本專案譯名，非已核實的官方繁中用語。",
       "eraStatus": "1920s_example_verified",
       "englishCandidate": "University Professor",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
@@ -54,12 +53,10 @@
       "name": "教師",
       "category": "education_research",
       "era": "1920s",
-      "sourceIds": [
-        "chaosium_investigator_handbook_7e"
-      ],
+      "sourceIds": [],
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
-      "notes": "尚未在目前核對的官方公開商品頁或規則 Wiki 範例中逐項找到；需對照手冊正式職業條目。",
+      "notes": "目前找到的官方公開規則 Wiki 範例未逐項列出 Teacher；需對照 Investigator Handbook 正式職業條目。",
       "eraStatus": "1920s_plausible_not_individually_verified",
       "englishCandidate": "Teacher",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
@@ -69,12 +66,10 @@
       "name": "圖書館員",
       "category": "education_research",
       "era": "1920s",
-      "sourceIds": [
-        "chaosium_investigator_handbook_7e"
-      ],
+      "sourceIds": [],
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
-      "notes": "尚未在目前核對的官方公開商品頁或規則 Wiki 範例中逐項找到；需對照手冊正式職業條目。",
+      "notes": "目前找到的官方公開規則 Wiki 範例未逐項列出 Librarian；需對照 Investigator Handbook 正式職業條目。",
       "eraStatus": "1920s_plausible_not_individually_verified",
       "englishCandidate": "Librarian",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
@@ -85,12 +80,11 @@
       "category": "media_communication",
       "era": "1920s",
       "sourceIds": [
-        "chaosium_investigator_handbook_7e",
         "chaosium_official_rules_wiki_occupations"
       ],
       "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
-      "notes": "官方手冊商品頁職業例子。 官方規則 Wiki 可支持相關英文職業概念；本專案繁中譯名仍為編者譯名，非經核實的官方繁中用語。",
+      "notes": "官方規則 Wiki 的 Sample Investigator Occupations 明列 Journalist。繁中名稱為本專案譯名，非已核實的官方繁中用語；1920 年代個別適用性尚未逐項核實。",
       "eraStatus": "1920s_plausible_not_individually_verified",
       "englishCandidate": "Journalist",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
@@ -101,12 +95,11 @@
       "category": "investigation_law",
       "era": "1920s",
       "sourceIds": [
-        "chaosium_investigator_handbook_7e",
         "chaosium_official_rules_wiki_occupations"
       ],
       "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
-      "notes": "官方商品頁提及 detective；具體條目仍待核對。 官方規則 Wiki 可支持相關英文職業概念；本專案繁中譯名仍為編者譯名，非經核實的官方繁中用語。",
+      "notes": "官方規則 Wiki 明列 Private Investigator。繁中名稱為本專案譯名；1920 年代個別適用性尚未逐項核實。",
       "eraStatus": "1920s_plausible_not_individually_verified",
       "englishCandidate": "Private Investigator",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
@@ -117,14 +110,13 @@
       "category": "investigation_law",
       "era": "1920s",
       "sourceIds": [
-        "chaosium_investigator_handbook_7e",
         "chaosium_official_rules_wiki_occupations"
       ],
       "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
-      "notes": "官方商品頁提及 police officer；正式分類待核對。 官方規則 Wiki 可支持相關英文職業概念；本專案繁中譯名仍為編者譯名，非經核實的官方繁中用語。",
+      "notes": "官方規則 Wiki 明列 Police Detective；此英文名稱比泛稱 Police Officer 更貼近可核對的條目。繁中選單仍以「警察」作廣義顯示名稱，未宣稱為官方譯名。",
       "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Police Officer",
+      "englishCandidate": "Police Detective",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
@@ -133,13 +125,13 @@
       "category": "health_care",
       "era": "1920s",
       "sourceIds": [
-        "chaosium_investigator_handbook_7e"
+        "chaosium_official_rules_wiki_occupations"
       ],
-      "sourceStatus": "to_verify_against_book",
+      "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
-      "notes": "待對照手冊正式職業條目及譯名。",
+      "notes": "官方規則 Wiki 明列 Doctor of Medicine。繁中名稱為本專案譯名；1920 年代個別適用性尚未逐項核實。",
       "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Doctor of Medicine / Physician",
+      "englishCandidate": "Doctor of Medicine",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
@@ -175,12 +167,10 @@
       "name": "商人",
       "category": "business_trade",
       "era": "1920s",
-      "sourceIds": [
-        "chaosium_investigator_handbook_7e"
-      ],
+      "sourceIds": [],
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
-      "notes": "待對照手冊正式職業條目及譯名。",
+      "notes": "「商人」是本專案的廣義分類；目前尚未將它對應到一個已核實的官方英文職業條目。",
       "eraStatus": "1920s_plausible_not_individually_verified",
       "englishCandidate": "Businessperson / Merchant",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
@@ -191,12 +181,11 @@
       "category": "business_trade",
       "era": "1920s",
       "sourceIds": [
-        "chaosium_investigator_handbook_7e",
-        "chaosium_official_rules_wiki_occupations"
+        "chaosium_investigator_handbook_7e"
       ],
       "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
-      "notes": "官方商品頁職業範例。 官方規則 Wiki 亦列有 Antiquarian；Antiquarian 與 Antique Dealer 是不同英文職業名，請勿視為同一條目。",
+      "notes": "Chaosium 官方 Investigator Handbook 商品頁使用 Antique Dealer 作職業範例圖說。此名稱與官方規則 Wiki 的 Antiquarian 是不同英文名稱，不可視為同一條目；1920 年代個別適用性尚未核實。",
       "eraStatus": "1920s_plausible_not_individually_verified",
       "englishCandidate": "Antique Dealer",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
@@ -258,12 +247,14 @@
       "name": "作家",
       "category": "arts_entertainment",
       "era": "1920s",
-      "sourceIds": [],
-      "sourceStatus": "to_verify_against_book",
+      "sourceIds": [
+        "chaosium_official_rules_wiki_occupations"
+      ],
+      "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
-      "notes": "待核對手冊正式職業條目及譯名。",
+      "notes": "官方規則 Wiki 明列 Author。此資料顯示名稱「作家」對應英文候選 Author；繁中譯名仍為本專案用語，1920 年代個別適用性尚未逐項核實。",
       "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Author / Writer",
+      "englishCandidate": "Author",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
