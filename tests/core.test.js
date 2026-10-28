@@ -162,6 +162,9 @@ test("all occupation IDs are unique, source labels are present, and list is not 
   assert.equal(occupations.aliases.length,21,"cross-reference aliases");
   const canonicalIds=new Set(occupations.occupations.map(o=>o.id));
   for(const alias of occupations.aliases){assert.ok(alias.isAlias);assert.ok(canonicalIds.has(alias.aliasOf),alias.id+" points to canonical entry");}
+  assert.deepEqual(occupations.occupations.find(o=>o.id==="criminal").crossReferences,["Gangster"]);
+  assert.deepEqual(occupations.occupations.find(o=>o.id==="physician").crossReferences,["Psychiatrist"]);
+  assert.deepEqual(occupations.occupations.find(o=>o.id==="pilot").crossReferences,["Aviator"]);
 });
 test("manual edits update character; full background omits blank fields and single-field copy preserves empty string", () => {
   let c=buildCharacter(completeAnswers(),templates,questions,{name:"林先生",age:34});
