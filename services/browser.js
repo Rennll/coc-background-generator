@@ -3,7 +3,7 @@ export async function copyText(text) {
   if (navigator.clipboard?.writeText) { await navigator.clipboard.writeText(String(text)); return; }
   const textarea = document.createElement("textarea");
   textarea.value = String(text); textarea.setAttribute("readonly", "");
-  textarea.style.position = "fixed"; textarea.style.opacity = "0";
+  textarea.className = "clipboard-fallback";
   document.body.appendChild(textarea); textarea.select();
   const copied = document.execCommand("copy"); textarea.remove();
   if (!copied) throw new Error("Clipboard copy is not available in this browser.");
