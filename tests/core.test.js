@@ -688,6 +688,44 @@ test("JSON export validates the complete version-1 contract and ignores extra ch
   assert.equal("skills" in exported, false);
   assert.equal("unexpected" in exported.background, false);
 });
+test("JSON export reflects edits across profile and background and excludes stale generated extras", () => {
+  let character = buildCharacter(completeAnswers(), templates, questions, {
+    name: "原始姓名", occupation: "研究員", age: 30, birthplace: "臺南", residence: "臺北"
+  });
+  character = updateCharacterField(character, "profile", "name", "手動姓名");
+  character = updateCharacterField(character, "profile", "occupation", "鐘錶匠");
+  character = updateCharacterField(character, "profile", "age", "0");
+  character = updateCharacterField(character, "profile", "birthplace", "");
+  character = updateCharacterField(character, "profile", "residence", "基隆");
+  character = updateCharacterField(character, "background", "appearance", "手動外貌描述。");
+  character = updateCharacterField(character, "background", "belief", "手動信念。");
+  character = updateCharacterField(character, "background", "significant_person", "手動重要之人。");
+  character = updateCharacterField(character, "background", "treasured_possession", "手動珍貴之物。");
+  character = updateCharacterField(character, "background", "fear_or_concern", "手動恐懼。");
+  character = updateCharacterField(character, "background", "personality", "手動個性。");
+  character = updateCharacterField(character, "background", "meaningful_location", "手動地點。");
+  character = updateCharacterField(character, "background", "investigation_hook", "手動調查動機。");
+  character.rawAnswers = completeAnswers({Q1:"must_not_export"});
+  character.stats = {STR: 99};
+  character.skills = ["must_not_export"];
+  const exported = JSON.parse(exportJSON(character));
+  assert.deepEqual(exported.profile, {
+    name: "手動姓名", occupation: "鐘錶匠", age: 0, birthplace: "", residence: "基隆"
+  });
+  assert.deepEqual(exported.background, {
+    appearance: "手動外貌描述。",
+    belief: "手動信念。",
+    significant_person: "手動重要之人。",
+    treasured_possession: "手動珍貴之物。",
+    fear_or_concern: "手動恐懼。",
+    personality: "手動個性。",
+    meaningful_location: "手動地點。",
+    investigation_hook: "手動調查動機。"
+  });
+  assert.equal(exported.meta.created_at, null);
+  assert.equal(JSON.stringify(exported).includes("must_not_export"), false);
+});
+
 test("invalid answers and invalid template field references fail explicitly", () => {
   assert.throws(()=>buildCharacter(completeAnswers({Q3b:"wrong_branch"}),templates,questions),/Cannot build character/);
   const badTemplates={...templates,generationRules:{...templates.generationRules,appearance:{parts:[{answerFrom:"Q404"}]}}};
