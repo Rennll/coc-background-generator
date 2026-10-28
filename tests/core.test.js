@@ -533,6 +533,14 @@ test("occupation cross-references resolve directionally and era tags remain cons
   }
 });
 
+test("profession-related possession is phrased as one item before singular follow-up text", () => {
+  const item = questions.questions.find(question => question.id === "Q4").options.find(option => option.id === "profession_item");
+  assert.equal(item.label, "一件與職業有關的物品，例如工具、證書或紀念品。");
+  const character = buildCharacter(completeAnswers({Q4:"profession_item",Q5:"profession_first_recognition"}), templates, questions);
+  assert.equal(character.background.treasured_possession,
+    "他／她珍藏著一件與職業有關的物品，例如工具、證書或紀念品。那是他／她第一次獲得正式認可時留下的紀念。");
+});
+
 test("all conditional option pairs produce clean background text without changing unrelated fields", () => {
   const branchPairs = [["Q3a","Q3b","significant_person"],["Q4","Q5","treasured_possession"],["Q6","Q7","fear_or_concern"],["Q10","Q11","investigation_hook"]];
   for (const [parentId, childId, fieldId] of branchPairs) {
