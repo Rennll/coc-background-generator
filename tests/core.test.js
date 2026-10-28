@@ -533,6 +533,14 @@ test("occupation cross-references resolve directionally and era tags remain cons
   }
 });
 
+test("fear option about deception uses clear and natural Chinese phrasing", () => {
+  const option = questions.questions.find(question => question.id === "Q6").options.find(item => item.id === "deceived_again");
+  assert.equal(option.label, "再次相信一個後來被證明是謊言的說法。");
+  const character = buildCharacter(completeAnswers({Q6:"deceived_again",Q7:"deceived_belief_shattered"}), templates, questions);
+  assert.equal(character.background.fear_or_concern,
+    "他／她最不希望發生的事是再次相信一個後來被證明是謊言的說法。他／她曾全心相信某個人或某種理念，後來才發現事實並非如此。");
+});
+
 test("profession-related possession is phrased as one item before singular follow-up text", () => {
   const item = questions.questions.find(question => question.id === "Q4").options.find(option => option.id === "profession_item");
   assert.equal(item.label, "一件與職業有關的物品，例如工具、證書或紀念品。");
