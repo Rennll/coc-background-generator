@@ -72,6 +72,9 @@ npm run test:e2e
 
 ## 驗收紀錄（2026-10-28）
 
+- 年齡空白值邊界測試提交 `af14998`：核心測試 16/16、Chromium E2E 8/8 通過。空字串與純空白字串都正規化為 `null`，不會被 JavaScript 的數字轉換誤判為 0；同時保留負數、非整數與非數字輸入拒絕驗證：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40627619880)。
+
+
 - Notion 最後一輪規格對照提交 `2178d66`：核心測試 16/16、Chromium E2E 8/8 通過。修正 Q7 四組與規格不一致的選項文案，點擊預覽文字即可編輯，並讓缺漏或多出的背景模板規則明確報錯：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40627374805)。
 
 
