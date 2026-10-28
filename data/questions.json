@@ -225,7 +225,7 @@
       "options": [
         {
           "id": "profession_item",
-          "label": "與職業有關的工具、證書或紀念品。"
+          "label": "一件與職業有關的物品，例如工具、證書或紀念品。"
         },
         {
           "id": "deceased_person_relic",
