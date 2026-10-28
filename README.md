@@ -75,6 +75,10 @@ npm run test:e2e
 
 ## 驗收紀錄（2026-10-28）
 
+- 邊界驗證與敘事回歸提交 `e87419b`：核心測試 18/18、Playwright／Chromium E2E 10/10 通過。JSON `created_at` 時區偏移限制新增 +14:00 上限測試，並補強所有條件分支生成文案的前後空白與 `undefined`／`null`／`[object Object]` 洩漏檢查。視覺截圖已上傳：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40634385555)。
+
+
+
 - JSON 時間戳記驗證提交 `744f829`：核心測試 18/18、Playwright／Chromium E2E 10/10 通過。`exportJSON()` 現在驗證 `created_at` 為有效 ISO 8601 日期時間或 `null`，支援 UTC `Z` 與明確時區偏移，並拒絕無效日期、非字串及不合法時間；新增時區偏移、無效日期與預設 `null` 的回歸測試。CI 視覺截圖已上傳：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40633649877)。
 
 
