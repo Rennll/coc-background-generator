@@ -702,6 +702,21 @@ test("JSON export validates the complete version-1 contract and ignores extra ch
   assert.equal("skills" in exported, false);
   assert.equal("unexpected" in exported.background, false);
 });
+test("custom occupation input is trimmed and blank input never invents an occupation", () => {
+  const named = buildCharacter(
+    completeAnswers({Q10:"other_custom",Q11:"custom_work_unusual_detail",customOccupation:"  鐘錶匠  "}),
+    templates, questions
+  );
+  assert.equal(named.profile.occupation, "鐘錶匠");
+  const blank = buildCharacter(
+    completeAnswers({Q10:"other_custom",Q11:"custom_work_unusual_detail",customOccupation:"   "}),
+    templates, questions
+  );
+  assert.equal(blank.profile.occupation, "");
+  assert.equal(blank.background.investigation_hook,
+    buildCharacter(completeAnswers({Q10:"other_custom",Q11:"custom_work_unusual_detail",customOccupation:"天文觀測員"}),templates,questions).background.investigation_hook);
+});
+
 test("JSON export reflects edits across profile and background and excludes stale generated extras", () => {
   let character = buildCharacter(completeAnswers(), templates, questions, {
     name: "原始姓名", occupation: "研究員", age: 30, birthplace: "臺南", residence: "臺北"
