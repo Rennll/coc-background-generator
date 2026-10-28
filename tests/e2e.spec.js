@@ -129,6 +129,50 @@ test("changing Q10 clears the stale Q11 child answer in a real browser", async (
   await expect(page.locator('input[name="answer"][value="research_contradiction"]')).not.toBeChecked();
 });
 
+test("changing Q3a, Q4, and Q6 clears stale child answers in a real browser", async ({page}) => {
+  await page.goto("/");
+  await answer(page,"neat_reliable");
+  await answer(page,"truth_above_comfort");
+  await answer(page,"family_member");
+  await answer(page,"family_secret");
+  await page.locator("#prev").click();
+  await page.locator("#prev").click();
+  await page.locator('input[name="answer"][value="romantic_partner"]').check();
+  await page.locator("#next").click();
+  await expect(page.getByRole("heading",{name:"你們之間發生過什麼？"})).toBeVisible();
+  await expect(page.locator('input[name="answer"][value="family_secret"]')).toHaveCount(0);
+  await expect(page.locator('input[name="answer"][value="romance_unresolved_end"]')).toBeVisible();
+  await answer(page,"romance_unresolved_end");
+
+  await answer(page,"mysterious_object");
+  await answer(page,"mystery_wrongness");
+  await page.locator("#prev").click();
+  await page.locator("#prev").click();
+  await page.locator('input[name="answer"][value="profession_item"]').check();
+  await page.locator("#next").click();
+  await expect(page.getByRole("heading",{name:"那樣東西為什麼重要？"})).toBeVisible();
+  await expect(page.locator('input[name="answer"][value="mystery_wrongness"]')).toHaveCount(0);
+  await expect(page.locator('input[name="answer"][value="profession_first_recognition"]')).toBeVisible();
+  await answer(page,"profession_first_recognition");
+
+  await answer(page,"deceived_again");
+  await answer(page,"deceived_misunderstood");
+  await page.locator("#prev").click();
+  await page.locator("#prev").click();
+  await page.locator('input[name="answer"][value="helpless_witness"]').check();
+  await page.locator("#next").click();
+  await expect(page.getByRole("heading",{name:"這份擔憂從何而來？"})).toBeVisible();
+  await expect(page.locator('input[name="answer"][value="deceived_misunderstood"]')).toHaveCount(0);
+  await expect(page.locator('input[name="answer"][value="helpless_could_not_help"]')).toBeVisible();
+  await answer(page,"helpless_could_not_help");
+
+  await answer(page,"quiet_listener");
+  await answer(page,"hometown");
+  await answer(page,"knowledge_research");
+  await answer(page,"research_contradiction");
+  await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
+});
+
 test("occupation selector preserves English names, source tags, and custom entry", async ({page}) => {
   await page.goto("/");
   await answer(page,"neat_reliable");
