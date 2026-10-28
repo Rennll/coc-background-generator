@@ -2,15 +2,18 @@ import { getQuestionById, getQuestionOptions, validateAnswers, clearInvalidDepen
 import { buildCharacter, buildBackgroundText, buildFieldText, updateCharacterField } from "./lib/character.js";
 import { exportJSON } from "./lib/export.js";
 import { copyText, downloadText } from "./services/browser.js";
+import { generateName } from "./lib/names.js";
 
 const app = document.querySelector("#app");
-const state = { questions:null, templates:null, occupations:null, answers:{}, step:0, character:null, editing:null, error:"" };
+const state = { questions:null, templates:null, occupations:null, names:null, nameDataError:"", generatedNames:new Set(), nameClassification:null, pendingName:null, answers:{}, step:0, character:null, editing:null, error:"" };
 const esc = (v) => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const get = (url) => fetch(url).then(r => { if(!r.ok) throw new Error(`載入失敗：${url}`); return r.json(); });
 
 async function init(){
   try {
     [state.questions,state.templates,state.occupations] = await Promise.all([get("./data/questions.json"),get("./data/templates.json"),get("./data/occupations.json")]);
+    try { state.names = await get("./data/names.json"); }
+    catch(e) { state.nameDataError = e.message; }
     renderQuestion();
   } catch(e) {
     app.innerHTML = `<section class="panel"><h2>無法載入資料</h2><p>${esc(e.message)}</p><p>請使用本機 HTTP 靜態伺服器開啟，不要直接雙擊 index.html。</p></section>`;
@@ -42,7 +45,7 @@ function renderPreview(){
   app.innerHTML=`<section class="panel"><p class="eyebrow">INVESTIGATOR BACKGROUND</p><h2 class="qtitle">背景預覽</h2><p class="muted">所有欄位都會保留顯示。你可以修改或清空任何欄位。</p><div class="toolbar"><button class="btn btn-primary" id="copyAll">複製完整背景</button><button class="btn" id="export">匯出 JSON</button><button class="btn" id="restart">重新產生</button></div><div class="grid">${fields.map(f=>renderField(f)).join("")}</div><p class="notice">第一版不會自動儲存。請匯出 JSON 或複製文字保存。</p>${state.error?`<p role="status">${esc(state.error)}</p>`:""}</section>`;
   for(const f of fields){
     const key=`${f.section}:${f.id}`;
-    const beginEdit=()=>{state.editing=key;renderPreview();document.querySelector("#editor")?.focus();};
+    const beginEdit=()=>{if(f.section==="profile"&&f.id==="name")state.pendingName=null;state.editing=key;renderPreview();document.querySelector("#editor")?.focus();};
     document.querySelector(`[data-edit="${key}"]`)?.addEventListener("click",beginEdit);
     document.querySelector(`[data-edit-value="${key}"]`)?.addEventListener("click",beginEdit);
     document.querySelector(`[data-copy="${key}"]`)?.addEventListener("click",async()=>{const text=f.section==="profile"?String(state.character.profile[f.id]??""):buildFieldText(state.character,f.id);try{await copyText(text);state.error="已複製欄位內容。";}catch(e){state.error=`複製失敗：${e.message}`;}renderPreview();});
@@ -55,10 +58,14 @@ function renderPreview(){
         else if(selected==="") value="";
         else value=state.occupations.occupations.find(o=>o.id===selected)?.name ?? "";
       }
-      state.character=updateCharacterField(state.character,f.section,f.id,value);state.editing=null;state.error="";
+      if(f.section==="profile"&&f.id==="name"){const previousName=String(state.character.profile.name??"");value=String(value).trim();if(value!==previousName)state.nameClassification=value?{label:"自訂姓名",source:"custom"}:null;state.pendingName=null;}state.character=updateCharacterField(state.character,f.section,f.id,value);state.editing=null;state.error="";
     }catch(e){state.error=e.message;}renderPreview();});
     document.querySelector(`[data-cancel="${key}"]`)?.addEventListener("click",()=>{state.editing=null;state.error="";renderPreview();});
   }
+  document.querySelector("[data-generate-name]")?.addEventListener("click",()=>{try{if(!state.names)throw new Error(state.nameDataError||"姓名資料尚未載入");state.pendingName=generateName(state.names,{excludeNames:state.generatedNames});state.generatedNames.add(state.pendingName.name);state.error="";}catch(e){state.error=`無法產生姓名：${e.message}`;}renderPreview();});
+  document.querySelector("[data-name-reroll]")?.addEventListener("click",()=>{try{if(!state.names)throw new Error(state.nameDataError||"姓名資料尚未載入");state.pendingName=generateName(state.names,{excludeNames:state.generatedNames});state.generatedNames.add(state.pendingName.name);state.error="";}catch(e){state.error=`無法重新抽取姓名：${e.message}`;}renderPreview();});
+  document.querySelector("[data-name-cancel]")?.addEventListener("click",()=>{state.pendingName=null;state.error="";renderPreview();});
+  document.querySelector("[data-name-confirm]")?.addEventListener("click",()=>{if(!state.pendingName)return;state.character=updateCharacterField(state.character,"profile","name",state.pendingName.name);state.nameClassification={label:state.pendingName.label,source:"generated",culture:state.pendingName.culture};state.pendingName=null;state.error="";renderPreview();});
   document.querySelector("#copyAll").addEventListener("click",async()=>{try{await copyText(buildBackgroundText(state.character,state.templates));state.error="已複製完整背景。";}catch(e){state.error=`複製失敗：${e.message}`;}renderPreview();});
   document.querySelector("#export").addEventListener("click",()=>{downloadText("coc-investigator-background.json",exportJSON(state.character,new Date().toISOString()),"application/json;charset=utf-8");state.error="已匯出 JSON。";renderPreview();});
   document.querySelector("#restart").addEventListener("click",()=>{if(confirm("重新產生會清除問卷答案與手動編輯。確定要重新開始嗎？"))reset();});
@@ -66,7 +73,10 @@ function renderPreview(){
 function renderField(f){
   const value=f.section==="profile"?state.character.profile[f.id]:state.character.background[f.id];
   const display=value==null?"":String(value),key=`${f.section}:${f.id}`,editing=state.editing===key;
-  return `<article class="field ${f.section==="background"?"full":""}"><div class="field-head"><h3>${esc(f.label)}</h3><div><button class="small" data-copy="${key}" aria-label="複製欄位：${esc(f.label)}" type="button">複製欄位</button> <button class="small" data-edit="${key}" aria-label="${editing?"編輯":"編輯"}：${esc(f.label)}" type="button">${editing?"編輯中":"編輯"}</button></div></div>${editing?`${f.section==="profile"&&f.id==="occupation"?occupationEditor(display):f.id==="age"?`<input id="editor" class="input" aria-label="${esc(f.label)}" type="number" min="0" step="1" value="${esc(display)}">`:f.section==="background"?`<textarea id="editor" class="area" aria-label="${esc(f.label)}">${esc(display)}</textarea>`:`<input id="editor" class="input" aria-label="${esc(f.label)}" value="${esc(display)}">`}<div class="actions"><button class="btn" data-cancel="${key}" aria-label="取消編輯：${esc(f.label)}">取消</button><button class="btn btn-primary" data-save="${key}" aria-label="儲存：${esc(f.label)}">儲存</button></div>`:`<button class="value value-button ${display===""?"empty":""}" data-edit-value="${key}" aria-label="編輯欄位：${esc(f.label)}" type="button">${display===""?"尚未填寫":esc(display)}</button>`}</article>`;
+  const isName=f.section==="profile"&&f.id==="name";
+  const nameMeta=isName&&state.nameClassification? `<p class="name-classification" data-name-classification>${esc(state.nameClassification.label)}</p>`:"";
+  const nameActions=isName? `<div class="name-tools"><button class="btn" data-generate-name type="button">產生姓名</button><span class="muted">姓名資料分類僅描述名字素材的常見風格，不代表角色性別。</span></div>${state.pendingName?`<div class="name-candidate" role="group" aria-label="姓名候選"><p><strong>候選姓名：</strong><span data-name-candidate>${esc(state.pendingName.name)}</span></p><p class="muted">${esc(state.pendingName.cultureLabel)} · ${esc(state.pendingName.label)}</p><div class="actions"><button class="btn" data-name-cancel type="button">取消</button><button class="btn" data-name-reroll type="button">重新抽取</button><button class="btn btn-primary" data-name-confirm type="button">確認套用</button></div></div>`:""} `:"";
+  return `<article class="field ${f.section==="background"?"full":""}"><div class="field-head"><h3>${esc(f.label)}</h3><div><button class="small" data-copy="${key}" aria-label="複製欄位：${esc(f.label)}" type="button">複製欄位</button> <button class="small" data-edit="${key}" aria-label="編輯：${esc(f.label)}" type="button">${editing?"編輯中":"編輯"}</button></div></div>${editing?`${f.section==="profile"&&f.id==="occupation"?occupationEditor(display):f.id==="age"?`<input id="editor" class="input" aria-label="${esc(f.label)}" type="number" min="0" step="1" value="${esc(display)}">`:f.section==="background"?`<textarea id="editor" class="area" aria-label="${esc(f.label)}">${esc(display)}</textarea>`:`<input id="editor" class="input" aria-label="${esc(f.label)}" value="${esc(display)}">`}<div class="actions"><button class="btn" data-cancel="${key}" aria-label="取消編輯：${esc(f.label)}">取消</button><button class="btn btn-primary" data-save="${key}" aria-label="儲存：${esc(f.label)}">儲存</button></div>`:`<button class="value value-button ${display===""?"empty":""}" data-edit-value="${key}" aria-label="編輯欄位：${esc(f.label)}" type="button">${display===""?"尚未填寫":esc(display)}</button>`}${nameMeta}${nameActions}</article>`;
 }
 function occupationEditor(display){
   const known=state.occupations.occupations.find(o=>o.name===display),selected=known?.id ?? (display?"other_custom":"");
