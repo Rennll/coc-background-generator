@@ -33,6 +33,12 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   await page.locator("#export").click();
   const download = await downloadPromise;
   expect(download.suggestedFilename()).toBe("coc-investigator-background.json");
+  page.once("dialog", dialog => dialog.dismiss());
+  await page.locator("#restart").click();
+  await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
+  page.once("dialog", dialog => dialog.accept());
+  await page.locator("#restart").click();
+  await expect(page.getByRole("heading",{name:"你的角色長什麼樣子？"})).toBeVisible();
 });
 
 test("custom occupation uses the generic Q11 branch and remains editable in preview", async ({page}) => {
