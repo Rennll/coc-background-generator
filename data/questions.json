@@ -369,7 +369,7 @@
         "helpless_witness": [
           {
             "id": "helpless_could_not_help",
-            "label": "他／她曾經在場，卻不知道該怎麼幫助對方。"
+            "label": "他／她至今記得那個人的求救聲，卻始終不知道對方後來怎麼了。"
           },
           {
             "id": "helpless_made_worse",
@@ -389,11 +389,11 @@
         "deceived_again": [
           {
             "id": "deceived_belief_shattered",
-            "label": "他／她曾全心相信某個人或某種理念，後來才發現事實並非如此。"
+            "label": "他／她曾因相信一項承諾而做出重大決定，事後才發現對方隱瞞了關鍵事實。"
           },
           {
             "id": "deceived_misunderstood",
-            "label": "他／她至今仍不知道，自己當年究竟是被欺騙，還是誤解了對方。"
+            "label": "對方後來給出另一套說法，至今沒有證據能證明誰說的是真話。"
           }
         ],
         "lose_grip_on_reality": [
@@ -419,7 +419,7 @@
         "effort_wasted": [
           {
             "id": "effort_forced_to_stop",
-            "label": "他／她曾為某個目標犧牲許多，卻被迫半途放棄。"
+            "label": "就在目標即將實現時，突如其來的變故讓一切前功盡棄。"
           },
           {
             "id": "effort_saw_give_up",
