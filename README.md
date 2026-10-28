@@ -72,6 +72,9 @@ npm run test:e2e
 
 ## 驗收紀錄（2026-10-28）
 
+- 最新條件分支回歸提交 `f6dd1ac`：核心測試 16/16、Chromium E2E 7/7 通過；新增 Q3a、Q4、Q6 修改前置答案後的真實瀏覽器測試，並確認 Q10→Q11 既有測試涵蓋失效答案清除及自訂職業通用分支：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40625933935)。
+
+
 - Repository 初始 HEAD：`190fd96043e04fda4186cadbacd34e443c02b550`（main）。
 - 對照 Notion 規格後，已在 `audit/spec-alignment` 分支調整問卷選項、背景模板、核心測試與 Chromium E2E 測試。
 - 職業資料以使用者從 Investigator Handbook 貼上且已自行逐字核對實體手冊的英文清單為基準，將 91 筆主要職業與 21 筆 see-alias 交叉參照分開保存，避免別名造成重複選項。英文原名保留於 `englishCandidate`；繁中顯示名稱採專案工作譯名，未宣稱為官方中文版。
