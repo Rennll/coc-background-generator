@@ -27,7 +27,7 @@
       "title": "Call of Cthulhu RPG Wiki — Occupation and Skills",
       "url": "https://cthulhuwiki.chaosium.com/investigators/step-three-occupation-and-skills.html",
       "sourceType": "official_rules_wiki",
-      "supports": "官方規則 Wiki 列出 Antiquarian、Author、Dilettante、Doctor of Medicine、Journalist、Police Detective、Private Investigator、Professor 等範例職業；不代表完整職業清單。",
+      "supports": "Chaosium 官方规则 Wiki 的示例职业章节列出 Antiquarian、Author、Dilettante、Doctor of Medicine、Journalist、Police Detective、Private Investigator、Professor。只佐证这些职业在官方规则 Wiki 中有示例，不证明它们在用户转录的 Investigator Handbook 清单中的拼写、标签、页码或官方繁中译名。",
       "verificationStatus": "official_page_verified"
     },
     {
@@ -155,14 +155,16 @@
       ],
       "sourceStatus": "user_provided_handbook_list",
       "entryStatus": "handbook_list_user_provided",
-      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。 Chaosium 官方規則 Wiki 亦列出此職業作為範例；這不等於已核對 Investigator Handbook 原頁或官方繁中譯名。",
       "eraStatus": "lovecraftian_tag_requires_review",
       "englishCandidate": "Antiquarian",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
       "handbookTags": [
         "Lovecraftian"
       ],
-      "aliases": []
+      "aliases": [],
+      "officialCorroboration": "chaosium_official_rules_wiki_occupations",
+      "officialCorroborationStatus": "official_rules_wiki_example_only"
     },
     {
       "id": "antique_dealer",
@@ -278,14 +280,16 @@
       ],
       "sourceStatus": "user_provided_handbook_list",
       "entryStatus": "handbook_list_user_provided",
-      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。 Chaosium 官方規則 Wiki 亦列出此職業作為範例；這不等於已核對 Investigator Handbook 原頁或官方繁中譯名。",
       "eraStatus": "lovecraftian_tag_requires_review",
       "englishCandidate": "Author",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
       "handbookTags": [
         "Lovecraftian"
       ],
-      "aliases": []
+      "aliases": [],
+      "officialCorroboration": "chaosium_official_rules_wiki_occupations",
+      "officialCorroborationStatus": "official_rules_wiki_example_only"
     },
     {
       "id": "pilot",
@@ -581,14 +585,16 @@
       ],
       "sourceStatus": "user_provided_handbook_list",
       "entryStatus": "handbook_list_user_provided",
-      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。 Chaosium 官方規則 Wiki 亦列出此職業作為範例；這不等於已核對 Investigator Handbook 原頁或官方繁中譯名。",
       "eraStatus": "lovecraftian_tag_requires_review",
       "englishCandidate": "Dilettante",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
       "handbookTags": [
         "Lovecraftian"
       ],
-      "aliases": []
+      "aliases": [],
+      "officialCorroboration": "chaosium_official_rules_wiki_occupations",
+      "officialCorroborationStatus": "official_rules_wiki_example_only"
     },
     {
       "id": "diver",
@@ -617,7 +623,7 @@
       ],
       "sourceStatus": "user_provided_handbook_list",
       "entryStatus": "handbook_list_user_provided",
-      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。 手冊原清單另註明 also see Psychiatrist；此處保留交叉參照，不合併成同一職業。",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。 手冊原清單另註明 also see Psychiatrist；此處保留交叉參照，不合併成同一職業。 Chaosium 官方規則 Wiki 亦列出此職業作為範例；這不等於已核對 Investigator Handbook 原頁或官方繁中譯名。",
       "eraStatus": "lovecraftian_tag_requires_review",
       "englishCandidate": "Doctor of Medicine",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
@@ -627,7 +633,9 @@
       "aliases": [],
       "crossReferences": [
         "Psychiatrist"
-      ]
+      ],
+      "officialCorroboration": "chaosium_official_rules_wiki_occupations",
+      "officialCorroborationStatus": "official_rules_wiki_example_only"
     },
     {
       "id": "drifter",
@@ -933,7 +941,7 @@
       ],
       "sourceStatus": "user_provided_handbook_list",
       "entryStatus": "handbook_list_user_provided",
-      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。 Chaosium 官方規則 Wiki 亦列出此職業作為範例；這不等於已核對 Investigator Handbook 原頁或官方繁中譯名。",
       "eraStatus": "lovecraftian_tag_requires_review",
       "englishCandidate": "Journalist",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
@@ -942,7 +950,9 @@
       ],
       "aliases": [
         "Reporter"
-      ]
+      ],
+      "officialCorroboration": "chaosium_official_rules_wiki_occupations",
+      "officialCorroborationStatus": "official_rules_wiki_example_only"
     },
     {
       "id": "judge",
@@ -1252,14 +1262,16 @@
       ],
       "sourceStatus": "user_provided_handbook_list",
       "entryStatus": "handbook_list_user_provided",
-      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。 Chaosium 官方規則 Wiki 亦列出此職業作為範例；這不等於已核對 Investigator Handbook 原頁或官方繁中譯名。",
       "eraStatus": "lovecraftian_tag_requires_review",
       "englishCandidate": "Police Detective/Officer",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
       "handbookTags": [
         "Lovecraftian"
       ],
-      "aliases": []
+      "aliases": [],
+      "officialCorroboration": "chaosium_official_rules_wiki_occupations",
+      "officialCorroborationStatus": "official_rules_wiki_example_only"
     },
     {
       "id": "private_detective",
@@ -1271,12 +1283,14 @@
       ],
       "sourceStatus": "user_provided_handbook_list",
       "entryStatus": "handbook_list_user_provided",
-      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。 Chaosium 官方規則 Wiki 亦列出此職業作為範例；這不等於已核對 Investigator Handbook 原頁或官方繁中譯名。",
       "eraStatus": "1920s_applicability_not_individually_verified",
       "englishCandidate": "Private Investigator",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
       "handbookTags": [],
-      "aliases": []
+      "aliases": [],
+      "officialCorroboration": "chaosium_official_rules_wiki_occupations",
+      "officialCorroborationStatus": "official_rules_wiki_example_only"
     },
     {
       "id": "academic",
@@ -1288,14 +1302,16 @@
       ],
       "sourceStatus": "user_provided_handbook_list",
       "entryStatus": "handbook_list_user_provided",
-      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。 Chaosium 官方規則 Wiki 亦列出此職業作為範例；這不等於已核對 Investigator Handbook 原頁或官方繁中譯名。",
       "eraStatus": "lovecraftian_tag_requires_review",
       "englishCandidate": "Professor",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
       "handbookTags": [
         "Lovecraftian"
       ],
-      "aliases": []
+      "aliases": [],
+      "officialCorroboration": "chaosium_official_rules_wiki_occupations",
+      "officialCorroborationStatus": "official_rules_wiki_example_only"
     },
     {
       "id": "prospector",
