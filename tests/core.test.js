@@ -169,6 +169,7 @@ test("all occupation IDs are unique, source labels are present, and list is not 
   assert.equal(occupations.aliases.length,21,"cross-reference aliases");
   const canonicalIds=new Set(occupations.occupations.map(o=>o.id));
   for(const alias of occupations.aliases){assert.ok(alias.isAlias);assert.ok(canonicalIds.has(alias.aliasOf),alias.id+" points to canonical entry");}
+  for(const id of ["alias_aviator","alias_gun_moll"]){const alias=occupations.aliases.find(a=>a.id===id);assert.deepEqual(alias.handbookTags,["Classic"],id+" preserves the Handbook Classic tag");assert.equal(alias.eraStatus,"classic_tag_requires_review",id+" does not overclaim 1920s suitability");}
   assert.deepEqual(occupations.occupations.find(o=>o.id==="criminal").crossReferences,["Gangster"]);
   assert.deepEqual(occupations.occupations.find(o=>o.id==="physician").crossReferences,["Psychiatrist"]);
   assert.deepEqual(occupations.occupations.find(o=>o.id==="pilot").crossReferences,["Aviator"]);
