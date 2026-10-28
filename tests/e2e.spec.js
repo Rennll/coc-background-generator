@@ -293,6 +293,38 @@ test("restart confirmation preserves edits on cancel and resets on accept", asyn
   await expect(page.getByRole("heading",{name:"背景預覽"})).toHaveCount(0);
 });
 
+test("questionnaire and preview remain free of horizontal overflow at mobile, tablet, and desktop widths", async ({page}) => {
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({width, height: 900});
+    await page.goto("/");
+    await expect(page.getByRole("heading", {name:"你的角色長什麼樣子？"})).toBeVisible();
+    const questionnaireOverflow = await page.evaluate(() => ({
+      viewport: window.innerWidth,
+      document: document.documentElement.scrollWidth,
+      body: document.body.scrollWidth
+    }));
+    expect(questionnaireOverflow.document, `questionnaire document overflow at ${width}px: ${JSON.stringify(questionnaireOverflow)}`).toBeLessThanOrEqual(width);
+    expect(questionnaireOverflow.body, `questionnaire body overflow at ${width}px: ${JSON.stringify(questionnaireOverflow)}`).toBeLessThanOrEqual(width);
+
+    for (const optionId of [
+      "neat_reliable", "truth_above_comfort", "family_member", "family_secret",
+      "mysterious_object", "mystery_wrongness", "deceived_again",
+      "deceived_misunderstood", "quiet_listener", "hometown",
+      "knowledge_research", "research_contradiction"
+    ]) {
+      await answer(page, optionId);
+    }
+    await expect(page.getByRole("heading", {name:"背景預覽"})).toBeVisible();
+    const previewOverflow = await page.evaluate(() => ({
+      viewport: window.innerWidth,
+      document: document.documentElement.scrollWidth,
+      body: document.body.scrollWidth
+    }));
+    expect(previewOverflow.document, `preview document overflow at ${width}px: ${JSON.stringify(previewOverflow)}`).toBeLessThanOrEqual(width);
+    expect(previewOverflow.body, `preview body overflow at ${width}px: ${JSON.stringify(previewOverflow)}`).toBeLessThanOrEqual(width);
+  }
+});
+
 test("blank background fields stay visible, full copy skips them, and single-field copy is empty", async ({page,context}) => {
   await context.grantPermissions(["clipboard-read","clipboard-write"]);
   await page.goto("/");
