@@ -198,6 +198,11 @@ test("changing Q10 clears the stale Q11 child answer in a real browser", async (
   await expect(page.locator('input[name="answer"][value="custom_work_unusual_detail"]')).toHaveCount(0);
   await expect(page.locator('input[name="answer"][value="research_contradiction"]')).toBeVisible();
   await expect(page.locator('input[name="answer"][value="research_contradiction"]')).not.toBeChecked();
+
+  await page.locator("#prev").click();
+  await page.locator('input[name="answer"][value="other_custom"]').check();
+  await expect(page.locator("#customOccupation")).toHaveValue("");
+  await expect(page.locator('input[name="answer"][value="knowledge_research"]')).not.toBeChecked();
 });
 
 test("changing Q3a, Q4, and Q6 clears stale child answers in a real browser", async ({page}) => {
