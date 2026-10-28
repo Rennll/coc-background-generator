@@ -84,6 +84,32 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   await expect(page.getByRole("heading",{name:"你的角色長什麼樣子？"})).toBeVisible();
 });
 
+test("user-edited preview text is rendered as text rather than interpreted as HTML", async ({page}) => {
+  await page.goto("/");
+  await answer(page,"neat_reliable");
+  await answer(page,"truth_above_comfort");
+  await answer(page,"family_member");
+  await answer(page,"family_secret");
+  await answer(page,"mysterious_object");
+  await answer(page,"mystery_wrongness");
+  await answer(page,"deceived_again");
+  await answer(page,"deceived_misunderstood");
+  await answer(page,"quiet_listener");
+  await answer(page,"hometown");
+  await answer(page,"knowledge_research");
+  await answer(page,"research_contradiction");
+
+  const payload = '<img src=x onerror="alert(1)"> & "quoted"';
+  await page.locator('[data-edit="background:belief"]').click();
+  await page.locator("#editor").fill(payload);
+  await page.locator('[data-save="background:belief"]').click();
+
+  const belief = page.locator(".field").filter({has:page.getByRole("heading",{name:"信念",exact:true})});
+  await expect(belief.locator(".value-button")).toHaveText(payload);
+  await expect(page.locator("img")).toHaveCount(0);
+  await expect(page.locator("script")).toHaveCount(0);
+});
+
 test("editing one background field leaves other generated fields unchanged in preview and export", async ({page}) => {
   await page.goto("/");
   await answer(page,"neat_reliable");
