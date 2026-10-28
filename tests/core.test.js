@@ -446,6 +446,26 @@ Zookeeper`.split("\n");
   assert.deepEqual(occupations.occupations.find(o=>o.id==="physician").crossReferences,["Psychiatrist"]);
   assert.deepEqual(occupations.occupations.find(o=>o.id==="pilot").crossReferences,["Aviator"]);
 });
+test("editing one background field preserves every other generated field and custom occupation stays in profile", () => {
+  const answers = completeAnswers({
+    Q10: "other_custom",
+    Q11: "custom_work_unusual_detail",
+    customOccupation: "鐘錶匠"
+  });
+  const original = buildCharacter(answers, templates, questions);
+  const edited = updateCharacterField(original, "background", "belief", "我只相信親眼查證的證據。");
+  assert.equal(edited.background.belief, "我只相信親眼查證的證據。");
+  for (const fieldId of Object.keys(templates.fieldLabels)) {
+    if (fieldId === "belief") continue;
+    assert.equal(edited.background[fieldId], original.background[fieldId],
+      fieldId + " must remain unchanged when another field is edited");
+  }
+  assert.equal(edited.profile.occupation, "鐘錶匠");
+  assert.equal(edited.background.investigation_hook, original.background.investigation_hook,
+    "custom occupation is not implicitly injected into the Q11 narrative");
+  assert.match(edited.background.investigation_hook, /工作|細節|異常|不尋常|線索|委託/u);
+});
+
 test("manual edits update character; full background omits blank fields and single-field copy preserves empty string", () => {
   let c=buildCharacter(completeAnswers(),templates,questions,{name:"林先生",age:34});
   c=updateCharacterField(c,"background","belief","");
