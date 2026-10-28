@@ -72,6 +72,9 @@ npm run test:e2e
 
 ## 驗收紀錄（2026-10-28）
 
+- 預覽欄位無障礙標籤修正提交 `1f250f0`：核心測試 16/16、Chromium E2E 8/8 通過。13 個預覽欄位的編輯控制、輸入欄位、儲存與取消按鈕均有欄位專屬可存取名稱；測試逐欄開啟並取消編輯驗證：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40626682645)。
+
+
 - 最新條件分支回歸提交 `f6dd1ac`：核心測試 16/16、Chromium E2E 7/7 通過；新增 Q3a、Q4、Q6 修改前置答案後的真實瀏覽器測試，並確認 Q10→Q11 既有測試涵蓋失效答案清除及自訂職業通用分支：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40625933935)。
 
 
