@@ -661,6 +661,20 @@ test("manual edits, including age and custom occupation, are reflected in export
   assert.throws(()=>buildCharacter(completeAnswers(),templates,questions,{age:{value:42}}),/Profile age must be/);
   assert.throws(()=>updateCharacterField(c,"profile","age",false),/Age must be/);
 });
+test("full background text omits whitespace-only fields but preserves nonblank edited text", () => {
+  let character = buildCharacter(completeAnswers(), templates, questions, {
+    name: "   ", occupation: "研究員", age: 0, birthplace: "", residence: "  "
+  });
+  character = updateCharacterField(character, "background", "belief", "   ");
+  character = updateCharacterField(character, "background", "appearance", "  外貌文字  ");
+  const text = buildBackgroundText(character, templates);
+  assert.doesNotMatch(text, /姓名：|出生地：|居住地：|信念：/);
+  assert.match(text, /職業：研究員/);
+  assert.match(text, /年齡：0/);
+  assert.match(text, /外貌描述：外貌文字/);
+  assert.doesNotMatch(text, /外貌描述：  外貌文字  /);
+});
+
 test("JSON export validates the complete version-1 contract and ignores extra character data", () => {
   const character = buildCharacter(completeAnswers(), templates, questions, {
     name: "測試角色", occupation: "研究員", age: 42, birthplace: "臺北", residence: "臺北"
