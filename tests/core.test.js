@@ -170,6 +170,7 @@ test("all occupation IDs are unique, source labels are present, and list is not 
   const canonicalIds=new Set(occupations.occupations.map(o=>o.id));
   for(const alias of occupations.aliases){assert.ok(alias.isAlias);assert.ok(canonicalIds.has(alias.aliasOf),alias.id+" points to canonical entry");}
   for(const id of ["alias_aviator","alias_gun_moll"]){const alias=occupations.aliases.find(a=>a.id===id);assert.deepEqual(alias.handbookTags,["Classic"],id+" preserves the Handbook Classic tag");assert.equal(alias.eraStatus,"classic_tag_requires_review",id+" does not overclaim 1920s suitability");}
+  const pilot=occupations.occupations.find(o=>o.id==="pilot");assert.deepEqual(pilot.handbookTags,[]);assert.equal(pilot.eraStatus,"1920s_applicability_not_individually_verified","Aviator’s Classic tag must not transfer to Pilot");
   for(const alias of occupations.aliases){const target=occupations.occupations.find(o=>o.id===alias.aliasOf);assert.ok(target.crossReferences?.includes(alias.englishCandidate),`${alias.englishCandidate} cross-reference is visible on ${target.englishCandidate}`);}
   assert.deepEqual(occupations.occupations.find(o=>o.id==="criminal").crossReferences,["Gangster","Assassin","Bank Robber","Bootlegger","Burglar","Conman","Fence","Forger/Counterfeiter","Gun Moll","Smuggler","Street Punk","Thug"]);
   assert.deepEqual(occupations.occupations.find(o=>o.id==="physician").crossReferences,["Psychiatrist"]);
