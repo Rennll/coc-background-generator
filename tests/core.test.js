@@ -163,7 +163,7 @@ test("all occupation IDs are unique, source labels are present, and list is not 
   const officialExamples=occupations.occupations.filter(o=>o.officialCorroborationStatus==="official_rules_wiki_example_only");
   assert.equal(officialExamples.length,8,"only eight entries are corroborated as official wiki examples");
   for(const o of officialExamples){assert.equal(o.officialCorroboration,"chaosium_official_rules_wiki_occupations");assert.match(o.notes,/不等於已核對 Investigator Handbook 原頁/);}
-  assert.match(occupations.sources.find(source=>source.id==="chaosium_official_rules_wiki_occupations").supports,/不证明.*官方繁中译名/);
+  assert.match(occupations.sources.find(source=>source.id==="chaosium_official_rules_wiki_occupations").supports,/不證明.*官方繁中譯名/);
   assert.equal(occupations.occupations.length,91,"canonical handbook entries");
   assert.equal(occupations.aliases.length,21,"cross-reference aliases");
   const canonicalIds=new Set(occupations.occupations.map(o=>o.id));
