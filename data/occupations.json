@@ -302,7 +302,7 @@
       "sourceStatus": "user_provided_handbook_list",
       "entryStatus": "handbook_list_user_provided",
       "notes": "手冊清單中的 Pilot 未標註年代標籤；[Classic] 出現在 Aviator 交叉參照上，不能直接轉移到 Pilot。繁中名稱為專案工作譯名。 手冊原清單另註明 also see Aviator；此處保留交叉參照，不合併成同一職業。",
-      "eraStatus": "classic_tag_requires_review",
+      "eraStatus": "1920s_applicability_not_individually_verified",
       "englishCandidate": "Pilot",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
       "handbookTags": [],
