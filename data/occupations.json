@@ -416,6 +416,10 @@
       "aliases": [
         "Maid",
         "Valet"
+      ],
+      "crossReferences": [
+        "Maid",
+        "Valet"
       ]
     },
     {
@@ -453,6 +457,9 @@
         "Modern"
       ],
       "aliases": [
+        "Hacker"
+      ],
+      "crossReferences": [
         "Hacker"
       ]
     },
@@ -519,7 +526,18 @@
         "Thug"
       ],
       "crossReferences": [
-        "Gangster"
+        "Gangster",
+        "Assassin",
+        "Bank Robber",
+        "Bootlegger",
+        "Burglar",
+        "Conman",
+        "Fence",
+        "Forger/Counterfeiter",
+        "Gun Moll",
+        "Smuggler",
+        "Street Punk",
+        "Thug"
       ]
     },
     {
@@ -670,6 +688,10 @@
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
       "handbookTags": [],
       "aliases": [
+        "Chauffeur",
+        "Taxi Driver"
+      ],
+      "crossReferences": [
         "Chauffeur",
         "Taxi Driver"
       ]
@@ -952,7 +974,10 @@
         "Reporter"
       ],
       "officialCorroboration": "chaosium_official_rules_wiki_occupations",
-      "officialCorroborationStatus": "official_rules_wiki_example_only"
+      "officialCorroborationStatus": "official_rules_wiki_example_only",
+      "crossReferences": [
+        "Reporter"
+      ]
     },
     {
       "id": "judge",
@@ -1004,6 +1029,10 @@
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
       "handbookTags": [],
       "aliases": [
+        "Lumberjack",
+        "Miner"
+      ],
+      "crossReferences": [
         "Lumberjack",
         "Miner"
       ]
@@ -1249,6 +1278,9 @@
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
       "handbookTags": [],
       "aliases": [
+        "Photojournalist"
+      ],
+      "crossReferences": [
         "Photojournalist"
       ]
     },
