@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { readFile } from "node:fs/promises";
+import { readFile, mkdir } from "node:fs/promises";
 
 async function answer(page, optionId, {customOccupation} = {}) {
   await page.locator(`input[name="answer"][value="${optionId}"]`).check();
@@ -448,7 +448,6 @@ test("restart confirmation preserves edits on cancel and resets on accept", asyn
   await expect(page.getByRole("heading",{name:"你的角色長什麼樣子？"})).toBeVisible();
   await expect(page.getByRole("heading",{name:"背景預覽"})).toHaveCount(0);
 });
-
 test("questionnaire and preview remain free of horizontal overflow at mobile, tablet, and desktop widths", async ({page}) => {
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({width, height: 900});
@@ -519,3 +518,143 @@ test("blank background fields stay visible, full copy skips them, and single-fie
   await beliefField.locator('[data-copy="background:belief"]').click();
   expect(await page.evaluate(()=>navigator.clipboard.readText())).toBe("");
 });
+
+
+test("name generator candidate can be cancelled, rerolled, confirmed, and manually edited", async ({ page }) => {
+  await page.goto("/");
+  await answer(page,"neat_reliable");
+  await answer(page,"truth_above_comfort");
+  await answer(page,"family_member");
+  await answer(page,"family_secret");
+  await answer(page,"mysterious_object");
+  await answer(page,"mystery_wrongness");
+  await answer(page,"deceived_again");
+  await answer(page,"deceived_misunderstood");
+  await answer(page,"quiet_listener");
+  await answer(page,"hometown");
+  await answer(page,"knowledge_research");
+  await answer(page,"research_contradiction");
+  const nameField = page.locator(".field").filter({has:page.getByRole("heading",{name:"姓名",exact:true})});
+  await expect(nameField.locator("#name-culture")).toHaveValue("taiwanHan");
+  await nameField.locator("#name-culture").selectOption("japanese");
+  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await expect(nameField.getByText("候選姓名：")).toBeVisible();
+  await expect(nameField.locator(".name-candidate")).toContainText("日本");
+  await nameField.locator("#name-culture").selectOption("taiwanHan");
+  await expect(nameField.locator("[data-name-candidate]")).toHaveCount(0);
+  await nameField.locator("#name-culture").selectOption("japanese");
+  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  const firstCandidate = await nameField.locator("[data-name-candidate]").textContent();
+  await nameField.getByRole("button",{name:"取消",exact:true}).click();
+  await expect(nameField).toContainText("尚未填寫");
+  await expect(nameField.locator("[data-name-classification]")).toHaveCount(0);
+  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await nameField.getByRole("button",{name:"重新抽取"}).click();
+  const candidate = (await nameField.locator("[data-name-candidate]").textContent())?.trim();
+  expect(candidate).toBeTruthy();
+  expect(candidate).not.toBe(firstCandidate);
+  await nameField.getByRole("button",{name:"確認套用"}).click();
+  await expect(nameField).toContainText(candidate);
+  await expect(nameField.locator("[data-name-classification]")).toContainText(/男性常用名|女性常用名/);
+  await nameField.locator('[data-edit="profile:name"]').click();
+  await page.locator("#editor").fill("手動自訂姓名");
+  await nameField.getByRole("button",{name:"儲存"}).click();
+  await expect(nameField).toContainText("手動自訂姓名");
+  await expect(nameField.locator("[data-name-classification]")).toHaveText("自訂姓名");
+  await nameField.locator('[data-edit="profile:name"]').click();
+  await page.locator("#editor").fill("取消不應保存");
+  await nameField.locator('[data-cancel="profile:name"]').click();
+  await expect(nameField).toContainText("手動自訂姓名");
+  await expect(nameField.locator("[data-name-classification]")).toHaveText("自訂姓名");
+  await expect(page.getByRole("heading",{name:"性別",exact:true})).toHaveCount(0);
+});
+
+
+test("capture real name-generator screenshots for CI artifacts", async ({ page }) => {
+  await page.goto("/");
+  await answer(page,"neat_reliable");
+  await answer(page,"truth_above_comfort");
+  await answer(page,"family_member");
+  await answer(page,"family_secret");
+  await answer(page,"mysterious_object");
+  await answer(page,"mystery_wrongness");
+  await answer(page,"deceived_again");
+  await answer(page,"deceived_misunderstood");
+  await answer(page,"quiet_listener");
+  await answer(page,"hometown");
+  await answer(page,"knowledge_research");
+  await answer(page,"research_contradiction");
+  await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
+
+  await mkdir("test-results", { recursive: true });
+  for (const [culture, filename] of [
+    ["taiwanHan", "test-results/random-name-taiwan.png"],
+    ["japanese", "test-results/random-name-japan.png"]
+  ]) {
+    await page.locator("#name-culture").selectOption(culture);
+    await page.locator("[data-generate-name]").click();
+    await expect(page.getByRole("group",{name:"姓名候選"})).toBeVisible();
+    await expect(page.locator("[data-name-candidate]")).toBeVisible();
+    await page.screenshot({ path: filename, fullPage: true, animations: "disabled" });
+    await page.locator("[data-name-cancel]").click();
+  }
+});
+
+test("saved generated and manual names survive candidate cancellation and culture changes", async ({ page }) => {
+  await page.goto("/");
+  for (const optionId of [
+    "neat_reliable","truth_above_comfort","family_member","family_secret",
+    "mysterious_object","mystery_wrongness","deceived_again","deceived_misunderstood",
+    "quiet_listener","hometown","knowledge_research","research_contradiction"
+  ]) {
+    await answer(page, optionId);
+  }
+  await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
+
+  const nameField = page.locator(".field").filter({has:page.getByRole("heading",{name:"姓名",exact:true})});
+  await nameField.locator("#name-culture").selectOption("taiwanHan");
+  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  const initialCandidate = (await nameField.locator("[data-name-candidate]").textContent())?.trim();
+  expect(initialCandidate).toBeTruthy();
+  await nameField.getByRole("button",{name:"確認套用"}).click();
+
+  const savedGeneratedName = (await nameField.locator(".value-button").textContent())?.trim();
+  const savedGeneratedClassification = (await nameField.locator("[data-name-classification]").textContent())?.trim();
+  expect(savedGeneratedName).toBe(initialCandidate);
+  expect(savedGeneratedClassification).toMatch(/男性常用名|女性常用名/);
+
+  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
+  await nameField.getByRole("button",{name:"取消",exact:true}).click();
+  await expect(nameField.locator(".value-button")).toHaveText(savedGeneratedName);
+  await expect(nameField.locator("[data-name-classification]")).toHaveText(savedGeneratedClassification);
+
+  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
+  await nameField.locator("#name-culture").selectOption("japanese");
+  await expect(nameField.locator("[data-name-candidate]")).toHaveCount(0);
+  await expect(nameField.locator(".value-button")).toHaveText(savedGeneratedName);
+  await expect(nameField.locator("[data-name-classification]")).toHaveText(savedGeneratedClassification);
+
+  await nameField.locator('[data-edit="profile:name"]').click();
+  await page.locator("#editor").fill("手動覆寫姓名");
+  await nameField.getByRole("button",{name:"儲存"}).click();
+  await expect(nameField.locator(".value-button")).toHaveText("手動覆寫姓名");
+  await expect(nameField.locator("[data-name-classification]")).toHaveText("自訂姓名");
+
+  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
+  await nameField.getByRole("button",{name:"取消",exact:true}).click();
+  await expect(nameField.locator(".value-button")).toHaveText("手動覆寫姓名");
+  await expect(nameField.locator("[data-name-classification]")).toHaveText("自訂姓名");
+
+  const downloadPromise = page.waitForEvent("download");
+  await page.locator("#export").click();
+  const download = await downloadPromise;
+  const stream = await download.createReadStream();
+  let exportedText = "";
+  for await (const chunk of stream) exportedText += chunk.toString("utf8");
+  const exported = JSON.parse(exportedText);
+  expect(exported.profile.name).toBe("手動覆寫姓名");
+});
+
