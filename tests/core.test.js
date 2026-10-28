@@ -533,6 +533,33 @@ test("occupation cross-references resolve directionally and era tags remain cons
   }
 });
 
+test("all conditional option pairs produce clean background text without changing unrelated fields", () => {
+  const branchPairs = [["Q3a","Q3b","significant_person"],["Q4","Q5","treasured_possession"],["Q6","Q7","fear_or_concern"],["Q10","Q11","investigation_hook"]];
+  for (const [parentId, childId, fieldId] of branchPairs) {
+    const parent = questions.questions.find(question => question.id === parentId);
+    const child = questions.questions.find(question => question.id === childId);
+    for (const parentOption of parent.options) {
+      const childOptions = child.optionsByParentOption[parentOption.id];
+      assert.ok(Array.isArray(childOptions) && childOptions.length > 0, parentId + "=" + parentOption.id + " has child options");
+      for (const childOption of childOptions) {
+        const overrides = {[parentId]:parentOption.id,[childId]:childOption.id};
+        if (parentId === "Q10" && parentOption.id === "other_custom") overrides.customOccupation = "測試職業";
+        const character = buildCharacter(completeAnswers(overrides),templates,questions);
+        const text = character.background[fieldId];
+        assert.equal(typeof text,"string",fieldId + " output is a string");
+        assert.ok(text.trim().length > 0, parentId + "=" + parentOption.id + ", " + childId + "=" + childOption.id + " generates nonempty " + fieldId);
+        assert.equal(text,text.trim(),fieldId + " has no leading/trailing whitespace");
+        assert.doesNotMatch(text,/undefined|null|\[object Object\]/u,fieldId + " does not leak internal values");
+        assert.doesNotMatch(text,/([。！？.!?])\1/u,fieldId + " has no duplicated terminal punctuation");
+        for (const otherField of Object.keys(templates.fieldLabels).filter(id => id !== fieldId)) {
+          assert.equal(character.background[otherField],buildCharacter(completeAnswers(),templates,questions).background[otherField],
+            "changing " + parentId + "/" + childId + " leaves " + otherField + " unchanged");
+        }
+      }
+    }
+  }
+});
+
 test("editing one background field preserves every other generated field and custom occupation stays in profile", () => {
   const answers = completeAnswers({
     Q10: "other_custom",
