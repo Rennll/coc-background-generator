@@ -503,7 +503,7 @@ Zookeeper`.split("\n");
   assert.deepEqual(occupations.occupations.find(o=>o.id==="physician").crossReferences,["Psychiatrist"]);
   assert.deepEqual(occupations.occupations.find(o=>o.id==="pilot").crossReferences,["Aviator"]);
 });
-test("occupation cross-references resolve bidirectionally and era tags remain conservative", () => {
+test("occupation cross-references resolve directionally and era tags remain conservative", () => {
   const canonical = new Map(occupations.occupations.map(entry => [entry.englishCandidate, entry]));
   const aliasesByName = new Map(occupations.aliases.map(entry => [entry.englishCandidate, entry]));
   const sources = new Set(occupations.sources.map(source => source.id));
