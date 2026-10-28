@@ -87,8 +87,9 @@ test("Q7/Q8/Q9/Q10 options match the confirmed wording and Q11 custom fallback",
 test("all occupation IDs are unique, source labels are present, and list is not advertised as complete", () => {
   assert.equal(new Set(occupations.occupations.map(o=>o.id)).size,occupations.occupations.length);
   assert.match(occupations.scope,/not an official complete list/i);
+  assert.ok(occupations.sources.some(source=>source.id==="chaosium_official_rules_wiki_occupations"));
   for (const o of occupations.occupations) {
-    assert.ok(o.name && o.category && o.sourceStatus, o.id);
+    assert.ok(o.name && o.category && o.sourceStatus && o.eraStatus, o.id);
     if (o.sourceStatus === "supplementary_unverified") assert.equal(o.entryStatus,"supplementary");
   }
 });
