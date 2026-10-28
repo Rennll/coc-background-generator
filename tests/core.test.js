@@ -124,5 +124,5 @@ test("manual edits, including age and custom occupation, are reflected in export
 test("invalid answers and invalid template field references fail explicitly", () => {
   assert.throws(()=>buildCharacter(completeAnswers({Q3b:"wrong_branch"}),templates,questions),/Cannot build character/);
   const badTemplates={...templates,generationRules:{...templates.generationRules,appearance:{parts:[{answerFrom:"Q404"}]}}};
-  assert.throws(()=>buildCharacter(completeAnswers(),badTemplates,questions),/Invalid option/);
+  assert.throws(()=>buildCharacter(completeAnswers(),badTemplates,questions),/Template references unknown question ID/);
 });
