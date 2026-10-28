@@ -147,7 +147,8 @@ test("user-edited preview text is rendered as text rather than interpreted as HT
   await page.locator("#editor").fill(payload);
   await page.locator('[data-save="background:belief"]').click();
 
-  const belief = page.locator(".field").filter({has:page.getByRole("heading",{name:"信念",exact:true})});  await expect(belief.locator(".value-button")).toHaveText(payload);
+  const belief = page.locator(".field").filter({has:page.getByRole("heading",{name:"信念",exact:true})});
+  await expect(belief.locator(".value-button")).toHaveText(payload);
   await expect(page.locator("img")).toHaveCount(0);
   await expect(belief.locator("script")).toHaveCount(0);
 
@@ -296,7 +297,8 @@ test("custom occupation uses the generic Q11 branch and remains editable in prev
 });
 
 test("changing Q10 clears the stale Q11 child answer in a real browser", async ({page}) => {
-  await page.goto("/");  await answer(page,"neat_reliable");
+  await page.goto("/");
+  await answer(page,"neat_reliable");
   await answer(page,"truth_above_comfort");
   await answer(page,"family_member");
   await answer(page,"family_secret");
