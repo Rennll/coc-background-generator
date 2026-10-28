@@ -122,6 +122,9 @@ test("occupation selector preserves English names, source tags, and custom entry
   await expect(selector.locator('option[value="acrobat"]')).toContainText("雜技演員（Acrobat）");
   await expect(selector.locator('option[value="computer_programmer_technician_hacker"]')).toContainText("Modern");
   await expect(selector.locator('option[value="antiquarian"]')).toContainText("Lovecraftian");
+  await expect(selector.locator('option[value="criminal"]')).toContainText("另見：Gangster");
+  await expect(selector.locator('option[value="physician"]')).toContainText("另見：Psychiatrist");
+  await expect(selector.locator('option[value="pilot"]')).toContainText("另見：Aviator");
   await selector.selectOption("other_custom");
   await page.locator("#occupation-custom").fill("鐘錶匠");
   await occupationField.getByRole("button",{name:"儲存"}).click();
