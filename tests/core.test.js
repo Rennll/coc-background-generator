@@ -72,8 +72,13 @@ test("question flow and template formats reject incomplete or unsupported schema
     }
   }
   for (const [fieldId, rule] of Object.entries(templates.generationRules)) {
-    assert.deepEqual([...new Set(rule.parts.map(part => part.answerFrom))].sort(), [...rule.questionIds].sort(),
-      fieldId + " questionIds must exactly match the questions actually used by its template parts");
+    const directSources = new Set(rule.parts.map(part => part.answerFrom));
+    const branchParents = new Set(rule.parts
+      .map(part => questions.questions.find(question => question.id === part.answerFrom)?.dependsOn?.questionId)
+      .filter(Boolean));
+    const expectedSources = new Set([...directSources, ...branchParents]);
+    assert.deepEqual([...expectedSources].sort(), [...rule.questionIds].sort(),
+      fieldId + " questionIds must include direct template sources and their branch-driving parent questions only");
     assert.equal(new Set(rule.questionIds).size, rule.questionIds.length,
       fieldId + " questionIds must not contain duplicates");
     for (const part of rule.parts) {
