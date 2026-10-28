@@ -54,6 +54,14 @@ test("changing a parent clears invalid dependent answers and preserves valid one
   assert.equal(invalid.Q3a,"mentor"); assert.equal("Q3b" in invalid,false);
   const valid = clearInvalidDependentAnswers("Q3a",{Q3a:"mentor",Q3b:"mentor_unthanked"},questions);
   assert.equal(valid.Q3b,"mentor_unthanked");
+  const q4 = clearInvalidDependentAnswers("Q4",{Q4:"profession_item",Q5:"mystery_wrongness"},questions);
+  assert.equal(q4.Q4,"profession_item"); assert.equal("Q5" in q4,false);
+  const q4Valid = clearInvalidDependentAnswers("Q4",{Q4:"profession_item",Q5:"profession_first_recognition"},questions);
+  assert.equal(q4Valid.Q5,"profession_first_recognition");
+  const q6 = clearInvalidDependentAnswers("Q6",{Q6:"helpless_witness",Q7:"deceived_misunderstood"},questions);
+  assert.equal(q6.Q6,"helpless_witness"); assert.equal("Q7" in q6,false);
+  const q6Valid = clearInvalidDependentAnswers("Q6",{Q6:"helpless_witness",Q7:"helpless_could_not_help"},questions);
+  assert.equal(q6Valid.Q7,"helpless_could_not_help");
   const q10 = clearInvalidDependentAnswers("Q10",{Q10:"other_custom",Q11:"research_contradiction",customOccupation:"Clockmaker"},questions);
   assert.equal("Q11" in q10,false);
   assert.equal(q10.customOccupation,"Clockmaker");
