@@ -541,6 +541,10 @@ test("name generator candidate can be cancelled, rerolled, confirmed, and manual
   await nameField.getByRole("button",{name:"產生姓名"}).click();
   await expect(nameField.getByText("候選姓名：")).toBeVisible();
   await expect(nameField.locator(".name-candidate")).toContainText("日本");
+  await nameField.locator("#name-culture").selectOption("taiwanHan");
+  await expect(nameField.locator("[data-name-candidate]")).toHaveCount(0);
+  await nameField.locator("#name-culture").selectOption("japanese");
+  await nameField.getByRole("button",{name:"產生姓名"}).click();
   const firstCandidate = await nameField.locator("[data-name-candidate]").textContent();
   await nameField.getByRole("button",{name:"取消",exact:true}).click();
   await expect(nameField).toContainText("尚未填寫");
