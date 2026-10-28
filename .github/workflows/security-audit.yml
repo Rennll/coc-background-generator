@@ -1,0 +1,27 @@
+name: Security audit
+
+on:
+  pull_request:
+  push:
+    branches:
+      - audit/spec-alignment
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Generate lockfile for audit
+        run: npm install --package-lock-only --ignore-scripts --no-audit
+      - name: Install locked dependencies
+        run: npm ci --ignore-scripts --no-audit
+      - name: Audit dependencies for high and critical vulnerabilities
+        run: npm audit --audit-level=high
