@@ -63,7 +63,7 @@ npm run test:e2e
 
 - `questions.json` 已依 Notion 規格校正 Q7、Q8、Q9、Q10、Q11 的選項與分支；Q10 自訂職業使用 `other_custom` 通用分支。正式題目編號有 11 個數字題號，但因 Q3a/Q3b 拆成兩個步驟，流程共有 12 個題目 ID／步驟。
 - `templates.json` 已調整重要之人、珍貴之物與恐懼／擔憂欄位的分句標點，並新增句末標點設定；`character.js` 會套用可選的結尾標點。新增測試會逐一遍歷四組條件分支的選項，檢查八個欄位都有句末標點且沒有常見重複標點。程式測試仍無法取代真人閱讀，語意重複與敘事自然度仍需抽樣審閱。
-- `occupations.json` 是 22 筆初步資料，不是官方完整職業清單。每筆資料另列英文職稱、來源狀態、手冊標籤、1920 年代適用性及繁中譯名核實狀態。英文候選職稱是供比對的工作欄位，不代表已確認為手冊正式條目；繁中譯名均未宣稱為官方譯名。部分項目僅有官方商品頁範例、類別佐證或尚待核對；補充項目會明確標示，不可宣稱為官方已核實條目。
+- `occupations.json` 已改為依使用者從 Investigator Handbook 貼上的清單建立 91 筆主要職業與 21 筆交叉參照。這是使用者提供的轉錄資料，尚未由我逐字對照書本核實；清單是否完整亦未獨立確認。保留 [Classic]、[Lovecraftian]、[Modern] 標籤；標籤不自動等於 1920 年代適用性。繁中名稱是專案工作譯名，並非已核實的官方繁中譯名。
 - JSON 匯出是本專案自訂格式，不是 Chaosium 官方 JSON 標準。
 - `tests/core.test.js` 覆蓋資料合約、條件分支、答案清除、模板、空白欄位、手動編輯與 JSON 匯出。`tests/e2e.spec.js` 以 Playwright/Chromium 測試標準問卷、自訂職業、預覽編輯、JSON 下載內容、修改前置答案後清除舊分支、重新產生確認，以及空白欄位與剪貼簿行為。GitHub Actions 最近一次已通過核心測試及 4 項 Chromium E2E 測試；之後新增了背景欄位句末標點與所有條件分支組合的核心測試，職業來源標記也再做校正。最新程式提交的 CI 正在重新執行，通過後再更新此驗收紀錄。已通過的瀏覽器測試紀錄：[workflow run](https://github.com/Rennll/coc-background-generator/actions/runs/40615678504)。
 
@@ -74,6 +74,6 @@ npm run test:e2e
 
 - Repository 初始 HEAD：`190fd96043e04fda4186cadbacd34e443c02b550`（main）。
 - 對照 Notion 規格後，已在 `audit/spec-alignment` 分支調整問卷選項、背景模板、核心測試與 Chromium E2E 測試。
-- 職業資料維持 22 筆初步清單；官方商品頁僅能佐證部分範例，不代表逐項核實或官方完整清單。
-- 官方規則 Wiki 已補入職業資料來源。來源頁面可佐證部分英文職業範例，但無法核實完整 1920 年代清單或官方繁中譯名。
+- 職業資料以使用者貼上的英文清單為基準，將 91 筆主要職業與 21 筆 see-alias 交叉參照分開保存，避免別名造成重複選項。英文原名保留於 `englishCandidate`；繁中顯示名稱尚未對照官方中文版。
+- 使用者提供的 Investigator Handbook 職業清單已作為職業資料的主要輸入來源；官方網站來源只作背景參考，不取代使用者貼上的原文，也不代表已逐項對照手冊。
 - 已完成驗證的基準：核心測試通過，Chromium E2E 4/4 通過，涵蓋標準問卷與 JSON 內容、自訂職業、修改 Q10 後清除舊 Q11 答案、空白欄位與剪貼簿行為。之後新增的模板句末標點／分支組合測試與職業來源修訂仍待最新 CI 完成。先前通過紀錄：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40615678504)。
