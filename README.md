@@ -136,3 +136,4 @@ npm run test:e2e
 
 - 自訂職業空白輸入驗證提交 `471ca70`：GitHub Actions run [40649656384](https://github.com/Rennll/coc-background-generator/actions/runs/40649656384) 成功；核心測試 31/31、Playwright／Chromium E2E 12/12 通過。新增測試確認自訂職業名稱會修整前後空白、純空白職業會被驗證拒絕，且通用 Q11 調查動機不依賴自由輸入的職業名稱。PR #1 仍為 Draft；本次 CI 不代表已完成真人語意審閱或實體手機觸控驗收。
 - README 驗收紀錄更新提交 `aeeb09e`：GitHub Actions run [40650166783](https://github.com/Rennll/coc-background-generator/actions/runs/40650166783) 成功；核心測試 31/31、Playwright／Chromium E2E 12/12 通過。此結果驗證自訂職業空白輸入與既有問卷流程；不代表已完成實體手機觸控驗收或所有組合的人工敘事審閱。
+- 驗收文件同步提交 `fc07391`：GitHub Actions run [40652767171](https://github.com/Rennll/coc-background-generator/actions/runs/40652767171) 已完成且成功；核心測試與 Playwright／Chromium E2E 均通過。此輪確認 PR head 與 `audit/spec-alignment` 最新提交一致，PR #1 仍為 Draft，未合併或部署。人工敘事審閱與實體手機觸控驗收仍未宣稱完成。
