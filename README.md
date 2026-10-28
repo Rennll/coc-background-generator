@@ -68,4 +68,11 @@ npm run test:e2e
 - `tests/core.test.js` 覆蓋資料合約、條件分支、答案清除、模板、空白欄位、手動編輯與 JSON 匯出。`tests/e2e.spec.js` 以 Playwright/Chromium 測試標準問卷、自訂職業、預覽編輯、JSON 下載及修改前置答案後清除舊分支。GitHub Actions 曾成功執行核心測試與 2 項 E2E 測試；最近新增的父題切換回歸測試及職業來源修訂仍需以最新 CI 結果確認。
 
 規格文件：[Notion 規格書](https://app.notion.com/p/CoC-4066bb2da397814999b8f86d64fc24e4?pvs=204)
-\n\n## 驗收紀錄（2026-10-28）\n\n- Repository 初始 HEAD：`190fd96043e04fda4186cadbacd34e443c02b550`（main）。\n- 對照 Notion 規格後，已在 `audit/spec-alignment` 分支調整問卷選項、背景模板、核心測試與 Chromium E2E 測試。\n- 職業資料維持 22 筆初步清單；官方商品頁僅能佐證部分範例，不代表逐項核實或官方完整清單。\n- 官方規則 Wiki 已補入職業資料來源。來源頁面可佐證部分英文職業範例，但無法核實完整 1920 年代清單或官方繁中譯名。\n
+
+
+## 驗收紀錄（2026-10-28）
+
+- Repository 初始 HEAD：`190fd96043e04fda4186cadbacd34e443c02b550`（main）。
+- 對照 Notion 規格後，已在 `audit/spec-alignment` 分支調整問卷選項、背景模板、核心測試與 Chromium E2E 測試。
+- 職業資料維持 22 筆初步清單；官方商品頁僅能佐證部分範例，不代表逐項核實或官方完整清單。
+- 官方規則 Wiki 已補入職業資料來源。來源頁面可佐證部分英文職業範例，但無法核實完整 1920 年代清單或官方繁中譯名。
