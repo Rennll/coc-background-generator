@@ -87,7 +87,7 @@ test("every conditional branch option generates all eight background fields with
   for (const {parent,child} of parents) {
     const parentQuestion=questions.questions.find(q=>q.id===parent);
     for (const option of parentQuestion.options) {
-      const answers=completeAnswers({[parent]:option.id});
+      const answers=completeAnswers({[parent]:option.id,...(parent==="Q10"&&option.id==="other_custom"?{customOccupation:"鐘錶匠"}:{})});
       const childOptions=getQuestionOptions(child,answers,questions);
       assert.ok(childOptions.length>0, parent+"/"+option.id);
       answers[child]=childOptions[0].id;
@@ -102,7 +102,7 @@ test("every conditional branch option generates all eight background fields with
   for (const [child,parent] of [["Q3b","Q3a"],["Q5","Q4"],["Q7","Q6"],["Q11","Q10"]]) {
     const parentQuestion=questions.questions.find(q=>q.id===parent);
     for (const parentOption of parentQuestion.options) {
-      const answers=completeAnswers({[parent]:parentOption.id});
+      const answers=completeAnswers({[parent]:parentOption.id,...(parent==="Q10"&&parentOption.id==="other_custom"?{customOccupation:"鐘錶匠"}:{})});
       for (const option of getQuestionOptions(child,answers,questions)) {
         const candidate={...answers,[child]:option.id};
         const character=buildCharacter(candidate,templates,questions);
