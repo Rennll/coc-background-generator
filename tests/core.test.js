@@ -112,6 +112,31 @@ test("every conditional branch option generates all eight background fields with
     }
   }
 });
+test("all generated background fields read as complete sentences with terminal punctuation", () => {
+  const parents = [
+    {parent:"Q3a",child:"Q3b"},
+    {parent:"Q4",child:"Q5"},
+    {parent:"Q6",child:"Q7"},
+    {parent:"Q10",child:"Q11"}
+  ];
+  const samples=[completeAnswers()];
+  for(const {parent,child} of parents){
+    const pq=questions.questions.find(q=>q.id===parent);
+    for(const po of pq.options){
+      const answers=completeAnswers({[parent]:po.id,...(parent==="Q10"&&po.id==="other_custom"?{customOccupation:"鐘錶匠"}:{})});
+      const childOptions=getQuestionOptions(child,answers,questions);
+      for(const co of childOptions) samples.push({...answers,[child]:co.id});
+    }
+  }
+  for(const answers of samples){
+    const character=buildCharacter(answers,templates,questions);
+    for(const [field,value] of Object.entries(character.background)){
+      assert.ok(value.trim().length>0,field);
+      assert.match(value,/[。！？.!?]$/u,field+": "+value);
+      assert.doesNotMatch(value,/。。|；；|。；|；。/u,field+": "+value);
+    }
+  }
+});
 test("Q7/Q8/Q9/Q10 options match the confirmed wording and Q11 custom fallback", () => {
   assert.equal(getQuestionOptions("Q8",{},questions).length,7);
   assert.equal(getQuestionOptions("Q9",{},questions).length,6);
