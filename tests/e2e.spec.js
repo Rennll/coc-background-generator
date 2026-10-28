@@ -27,7 +27,7 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   for (const label of ["姓名","職業","年齡","出生地","居住地","外貌描述","信念","重要之人","珍貴之物","恐懼與擔憂","個性","有意義的地點","與調查的連結"]) {
     const field=page.locator(".field").filter({has:page.getByRole("heading",{name:label,exact:true})});
     await expect(field).toBeVisible();
-    await expect(field.getByRole("button",{name:"編輯",exact:true})).toBeVisible();
+    await expect(field.locator(`[data-edit]`)).toHaveAttribute("aria-label",`編輯：${label}`);
   }
   await page.locator('[data-edit="background:belief"]').click();
   await page.locator("#editor").fill("我只相信能夠查證的事實。");
@@ -35,10 +35,10 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   await expect(page.getByText("我只相信能夠查證的事實。")).toBeVisible();
 
   const occupationField=page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})});
-  await occupationField.getByRole("button",{name:"編輯"}).click();
+  await occupationField.locator('[data-edit="profile:occupation"]').click();
   await page.locator("#occupation-select").selectOption("other_custom");
   await page.locator("#occupation-custom").fill("大學教授");
-  await occupationField.getByRole("button",{name:"儲存"}).click();
+  await occupationField.locator('[data-save="profile:occupation"]').click();
   await expect(occupationField).toContainText("大學教授");
 
   // Exercise all remaining basic profile editors, including blank age -> JSON null.
@@ -270,9 +270,9 @@ test("blank background fields stay visible, full copy skips them, and single-fie
   await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
 
   const beliefField=page.locator(".field").filter({has:page.getByRole("heading",{name:"信念",exact:true})});
-  await beliefField.getByRole("button",{name:"編輯"}).click();
+  await beliefField.locator('[data-edit="background:belief"]').click();
   await page.locator("#editor").fill("");
-  await beliefField.getByRole("button",{name:"儲存"}).click();
+  await beliefField.locator('[data-save="background:belief"]').click();
   await expect(beliefField).toBeVisible();
   await expect(beliefField.getByText("尚未填寫")).toBeVisible();
 
