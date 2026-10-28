@@ -72,6 +72,9 @@ npm run test:e2e
 
 ## 驗收紀錄（2026-10-28）
 
+- Notion 最後一輪規格對照提交 `2178d66`：核心測試 16/16、Chromium E2E 8/8 通過。修正 Q7 四組與規格不一致的選項文案，點擊預覽文字即可編輯，並讓缺漏或多出的背景模板規則明確報錯：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40627374805)。
+
+
 - 預覽欄位無障礙標籤修正提交 `1f250f0`：核心測試 16/16、Chromium E2E 8/8 通過。13 個預覽欄位的編輯控制、輸入欄位、儲存與取消按鈕均有欄位專屬可存取名稱；測試逐欄開啟並取消編輯驗證：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40626682645)。
 
 
