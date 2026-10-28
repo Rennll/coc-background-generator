@@ -255,4 +255,9 @@ test("invalid answers and invalid template field references fail explicitly", ()
   assert.throws(()=>buildCharacter(completeAnswers({Q3b:"wrong_branch"}),templates,questions),/Cannot build character/);
   const badTemplates={...templates,generationRules:{...templates.generationRules,appearance:{parts:[{answerFrom:"Q404"}]}}};
   assert.throws(()=>buildCharacter(completeAnswers(),badTemplates,questions),/Template references unknown question ID/);
+  const missingRule={...templates,generationRules:{...templates.generationRules}};
+  delete missingRule.generationRules.personality;
+  assert.throws(()=>buildCharacter(completeAnswers(),missingRule,questions),/Missing generation rule for background field: personality/);
+  const orphanRule={...templates,generationRules:{...templates.generationRules,unknown_field:{parts:[]}}};
+  assert.throws(()=>buildCharacter(completeAnswers(),orphanRule,questions),/Generation rule references unknown background field: unknown_field/);
 });
