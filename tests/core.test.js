@@ -124,7 +124,7 @@ test("all occupation IDs are unique, source labels are present, and list is not 
   assert.match(occupations.scope,/not an official complete list/i);
   assert.ok(occupations.sources.some(source=>source.id==="chaosium_official_rules_wiki_occupations"));
   for (const o of occupations.occupations) {
-    assert.ok(o.name && o.category && o.sourceStatus && o.eraStatus, o.id);
+    assert.ok(o.name && o.category && o.sourceStatus && o.eraStatus && o.englishCandidate && o.translationStatus, o.id);
     if (o.sourceStatus === "supplementary_unverified") assert.equal(o.entryStatus,"supplementary");
   }
 });
