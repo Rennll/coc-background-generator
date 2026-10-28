@@ -84,6 +84,29 @@ test("question option IDs are globally unique and output fields map to declared 
   }
 });
 
+test("question IDs are unique and malformed question references are rejected", () => {
+  const questionIds = questions.questions.map(question => question.id);
+  assert.equal(new Set(questionIds).size, questionIds.length, "question IDs are globally unique");
+  assert.equal(new Set(questions.flow).size, questions.flow.length, "question flow has no duplicate IDs");
+  assert.deepEqual([...questions.flow].sort(), [...questionIds].sort(),
+    "flow contains every declared question exactly once");
+
+  const duplicateQuestion = {...questions.questions[0], id: questions.questions[1].id};
+  const duplicateQuestions = {...questions, questions: [...questions.questions, duplicateQuestion]};
+  assert.equal(new Set(duplicateQuestions.questions.map(question => question.id)).size,
+    duplicateQuestions.questions.length - 1, "fixture demonstrates duplicate question ID detection");
+
+  for (const question of questions.questions) {
+    if (question.dependsOn) {
+      assert.ok(questionIds.includes(question.dependsOn.questionId),
+        question.id + " dependency points to a declared question");
+    }
+    for (const option of question.options ?? []) {
+      assert.ok(option.id && option.label, question.id + " options have required identifiers and labels");
+    }
+  }
+});
+
 test("question options and dependency declarations reject malformed or unused data", () => {
   const questionIds = new Set(questions.questions.map(question => question.id));
   for (const question of questions.questions) {
