@@ -297,12 +297,15 @@
       ],
       "sourceStatus": "user_provided_handbook_list",
       "entryStatus": "handbook_list_user_provided",
-      "notes": "手冊清單中的 Pilot 未標註年代標籤；[Classic] 出現在 Aviator 交叉參照上，不能直接轉移到 Pilot。繁中名稱為專案工作譯名。",
+      "notes": "手冊清單中的 Pilot 未標註年代標籤；[Classic] 出現在 Aviator 交叉參照上，不能直接轉移到 Pilot。繁中名稱為專案工作譯名。 手冊原清單另註明 also see Aviator；此處保留交叉參照，不合併成同一職業。",
       "eraStatus": "classic_tag_requires_review",
       "englishCandidate": "Pilot",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
       "handbookTags": [],
       "aliases": [
+        "Aviator"
+      ],
+      "crossReferences": [
         "Aviator"
       ]
     },
@@ -493,7 +496,7 @@
       ],
       "sourceStatus": "user_provided_handbook_list",
       "entryStatus": "handbook_list_user_provided",
-      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。 手冊原清單另註明 also see Gangster；此處保留交叉參照，不合併成同一職業。",
       "eraStatus": "1920s_applicability_not_individually_verified",
       "englishCandidate": "Criminal",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
@@ -510,6 +513,9 @@
         "Smuggler",
         "Street Punk",
         "Thug"
+      ],
+      "crossReferences": [
+        "Gangster"
       ]
     },
     {
@@ -611,14 +617,17 @@
       ],
       "sourceStatus": "user_provided_handbook_list",
       "entryStatus": "handbook_list_user_provided",
-      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。 手冊原清單另註明 also see Psychiatrist；此處保留交叉參照，不合併成同一職業。",
       "eraStatus": "lovecraftian_tag_requires_review",
       "englishCandidate": "Doctor of Medicine",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
       "handbookTags": [
         "Lovecraftian"
       ],
-      "aliases": []
+      "aliases": [],
+      "crossReferences": [
+        "Psychiatrist"
+      ]
     },
     {
       "id": "drifter",
