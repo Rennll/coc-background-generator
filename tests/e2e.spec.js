@@ -84,6 +84,44 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   await expect(page.getByRole("heading",{name:"你的角色長什麼樣子？"})).toBeVisible();
 });
 
+test("editing one background field leaves other generated fields unchanged in preview and export", async ({page}) => {
+  await page.goto("/");
+  await answer(page,"neat_reliable");
+  await answer(page,"truth_above_comfort");
+  await answer(page,"family_member");
+  await answer(page,"family_secret");
+  await answer(page,"mysterious_object");
+  await answer(page,"mystery_wrongness");
+  await answer(page,"deceived_again");
+  await answer(page,"deceived_misunderstood");
+  await answer(page,"quiet_listener");
+  await answer(page,"hometown");
+  await answer(page,"knowledge_research");
+  await answer(page,"research_contradiction");
+
+  const appearance = page.locator(".field").filter({has:page.getByRole("heading",{name:"外貌描述",exact:true})});
+  const originalAppearance = (await appearance.innerText()).replace(/外貌描述|編輯/g,"").trim();
+  const hook = page.locator(".field").filter({has:page.getByRole("heading",{name:"與調查的連結",exact:true})});
+  const originalHook = (await hook.innerText()).replace(/與調查的連結|編輯/g,"").trim();
+
+  await page.locator('[data-edit="background:belief"]').click();
+  await page.locator("#editor").fill("我只相信能夠查證的事實。");
+  await page.locator('[data-save="background:belief"]').click();
+
+  await expect(appearance).toContainText(originalAppearance);
+  await expect(hook).toContainText(originalHook);
+  const downloadPromise = page.waitForEvent("download");
+  await page.locator("#export").click();
+  const download = await downloadPromise;
+  const stream = await download.createReadStream();
+  let text = "";
+  for await (const chunk of stream) text += chunk.toString("utf8");
+  const exported = JSON.parse(text);
+  expect(exported.background.belief).toBe("我只相信能夠查證的事實。");
+  expect(exported.background.appearance).toBe(originalAppearance);
+  expect(exported.background.investigation_hook).toBe(originalHook);
+});
+
 test("all 13 preview editors expose field-specific accessible names", async ({page}) => {
   await page.goto("/");
   await answer(page,"neat_reliable");
