@@ -78,6 +78,7 @@ test("questionnaire and preview remain usable at phone, tablet, and desktop widt
 test("keyboard focus remains visible on questionnaire controls", async ({page}) => {
   await page.setViewportSize({width:390,height:844});
   await page.goto("/");
+  await expect(page.getByRole("heading",{name:"你的角色長什麼樣子？"})).toBeVisible();
   await page.locator('input[name="answer"]').first().focus();
   await page.keyboard.press("Tab");
   const focused = page.locator(":focus");
