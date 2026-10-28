@@ -576,6 +576,17 @@ test("all conditional option pairs produce clean background text without changin
   }
 });
 
+test("custom occupations stay in profile while the shared Q11 branch remains occupation-agnostic", () => {
+  const first = buildCharacter(completeAnswers({Q10:"other_custom",Q11:"custom_work_unusual_detail",customOccupation:"鐘錶匠"}),templates,questions);
+  const second = buildCharacter(completeAnswers({Q10:"other_custom",Q11:"custom_work_unusual_detail",customOccupation:"天文觀測員"}),templates,questions);
+  assert.equal(first.profile.occupation,"鐘錶匠");
+  assert.equal(second.profile.occupation,"天文觀測員");
+  assert.equal(first.background.investigation_hook,second.background.investigation_hook,
+    "the shared custom-occupation hook does not duplicate or depend on the free-text occupation");
+  assert.match(first.background.investigation_hook,/日常工作/);
+  assert.doesNotMatch(first.background.investigation_hook,/鐘錶匠|天文觀測員/);
+});
+
 test("editing one background field preserves every other generated field and custom occupation stays in profile", () => {
   const answers = completeAnswers({
     Q10: "other_custom",
