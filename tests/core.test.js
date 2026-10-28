@@ -223,6 +223,122 @@ test("all occupation IDs are unique, source labels are present, and list is not 
   assert.match(occupations.sources.find(source=>source.id==="chaosium_official_rules_wiki_occupations").supports,/不證明.*官方繁中譯名/);
   assert.equal(occupations.occupations.length,91,"canonical handbook entries");
   assert.equal(occupations.aliases.length,21,"cross-reference aliases");
+  const expectedHandbookNames = `Accountant
+Acrobat
+Actor
+Agency Detective
+Alienist
+Animal Trainer
+Antiquarian
+Antique Dealer
+Archaeologist
+Architect
+Artist
+Asylum Attendant
+Assassin
+Athlete
+Author
+Aviator
+Bank Robber
+Bartender
+Big Game Hunter
+Book Dealer
+Bootlegger
+Bounty Hunter
+Boxer/Wrestler
+Burglar
+Butler/Valet/Maid
+Chauffeur
+Clergy, Member of the
+Computer Programmer/Technician/Hacker
+Conman
+Cowboy/girl
+Craftsperson
+Criminal
+Cult Leader
+Deprogrammer
+Designer
+Dilettante
+Diver
+Doctor of Medicine
+Drifter
+Driver
+Editor
+Elected Official
+Engineer
+Entertainer
+Explorer
+Farmer
+Federal Agent
+Fence
+Firefighter
+Foreign Correspondent
+Forensic Surgeon
+Forger/Counterfeiter
+Gambler
+Gangster
+Gun Moll
+Gentleman/Lady
+Hacker
+Hobo
+Hospital Orderly
+Journalist
+Judge
+Laboratory Assistant
+Laborer
+Lawyer
+Librarian
+Lumberjack
+Maid
+Mechanic (and Skilled Trades)
+Military Officer
+Miner
+Missionary
+Mountain Climber
+Museum Curator
+Musician
+Nurse
+Occultist
+Outdoorsman/Outdoorswoman
+Parapsychologist
+Pharmacist
+Photographer
+Photojournalist
+Pilot
+Police Detective/Officer
+Private Investigator
+Professor
+Prospector
+Prostitute
+Psychiatrist
+Psychologist/Psychoanalyst
+Reporter
+Researcher
+Sailor
+Salesperson
+Scientist
+Secretary
+Shopkeeper
+Smuggler
+Soldier/Marine
+Spy
+Street Punk
+Student/Intern
+Stuntman
+Taxi Driver
+Thug
+Tribe Member
+Undertaker
+Union Activist
+Valet
+Waitress/Waiter
+White-collar Worker
+Zealot
+Zookeeper`.split("\n");
+  const actualHandbookNames = [...occupations.occupations,...occupations.aliases].map(o=>o.englishCandidate).sort();
+  assert.equal(expectedHandbookNames.length,112,"the supplied Handbook list has 112 canonical names and see-aliases");
+  assert.deepEqual(actualHandbookNames,[...expectedHandbookNames].sort(),
+    "all supplied Handbook entries are represented exactly once, with no omissions or invented names");
   const expectedTags = {
     "Alienist":["Classic"], "Explorer":["Classic"],
     "Antiquarian":["Lovecraftian"], "Archaeologist":["Lovecraftian"],
