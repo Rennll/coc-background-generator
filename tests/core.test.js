@@ -255,6 +255,9 @@ test("manual edits, including age and custom occupation, are reflected in export
   assert.equal(buildCharacter(completeAnswers(),templates,questions,{age:"   "}).profile.age,null);
   assert.throws(()=>buildCharacter(completeAnswers(),templates,questions,{age:-1}),/Profile age must be/);
   assert.throws(()=>buildCharacter(completeAnswers(),templates,questions,{age:3.5}),/Profile age must be/);
+  assert.throws(()=>buildCharacter(completeAnswers(),templates,questions,{age:false}),/Profile age must be/);
+  assert.throws(()=>buildCharacter(completeAnswers(),templates,questions,{age:{value:42}}),/Profile age must be/);
+  assert.throws(()=>updateCharacterField(c,"profile","age",false),/Age must be/);
 });
 test("invalid answers and invalid template field references fail explicitly", () => {
   assert.throws(()=>buildCharacter(completeAnswers({Q3b:"wrong_branch"}),templates,questions),/Cannot build character/);
