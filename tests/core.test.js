@@ -4,10 +4,12 @@ import fs from "node:fs";
 import { getQuestionOptions, validateAnswers, clearInvalidDependentAnswers, getActiveFlow } from "../lib/questionnaire.js";
 import { buildCharacter, buildBackground, buildBackgroundText, buildFieldText, updateCharacterField } from "../lib/character.js";
 import { exportJSON } from "../lib/export.js";
+import { generateName, validateNameData } from "../lib/names.js";
 
 const questions = JSON.parse(fs.readFileSync(new URL("../data/questions.json", import.meta.url), "utf8"));
 const templates = JSON.parse(fs.readFileSync(new URL("../data/templates.json", import.meta.url), "utf8"));
 const occupations = JSON.parse(fs.readFileSync(new URL("../data/occupations.json", import.meta.url), "utf8"));
+const names = JSON.parse(fs.readFileSync(new URL("../data/names.json", import.meta.url), "utf8"));
 function completeAnswers(overrides = {}) {
   return {Q1:"neat_reliable",Q2:"truth_above_comfort",Q3a:"family_member",Q3b:"family_secret",Q4:"mysterious_object",Q5:"mystery_wrongness",Q6:"deceived_again",Q7:"deceived_belief_shattered",Q8:"quiet_listener",Q9:"private_corner",Q10:"knowledge_research",Q11:"research_contradiction",...overrides};
 }
@@ -783,4 +785,42 @@ test("invalid answers and invalid template field references fail explicitly", ()
   assert.throws(()=>buildCharacter(completeAnswers(),malformedRule,questions),/Invalid generation rule for background field: appearance/);
   const malformedPart={...templates,generationRules:{...templates.generationRules,appearance:{parts:[{}]}}};
   assert.throws(()=>buildCharacter(completeAnswers(),malformedPart,questions),/Invalid template part for background field: appearance/);
+});
+
+
+test("name pools are complete, non-empty, unique, and limited to the declared 1920s cultures", () => {
+  assert.equal(validateNameData(names), true);
+  for (const culture of ["taiwanHan", "japanese"]) {
+    const pool = names.pools[culture];
+    assert.equal(pool.period, "1920-1929");
+    for (const values of [pool.surnames, pool.givenNames.male, pool.givenNames.female]) {
+      assert.ok(values.length > 0);
+      assert.ok(values.every(value => typeof value === "string" && value.trim().length > 0));
+      assert.equal(new Set(values).size, values.length);
+    }
+  }
+});
+
+test("name generation returns a non-empty name and a data-backed classification without character gender input", () => {
+  const generated = generateName(names, { random: () => 0 });
+  assert.equal(generated.name, names.pools.taiwanHan.surnames[0] + names.pools.taiwanHan.givenNames.male[0]);
+  assert.equal(generated.label, "男性常用名");
+  assert.equal(generated.cultureLabel, names.pools.taiwanHan.label);
+  assert.ok(generated.name.length > 0);
+  const female = generateName(names, { random: () => 0.3 });
+  assert.equal(female.gender, "female");
+  assert.equal(female.label, "女性常用名");
+});
+
+test("name generation excludes existing candidates and handles malformed or empty data explicitly", () => {
+  const first = generateName(names, { random: () => 0 });
+  const second = generateName(names, { random: () => 0, excludeNames: [first.name] });
+  assert.notEqual(second.name, first.name);
+  assert.throws(() => validateNameData({ pools: {} }), /缺少文化池/);
+  const malformed = structuredClone(names);
+  malformed.pools.japanese.givenNames.female = [];
+  assert.throws(() => validateNameData(malformed), /無效或為空/);
+  const duplicated = structuredClone(names);
+  duplicated.pools.taiwanHan.surnames.push(duplicated.pools.taiwanHan.surnames[0]);
+  assert.throws(() => validateNameData(duplicated), /有重複項目/);
 });
