@@ -206,6 +206,9 @@ test("all occupation IDs are unique, source labels are present, and list is not 
   assert.equal(occupations.occupations.find(o=>o.id==="deprogrammer").name,"反洗腦專家","preserve the sense of reversing indoctrination, not performing it");
   assert.equal(occupations.occupations.find(o=>o.id==="union_activist").name,"工會活動人士","use natural Taiwan Traditional Chinese wording");
   assert.match(occupations.scope,/not an official complete list/i);
+  assert.match(occupations.scope,/user confirms.*checked word-for-word against a physical Investigator Handbook/i);
+  assert.match(occupations.scope,/has not independently inspected that physical copy/i);
+  assert.equal(occupations.sources.find(source=>source.id==="user_pasted_investigator_handbook_list").verificationStatus,"user_confirmed_physical_handbook_check_not_independently_repeated");
   assert.ok(occupations.sources.some(source=>source.id==="chaosium_official_rules_wiki_occupations"));
   const sourceIds=new Set(occupations.sources.map(source=>source.id));
   const sourceStatuses=new Set(["user_provided_handbook_list","official_example_or_category_supported","official_product_page_example","official_example","to_verify_against_book","supplementary_unverified"]);
