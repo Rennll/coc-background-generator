@@ -519,3 +519,46 @@ test("blank background fields stay visible, full copy skips them, and single-fie
   await beliefField.locator('[data-copy="background:belief"]').click();
   expect(await page.evaluate(()=>navigator.clipboard.readText())).toBe("");
 });
+
+
+test("name generator candidate can be cancelled, rerolled, confirmed, and manually edited", async ({ page }) => {
+  await page.goto("/");
+  await answer(page,"neat_reliable");
+  await answer(page,"truth_above_comfort");
+  await answer(page,"family_member");
+  await answer(page,"family_secret");
+  await answer(page,"mysterious_object");
+  await answer(page,"mystery_wrongness");
+  await answer(page,"deceived_again");
+  await answer(page,"deceived_misunderstood");
+  await answer(page,"quiet_listener");
+  await answer(page,"hometown");
+  await answer(page,"knowledge_research");
+  await answer(page,"research_contradiction");
+  const nameField = page.locator(".field").filter({has:page.getByRole("heading",{name:"姓名",exact:true})});
+  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await expect(nameField.getByText("候選姓名：")).toBeVisible();
+  const firstCandidate = await nameField.locator("[data-name-candidate]").textContent();
+  await nameField.getByRole("button",{name:"取消",exact:true}).click();
+  await expect(nameField).toContainText("尚未填寫");
+  await expect(nameField.locator("[data-name-classification]")).toHaveCount(0);
+  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await nameField.getByRole("button",{name:"重新抽取"}).click();
+  const candidate = (await nameField.locator("[data-name-candidate]").textContent())?.trim();
+  expect(candidate).toBeTruthy();
+  expect(candidate).not.toBe(firstCandidate);
+  await nameField.getByRole("button",{name:"確認套用"}).click();
+  await expect(nameField).toContainText(candidate);
+  await expect(nameField.locator("[data-name-classification]")).toContainText(/男性常用名|女性常用名/);
+  await nameField.getByRole("button",{name:"編輯",exact:true}).click();
+  await page.locator("#editor").fill("手動自訂姓名");
+  await nameField.getByRole("button",{name:"儲存"}).click();
+  await expect(nameField).toContainText("手動自訂姓名");
+  await expect(nameField.locator("[data-name-classification]")).toHaveText("自訂姓名");
+  await nameField.getByRole("button",{name:"編輯",exact:true}).click();
+  await page.locator("#editor").fill("取消不應保存");
+  await nameField.getByRole("button",{name:"取消",exact:true}).click();
+  await expect(nameField).toContainText("手動自訂姓名");
+  await expect(nameField.locator("[data-name-classification]")).toHaveText("自訂姓名");
+  await expect(page.getByRole("heading",{name:"性別",exact:true})).toHaveCount(0);
+});
