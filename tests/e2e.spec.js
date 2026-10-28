@@ -119,6 +119,7 @@ test("Content Security Policy is present and allows the app to run without inlin
   expect(policy).toContain("default-src 'self'");
   expect(policy).toContain("script-src 'self'");
   expect(policy).toContain("style-src 'self'");
+  await expect(page.locator('meta[name="referrer"]')).toHaveAttribute("content","no-referrer");
   expect(policy.match(/style-src[^;]*/)?.[0]).not.toContain("'unsafe-inline'");
   expect(policy).toContain("object-src 'none'");
   expect(policy).toContain("base-uri 'none'");
