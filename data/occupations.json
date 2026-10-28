@@ -1,0 +1,32 @@
+{
+  "schemaVersion":1,"locale":"zh-TW","scope":"1920s-focused starter list; not an official complete list",
+  "sources":[
+    {"id":"chaosium_investigator_handbook_7e","publisher":"Chaosium","title":"Call of Cthulhu Investigator Handbook (7th Edition)","url":"https://www.chaosium.com/call-of-cthulhu-investigator-handbook-hardcover/","sourceType":"publisher_product_page","supports":"官方手冊包含大量調查員職業與背景資訊；此頁未提供完整逐項清單。","verificationStatus":"publisher_source_verified"},
+    {"id":"chaosium_quick_start_rules_7e","publisher":"Chaosium","title":"Call of Cthulhu 7th Edition Quick-Start Rules","url":"https://www.chaosium.com/content/FreePDFs/CoC/CHA23131%20Call%20of%20Cthulhu%207th%20Edition%20Quick-Start%20Rules.pdf","sourceType":"official_free_pdf","supports":"官方快速入門中的 1920 年代調查員範例，可佐證部分職業與年代設定。","verificationStatus":"publisher_source_verified"}
+  ],
+  "occupations":[
+    {"id":"academic","name":"學者／大學教授","category":"education_research","era":"1920s","sourceIds":["chaosium_investigator_handbook_7e","chaosium_quick_start_rules_7e"],"sourceStatus":"official_example_or_category_supported","entryStatus":"starter_entry","notes":"官方快速入門範例包含 University Professor；中文名稱為本專案譯名。"},
+    {"id":"teacher","name":"教師","category":"education_research","era":"1920s","sourceIds":["chaosium_investigator_handbook_7e"],"sourceStatus":"official_product_page_example","entryStatus":"starter_entry","notes":"官方手冊商品頁職業例子。"},
+    {"id":"librarian","name":"圖書館員","category":"education_research","era":"1920s","sourceIds":["chaosium_investigator_handbook_7e"],"sourceStatus":"official_product_page_example","entryStatus":"starter_entry","notes":"官方手冊商品頁職業例子。"},
+    {"id":"journalist","name":"記者","category":"media_communication","era":"1920s","sourceIds":["chaosium_investigator_handbook_7e"],"sourceStatus":"official_product_page_example","entryStatus":"starter_entry","notes":"官方手冊商品頁職業例子。"},
+    {"id":"private_detective","name":"私家偵探","category":"investigation_law","era":"1920s","sourceIds":["chaosium_investigator_handbook_7e"],"sourceStatus":"official_product_page_example","entryStatus":"starter_entry","notes":"官方商品頁提及 detective；具體條目仍待核對。"},
+    {"id":"police_officer","name":"警察","category":"investigation_law","era":"1920s","sourceIds":["chaosium_investigator_handbook_7e"],"sourceStatus":"official_product_page_example","entryStatus":"starter_entry","notes":"官方商品頁提及 police officer；正式分類待核對。"},
+    {"id":"physician","name":"醫師","category":"health_care","era":"1920s","sourceIds":["chaosium_investigator_handbook_7e"],"sourceStatus":"to_verify_against_book","entryStatus":"starter_entry","notes":"待對照手冊正式職業條目及譯名。"},
+    {"id":"nurse","name":"護士","category":"health_care","era":"1920s","sourceIds":["chaosium_investigator_handbook_7e"],"sourceStatus":"to_verify_against_book","entryStatus":"starter_entry","notes":"待對照手冊正式職業條目及譯名。"},
+    {"id":"social_worker","name":"社會工作者","category":"health_care","era":"1920s","sourceIds":[],"sourceStatus":"supplementary_unverified","entryStatus":"supplementary","notes":"補充職稱，尚未核實為官方條目。"},
+    {"id":"businessperson","name":"商人","category":"business_trade","era":"1920s","sourceIds":["chaosium_investigator_handbook_7e"],"sourceStatus":"to_verify_against_book","entryStatus":"starter_entry","notes":"待對照手冊正式職業條目及譯名。"},
+    {"id":"antique_dealer","name":"古董商","category":"business_trade","era":"1920s","sourceIds":["chaosium_investigator_handbook_7e"],"sourceStatus":"official_example","entryStatus":"starter_entry","notes":"官方商品頁職業範例。"},
+    {"id":"innkeeper","name":"旅館經營者","category":"business_trade","era":"1920s","sourceIds":[],"sourceStatus":"supplementary_unverified","entryStatus":"supplementary","notes":"補充職稱，待核實。"},
+    {"id":"engineer","name":"工程師","category":"technical_manual","era":"1920s","sourceIds":[],"sourceStatus":"to_verify_against_book","entryStatus":"starter_entry","notes":"待核對手冊條目與專業分類。"},
+    {"id":"mechanic","name":"機械修理工","category":"technical_manual","era":"1920s","sourceIds":[],"sourceStatus":"supplementary_unverified","entryStatus":"supplementary","notes":"補充職稱，待核實。"},
+    {"id":"chauffeur","name":"私人司機／汽車司機","category":"transport","era":"1920s","sourceIds":[],"sourceStatus":"supplementary_unverified","entryStatus":"supplementary","notes":"補充職稱，待核實年代用語。"},
+    {"id":"writer","name":"作家","category":"arts_entertainment","era":"1920s","sourceIds":[],"sourceStatus":"to_verify_against_book","entryStatus":"starter_entry","notes":"待核對手冊正式職業條目及譯名。"},
+    {"id":"painter","name":"畫家","category":"arts_entertainment","era":"1920s","sourceIds":[],"sourceStatus":"to_verify_against_book","entryStatus":"starter_entry","notes":"待核對手冊正式職業條目及譯名。"},
+    {"id":"actor","name":"演員","category":"arts_entertainment","era":"1920s","sourceIds":[],"sourceStatus":"to_verify_against_book","entryStatus":"starter_entry","notes":"待核對手冊正式職業條目及譯名。"},
+    {"id":"musician","name":"音樂家","category":"arts_entertainment","era":"1920s","sourceIds":[],"sourceStatus":"to_verify_against_book","entryStatus":"starter_entry","notes":"待核對手冊正式職業條目及譯名。"},
+    {"id":"student","name":"學生","category":"education_research","era":"1920s","sourceIds":[],"sourceStatus":"to_verify_against_book","entryStatus":"starter_entry","notes":"常見角色背景，獨立職業定位待核對。"},
+    {"id":"retired_person","name":"退休者","category":"other_livelihood","era":"1920s","sourceIds":[],"sourceStatus":"supplementary_unverified","entryStatus":"supplementary","notes":"背景狀態，不一定是規則書獨立職業。"},
+    {"id":"independently_wealthy","name":"依靠私人財源生活者","category":"other_livelihood","era":"1920s","sourceIds":[],"sourceStatus":"supplementary_unverified","entryStatus":"supplementary","notes":"描述生活來源，不宣稱為官方職業條目。"}
+  ],
+  "customOccupation":{"id":"other_custom","name":"其他：自行填寫職業","category":"custom","sourceStatus":"user_defined","isOccupationRecord":false}
+}
