@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "locale": "zh-TW",
-  "scope": "Occupation names transcribed from a user-provided List of Occupations pasted from Investigator Handbook. This transcription is user-supplied and has not been independently checked against the book. The list is not filtered to 1920s occupations; era tags and applicability require review.",
+  "scope": "Occupation names transcribed from a user-provided List of Occupations pasted from Investigator Handbook. This transcription is user-supplied and has not been independently checked against the book. The list is not filtered to 1920s occupations; era tags and applicability require review. This is not an official complete list unless independently confirmed against the source edition.",
   "sources": [
     {
       "id": "chaosium_investigator_handbook_7e",
