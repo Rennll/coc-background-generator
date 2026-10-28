@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "locale": "zh-TW",
-  "scope": "1920s-focused starter list; not an official complete list",
+  "scope": "Occupation names transcribed from a user-provided List of Occupations pasted from Investigator Handbook. This transcription is user-supplied and has not been independently checked against the book. The list is not filtered to 1920s occupations; era tags and applicability require review.",
   "sources": [
     {
       "id": "chaosium_investigator_handbook_7e",
@@ -29,311 +29,2003 @@
       "sourceType": "official_rules_wiki",
       "supports": "官方規則 Wiki 列出 Antiquarian、Author、Dilettante、Doctor of Medicine、Journalist、Police Detective、Private Investigator、Professor 等範例職業；不代表完整職業清單。",
       "verificationStatus": "official_page_verified"
+    },
+    {
+      "id": "user_pasted_investigator_handbook_list",
+      "publisher": "Chaosium (as identified by user)",
+      "title": "Call of Cthulhu Investigator Handbook — List of Occupations (user-provided transcription)",
+      "url": "",
+      "sourceType": "user_provided_transcription",
+      "supports": "User supplied the English list in chat. This source record documents provenance only; it is not independent verification of the book or page.",
+      "verificationStatus": "user_provided_not_independently_verified"
     }
   ],
   "occupations": [
     {
-      "id": "academic",
-      "name": "學者／大學教授",
-      "category": "education_research",
-      "era": "1920s",
-      "sourceIds": [
-        "chaosium_quick_start_rules_7e",
-        "chaosium_official_rules_wiki_occupations"
-      ],
-      "sourceStatus": "official_example_or_category_supported",
-      "entryStatus": "starter_entry",
-      "notes": "官方快速入門的調查員範例使用 University Professor；官方規則 Wiki 另列 Professor。繁中名稱為本專案譯名，非已核實的官方繁中用語。",
-      "eraStatus": "1920s_example_verified",
-      "englishCandidate": "University Professor",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
-    },
-    {
-      "id": "teacher",
-      "name": "教師",
-      "category": "education_research",
-      "era": "1920s",
-      "sourceIds": [],
-      "sourceStatus": "to_verify_against_book",
-      "entryStatus": "starter_entry",
-      "notes": "目前找到的官方公開規則 Wiki 範例未逐項列出 Teacher；需對照 Investigator Handbook 正式職業條目。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Teacher",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
-    },
-    {
-      "id": "librarian",
-      "name": "圖書館員",
-      "category": "education_research",
-      "era": "1920s",
-      "sourceIds": [],
-      "sourceStatus": "to_verify_against_book",
-      "entryStatus": "starter_entry",
-      "notes": "目前找到的官方公開規則 Wiki 範例未逐項列出 Librarian；需對照 Investigator Handbook 正式職業條目。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Librarian",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
-    },
-    {
-      "id": "journalist",
-      "name": "記者",
-      "category": "media_communication",
-      "era": "1920s",
-      "sourceIds": [
-        "chaosium_official_rules_wiki_occupations"
-      ],
-      "sourceStatus": "official_example_or_category_supported",
-      "entryStatus": "starter_entry",
-      "notes": "官方規則 Wiki 的 Sample Investigator Occupations 明列 Journalist。繁中名稱為本專案譯名，非已核實的官方繁中用語；1920 年代個別適用性尚未逐項核實。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Journalist",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
-    },
-    {
-      "id": "private_detective",
-      "name": "私家偵探",
-      "category": "investigation_law",
-      "era": "1920s",
-      "sourceIds": [
-        "chaosium_official_rules_wiki_occupations"
-      ],
-      "sourceStatus": "official_example_or_category_supported",
-      "entryStatus": "starter_entry",
-      "notes": "官方規則 Wiki 明列 Private Investigator。繁中名稱為本專案譯名；1920 年代個別適用性尚未逐項核實。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Private Investigator",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
-    },
-    {
-      "id": "police_officer",
-      "name": "警察",
-      "category": "investigation_law",
-      "era": "1920s",
-      "sourceIds": [
-        "chaosium_official_rules_wiki_occupations"
-      ],
-      "sourceStatus": "official_example_or_category_supported",
-      "entryStatus": "starter_entry",
-      "notes": "官方規則 Wiki 明列 Police Detective；此英文名稱比泛稱 Police Officer 更貼近可核對的條目。繁中選單仍以「警察」作廣義顯示名稱，未宣稱為官方譯名。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Police Detective",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
-    },
-    {
-      "id": "physician",
-      "name": "醫師",
-      "category": "health_care",
-      "era": "1920s",
-      "sourceIds": [
-        "chaosium_official_rules_wiki_occupations"
-      ],
-      "sourceStatus": "official_example_or_category_supported",
-      "entryStatus": "starter_entry",
-      "notes": "官方規則 Wiki 明列 Doctor of Medicine。繁中名稱為本專案譯名；1920 年代個別適用性尚未逐項核實。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Doctor of Medicine",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
-    },
-    {
-      "id": "nurse",
-      "name": "護士",
-      "category": "health_care",
-      "era": "1920s",
-      "sourceIds": [
-        "chaosium_investigator_handbook_7e"
-      ],
-      "sourceStatus": "to_verify_against_book",
-      "entryStatus": "starter_entry",
-      "notes": "待對照手冊正式職業條目及譯名。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Nurse",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
-    },
-    {
-      "id": "social_worker",
-      "name": "社會工作者",
-      "category": "health_care",
-      "era": "1920s",
-      "sourceIds": [],
-      "sourceStatus": "supplementary_unverified",
-      "entryStatus": "supplementary",
-      "notes": "補充職稱，尚未核實為官方條目。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Social Worker",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
-    },
-    {
-      "id": "businessperson",
-      "name": "商人",
+      "id": "accountant",
+      "name": "會計師",
       "category": "business_trade",
-      "era": "1920s",
-      "sourceIds": [],
-      "sourceStatus": "to_verify_against_book",
-      "entryStatus": "starter_entry",
-      "notes": "「商人」是本專案的廣義分類；目前尚未將它對應到一個已核實的官方英文職業條目。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Businessperson / Merchant",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
-    },
-    {
-      "id": "antique_dealer",
-      "name": "古董商",
-      "category": "business_trade",
-      "era": "1920s",
+      "era": "review_required",
       "sourceIds": [
-        "chaosium_investigator_handbook_7e"
+        "user_pasted_investigator_handbook_list"
       ],
-      "sourceStatus": "official_example_or_category_supported",
-      "entryStatus": "starter_entry",
-      "notes": "Chaosium 官方 Investigator Handbook 商品頁使用 Antique Dealer 作職業範例圖說。此名稱與官方規則 Wiki 的 Antiquarian 是不同英文名稱，不可視為同一條目；1920 年代個別適用性尚未核實。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Antique Dealer",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Accountant",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
     },
     {
-      "id": "innkeeper",
-      "name": "旅館經營者",
-      "category": "business_trade",
-      "era": "1920s",
-      "sourceIds": [],
-      "sourceStatus": "supplementary_unverified",
-      "entryStatus": "supplementary",
-      "notes": "補充職稱，待核實。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Innkeeper",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
-    },
-    {
-      "id": "engineer",
-      "name": "工程師",
-      "category": "technical_manual",
-      "era": "1920s",
-      "sourceIds": [],
-      "sourceStatus": "to_verify_against_book",
-      "entryStatus": "starter_entry",
-      "notes": "待核對手冊條目與專業分類。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Engineer",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
-    },
-    {
-      "id": "mechanic",
-      "name": "機械修理工",
-      "category": "technical_manual",
-      "era": "1920s",
-      "sourceIds": [],
-      "sourceStatus": "supplementary_unverified",
-      "entryStatus": "supplementary",
-      "notes": "補充職稱，待核實。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Mechanic",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
-    },
-    {
-      "id": "chauffeur",
-      "name": "私人司機／汽車司機",
-      "category": "transport",
-      "era": "1920s",
-      "sourceIds": [],
-      "sourceStatus": "supplementary_unverified",
-      "entryStatus": "supplementary",
-      "notes": "補充職稱，待核實年代用語。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Chauffeur",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
-    },
-    {
-      "id": "writer",
-      "name": "作家",
+      "id": "acrobat",
+      "name": "特技演員",
       "category": "arts_entertainment",
-      "era": "1920s",
+      "era": "review_required",
       "sourceIds": [
-        "chaosium_official_rules_wiki_occupations"
+        "user_pasted_investigator_handbook_list"
       ],
-      "sourceStatus": "official_example_or_category_supported",
-      "entryStatus": "starter_entry",
-      "notes": "官方規則 Wiki 明列 Author。此資料顯示名稱「作家」對應英文候選 Author；繁中譯名仍為本專案用語，1920 年代個別適用性尚未逐項核實。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Author",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
-    },
-    {
-      "id": "painter",
-      "name": "畫家",
-      "category": "arts_entertainment",
-      "era": "1920s",
-      "sourceIds": [],
-      "sourceStatus": "to_verify_against_book",
-      "entryStatus": "starter_entry",
-      "notes": "待核對手冊正式職業條目及譯名。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Artist / Painter",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Acrobat",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
     },
     {
       "id": "actor",
       "name": "演員",
       "category": "arts_entertainment",
-      "era": "1920s",
-      "sourceIds": [],
-      "sourceStatus": "to_verify_against_book",
-      "entryStatus": "starter_entry",
-      "notes": "待核對手冊正式職業條目及譯名。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
       "englishCandidate": "Actor",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "agency_detective",
+      "name": "偵探社調查員",
+      "category": "investigation_law",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Agency Detective",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "alienist",
+      "name": "精神醫學專家（舊稱）",
+      "category": "health_care",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "classic_tag_requires_review",
+      "englishCandidate": "Alienist",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [
+        "Classic"
+      ],
+      "aliases": []
+    },
+    {
+      "id": "animal_trainer",
+      "name": "動物訓練師",
+      "category": "arts_entertainment",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Animal Trainer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "antiquarian",
+      "name": "古物研究者",
+      "category": "education_research",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "lovecraftian_tag_requires_review",
+      "englishCandidate": "Antiquarian",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [
+        "Lovecraftian"
+      ],
+      "aliases": []
+    },
+    {
+      "id": "antique_dealer",
+      "name": "古董商",
+      "category": "business_trade",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Antique Dealer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "archaeologist",
+      "name": "考古學家",
+      "category": "education_research",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "lovecraftian_tag_requires_review",
+      "englishCandidate": "Archaeologist",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [
+        "Lovecraftian"
+      ],
+      "aliases": []
+    },
+    {
+      "id": "architect",
+      "name": "建築師",
+      "category": "technical_manual",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Architect",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "artist",
+      "name": "藝術家",
+      "category": "arts_entertainment",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Artist",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "asylum_attendant",
+      "name": "精神病院看護",
+      "category": "health_care",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Asylum Attendant",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "athlete",
+      "name": "運動員",
+      "category": "arts_entertainment",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Athlete",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "writer",
+      "name": "作家",
+      "category": "arts_entertainment",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "lovecraftian_tag_requires_review",
+      "englishCandidate": "Author",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [
+        "Lovecraftian"
+      ],
+      "aliases": []
+    },
+    {
+      "id": "pilot",
+      "name": "飛行員",
+      "category": "transport",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "classic_tag_requires_review",
+      "englishCandidate": "Pilot",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [
+        "Classic"
+      ],
+      "aliases": [
+        "Aviator"
+      ]
+    },
+    {
+      "id": "bartender",
+      "name": "酒吧調酒師",
+      "category": "business_trade",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Bartender",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "big_game_hunter",
+      "name": "大型獵物獵人",
+      "category": "outdoors",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Big Game Hunter",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "book_dealer",
+      "name": "書商",
+      "category": "business_trade",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Book Dealer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "bounty_hunter",
+      "name": "賞金獵人",
+      "category": "investigation_law",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Bounty Hunter",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "boxer_wrestler",
+      "name": "拳擊手／摔角手",
+      "category": "arts_entertainment",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Boxer/Wrestler",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "butler_valet_maid",
+      "name": "管家／貼身男僕／女僕",
+      "category": "service",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Butler/Valet/Maid",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": [
+        "Maid",
+        "Valet"
+      ]
+    },
+    {
+      "id": "clergy_member_of_the",
+      "name": "神職人員",
+      "category": "religion",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Clergy, Member of the",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "computer_programmer_technician_hacker",
+      "name": "電腦程式設計師／技術人員／駭客",
+      "category": "technical_manual",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "modern_only",
+      "englishCandidate": "Computer Programmer/Technician/Hacker",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [
+        "Modern"
+      ],
+      "aliases": [
+        "Hacker"
+      ]
+    },
+    {
+      "id": "cowboy_girl",
+      "name": "牛仔／女牛仔",
+      "category": "outdoors",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Cowboy/girl",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "craftsperson",
+      "name": "工匠",
+      "category": "technical_manual",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Craftsperson",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "criminal",
+      "name": "罪犯",
+      "category": "crime",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Criminal",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": [
+        "Assassin",
+        "Bank Robber",
+        "Bootlegger",
+        "Burglar",
+        "Conman",
+        "Fence",
+        "Forger/Counterfeiter",
+        "Gun Moll",
+        "Smuggler",
+        "Street Punk",
+        "Thug"
+      ]
+    },
+    {
+      "id": "cult_leader",
+      "name": "邪教領袖",
+      "category": "crime",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Cult Leader",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "deprogrammer",
+      "name": "思想改造專家",
+      "category": "health_care",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "modern_only",
+      "englishCandidate": "Deprogrammer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [
+        "Modern"
+      ],
+      "aliases": []
+    },
+    {
+      "id": "designer",
+      "name": "設計師",
+      "category": "arts_entertainment",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Designer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "dilettante",
+      "name": "業餘愛好者／富家閒人",
+      "category": "other_livelihood",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "lovecraftian_tag_requires_review",
+      "englishCandidate": "Dilettante",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [
+        "Lovecraftian"
+      ],
+      "aliases": []
+    },
+    {
+      "id": "diver",
+      "name": "潛水員",
+      "category": "outdoors",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Diver",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "physician",
+      "name": "醫學博士／醫師",
+      "category": "health_care",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "lovecraftian_tag_requires_review",
+      "englishCandidate": "Doctor of Medicine",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [
+        "Lovecraftian"
+      ],
+      "aliases": []
+    },
+    {
+      "id": "drifter",
+      "name": "流浪者",
+      "category": "other_livelihood",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Drifter",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "driver",
+      "name": "司機",
+      "category": "transport",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Driver",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": [
+        "Chauffeur",
+        "Taxi Driver"
+      ]
+    },
+    {
+      "id": "editor",
+      "name": "編輯",
+      "category": "media_communication",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Editor",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "elected_official",
+      "name": "民選官員",
+      "category": "government",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Elected Official",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "engineer",
+      "name": "工程師",
+      "category": "technical_manual",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Engineer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "entertainer",
+      "name": "表演者",
+      "category": "arts_entertainment",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Entertainer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "explorer",
+      "name": "探險家",
+      "category": "outdoors",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "classic_tag_requires_review",
+      "englishCandidate": "Explorer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [
+        "Classic"
+      ],
+      "aliases": []
+    },
+    {
+      "id": "farmer",
+      "name": "農夫",
+      "category": "labor",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Farmer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "federal_agent",
+      "name": "聯邦探員",
+      "category": "investigation_law",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Federal Agent",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "firefighter",
+      "name": "消防員",
+      "category": "public_service",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Firefighter",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "foreign_correspondent",
+      "name": "駐外記者",
+      "category": "media_communication",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Foreign Correspondent",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "forensic_surgeon",
+      "name": "法醫外科醫師",
+      "category": "health_care",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Forensic Surgeon",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "gambler",
+      "name": "賭徒",
+      "category": "other_livelihood",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Gambler",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "gangster",
+      "name": "黑幫分子",
+      "category": "crime",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Gangster",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "gentleman_lady",
+      "name": "紳士／淑女",
+      "category": "other_livelihood",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Gentleman/Lady",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "hobo",
+      "name": "流浪漢",
+      "category": "other_livelihood",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Hobo",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "hospital_orderly",
+      "name": "醫院勤務員",
+      "category": "health_care",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Hospital Orderly",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "journalist",
+      "name": "新聞記者",
+      "category": "media_communication",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "lovecraftian_tag_requires_review",
+      "englishCandidate": "Journalist",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [
+        "Lovecraftian"
+      ],
+      "aliases": [
+        "Reporter"
+      ]
+    },
+    {
+      "id": "judge",
+      "name": "法官",
+      "category": "investigation_law",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Judge",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "laboratory_assistant",
+      "name": "實驗室助理",
+      "category": "education_research",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Laboratory Assistant",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "laborer",
+      "name": "勞工",
+      "category": "labor",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Laborer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": [
+        "Lumberjack",
+        "Miner"
+      ]
+    },
+    {
+      "id": "lawyer",
+      "name": "律師",
+      "category": "investigation_law",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Lawyer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "librarian",
+      "name": "圖書館員",
+      "category": "education_research",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "lovecraftian_tag_requires_review",
+      "englishCandidate": "Librarian",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [
+        "Lovecraftian"
+      ],
+      "aliases": []
+    },
+    {
+      "id": "mechanic",
+      "name": "機械技工（及熟練技工）",
+      "category": "technical_manual",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Mechanic (and Skilled Trades)",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "military_officer",
+      "name": "軍官",
+      "category": "military",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Military Officer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "missionary",
+      "name": "傳教士",
+      "category": "religion",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Missionary",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "mountain_climber",
+      "name": "登山者",
+      "category": "outdoors",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Mountain Climber",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "museum_curator",
+      "name": "博物館策展／典藏人員",
+      "category": "education_research",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Museum Curator",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
     },
     {
       "id": "musician",
       "name": "音樂家",
       "category": "arts_entertainment",
-      "era": "1920s",
-      "sourceIds": [],
-      "sourceStatus": "to_verify_against_book",
-      "entryStatus": "starter_entry",
-      "notes": "待核對手冊正式職業條目及譯名。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
       "englishCandidate": "Musician",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "nurse",
+      "name": "護理師",
+      "category": "health_care",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Nurse",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "occultist",
+      "name": "神秘學研究者",
+      "category": "occult",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "lovecraftian_tag_requires_review",
+      "englishCandidate": "Occultist",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [
+        "Lovecraftian"
+      ],
+      "aliases": []
+    },
+    {
+      "id": "outdoorsman_outdoorswoman",
+      "name": "戶外活動專家（男／女）",
+      "category": "outdoors",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Outdoorsman/Outdoorswoman",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "parapsychologist",
+      "name": "超心理學家",
+      "category": "education_research",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Parapsychologist",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "pharmacist",
+      "name": "藥劑師",
+      "category": "health_care",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Pharmacist",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "photographer",
+      "name": "攝影師",
+      "category": "arts_entertainment",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Photographer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": [
+        "Photojournalist"
+      ]
+    },
+    {
+      "id": "police_officer",
+      "name": "警探／警察",
+      "category": "investigation_law",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "lovecraftian_tag_requires_review",
+      "englishCandidate": "Police Detective/Officer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [
+        "Lovecraftian"
+      ],
+      "aliases": []
+    },
+    {
+      "id": "private_detective",
+      "name": "私家偵探",
+      "category": "investigation_law",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Private Investigator",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "academic",
+      "name": "教授",
+      "category": "education_research",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "lovecraftian_tag_requires_review",
+      "englishCandidate": "Professor",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [
+        "Lovecraftian"
+      ],
+      "aliases": []
+    },
+    {
+      "id": "prospector",
+      "name": "探礦者",
+      "category": "labor",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Prospector",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "prostitute",
+      "name": "性工作者",
+      "category": "other_livelihood",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Prostitute",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "psychiatrist",
+      "name": "精神科醫師",
+      "category": "health_care",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Psychiatrist",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "psychologist_psychoanalyst",
+      "name": "心理學家／精神分析師",
+      "category": "health_care",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Psychologist/Psychoanalyst",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "researcher",
+      "name": "研究人員",
+      "category": "education_research",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Researcher",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "sailor",
+      "name": "水手",
+      "category": "transport",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Sailor",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "salesperson",
+      "name": "銷售人員",
+      "category": "business_trade",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Salesperson",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "scientist",
+      "name": "科學家",
+      "category": "education_research",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Scientist",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "secretary",
+      "name": "秘書",
+      "category": "office",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Secretary",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "shopkeeper",
+      "name": "店主",
+      "category": "business_trade",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Shopkeeper",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "soldier_marine",
+      "name": "士兵／海軍陸戰隊員",
+      "category": "military",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Soldier/Marine",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "spy",
+      "name": "間諜",
+      "category": "investigation_law",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Spy",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
     },
     {
       "id": "student",
-      "name": "學生",
+      "name": "學生／實習生",
       "category": "education_research",
-      "era": "1920s",
-      "sourceIds": [],
-      "sourceStatus": "to_verify_against_book",
-      "entryStatus": "starter_entry",
-      "notes": "常見角色背景，獨立職業定位待核對。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Student",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Student/Intern",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
     },
     {
-      "id": "retired_person",
-      "name": "退休者",
-      "category": "other_livelihood",
-      "era": "1920s",
-      "sourceIds": [],
-      "sourceStatus": "supplementary_unverified",
-      "entryStatus": "supplementary",
-      "notes": "背景狀態，不一定是規則書獨立職業。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Retired Person",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
+      "id": "stuntman",
+      "name": "特技演員",
+      "category": "arts_entertainment",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Stuntman",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
     },
     {
-      "id": "independently_wealthy",
-      "name": "依靠私人財源生活者",
+      "id": "tribe_member",
+      "name": "部族成員",
+      "category": "community",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Tribe Member",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "undertaker",
+      "name": "殯葬業者",
+      "category": "service",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Undertaker",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "union_activist",
+      "name": "工會運動者",
+      "category": "labor",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Union Activist",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "waitress_waiter",
+      "name": "女服務生／男服務生",
+      "category": "service",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Waitress/Waiter",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "white_collar_worker",
+      "name": "白領工作者",
+      "category": "office",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "White-collar Worker",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "zealot",
+      "name": "狂熱者",
       "category": "other_livelihood",
-      "era": "1920s",
-      "sourceIds": [],
-      "sourceStatus": "supplementary_unverified",
-      "entryStatus": "supplementary",
-      "notes": "描述生活來源，不宣稱為官方職業條目。",
-      "eraStatus": "1920s_plausible_not_individually_verified",
-      "englishCandidate": "Independent Means / Wealthy Dilettante",
-      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Zealot",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    },
+    {
+      "id": "zookeeper",
+      "name": "動物園管理員",
+      "category": "animal_care",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "handbook_list_user_provided",
+      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "eraStatus": "1920s_applicability_not_individually_verified",
+      "englishCandidate": "Zookeeper",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
+      "handbookTags": [],
+      "aliases": []
+    }
+  ],
+  "aliases": [
+    {
+      "id": "alias_assassin",
+      "name": "Assassin",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Criminal」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Assassin",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "criminal",
+      "isAlias": true
+    },
+    {
+      "id": "alias_aviator",
+      "name": "Aviator",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Pilot」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Aviator",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "pilot",
+      "isAlias": true
+    },
+    {
+      "id": "alias_bank_robber",
+      "name": "Bank Robber",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Criminal」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Bank Robber",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "criminal",
+      "isAlias": true
+    },
+    {
+      "id": "alias_bootlegger",
+      "name": "Bootlegger",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Criminal」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Bootlegger",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "criminal",
+      "isAlias": true
+    },
+    {
+      "id": "alias_burglar",
+      "name": "Burglar",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Criminal」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Burglar",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "criminal",
+      "isAlias": true
+    },
+    {
+      "id": "alias_chauffeur",
+      "name": "Chauffeur",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Driver」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Chauffeur",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "driver",
+      "isAlias": true
+    },
+    {
+      "id": "alias_conman",
+      "name": "Conman",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Criminal」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Conman",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "criminal",
+      "isAlias": true
+    },
+    {
+      "id": "alias_fence",
+      "name": "Fence",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Criminal」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Fence",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "criminal",
+      "isAlias": true
+    },
+    {
+      "id": "alias_forger_counterfeiter",
+      "name": "Forger/Counterfeiter",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Criminal」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Forger/Counterfeiter",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "criminal",
+      "isAlias": true
+    },
+    {
+      "id": "alias_gun_moll",
+      "name": "Gun Moll",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Criminal」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Gun Moll",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "criminal",
+      "isAlias": true
+    },
+    {
+      "id": "alias_hacker",
+      "name": "Hacker",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Computer Programmer/Technician/Hacker」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Hacker",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "computer_programmer_technician_hacker",
+      "isAlias": true
+    },
+    {
+      "id": "alias_lumberjack",
+      "name": "Lumberjack",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Laborer」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Lumberjack",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "laborer",
+      "isAlias": true
+    },
+    {
+      "id": "alias_maid",
+      "name": "Maid",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Butler/Valet/Maid」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Maid",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "butler_valet_maid",
+      "isAlias": true
+    },
+    {
+      "id": "alias_miner",
+      "name": "Miner",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Laborer」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Miner",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "laborer",
+      "isAlias": true
+    },
+    {
+      "id": "alias_photojournalist",
+      "name": "Photojournalist",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Photographer」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Photojournalist",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "photographer",
+      "isAlias": true
+    },
+    {
+      "id": "alias_reporter",
+      "name": "Reporter",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Journalist」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Reporter",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "journalist",
+      "isAlias": true
+    },
+    {
+      "id": "alias_smuggler",
+      "name": "Smuggler",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Criminal」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Smuggler",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "criminal",
+      "isAlias": true
+    },
+    {
+      "id": "alias_street_punk",
+      "name": "Street Punk",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Criminal」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Street Punk",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "criminal",
+      "isAlias": true
+    },
+    {
+      "id": "alias_taxi_driver",
+      "name": "Taxi Driver",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Driver」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Taxi Driver",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "driver",
+      "isAlias": true
+    },
+    {
+      "id": "alias_thug",
+      "name": "Thug",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Criminal」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Thug",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "criminal",
+      "isAlias": true
+    },
+    {
+      "id": "alias_valet",
+      "name": "Valet",
+      "category": "alias",
+      "era": "review_required",
+      "sourceIds": [
+        "user_pasted_investigator_handbook_list"
+      ],
+      "sourceStatus": "user_provided_handbook_list",
+      "entryStatus": "cross_reference",
+      "notes": "手冊清單將此名稱指向「Butler/Valet/Maid」；為避免重複職業選項，作為交叉參照保留。",
+      "eraStatus": "inherited_from_referenced_occupation",
+      "englishCandidate": "Valet",
+      "translationStatus": "not_applicable_alias",
+      "handbookTags": [],
+      "aliasOf": "butler_valet_maid",
+      "isAlias": true
     }
   ],
   "customOccupation": {
