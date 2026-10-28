@@ -293,6 +293,10 @@ test("JSON export validates the complete version-1 contract and ignores extra ch
   assert.deepEqual(Object.keys(exported.profile).sort(), ["age", "birthplace", "name", "occupation", "residence"]);
   assert.deepEqual(Object.keys(exported.background).sort(), Object.keys(templates.fieldLabels).sort());
   assert.equal(exported.meta.created_at, "2026-10-28T00:00:00.000Z");
+  assert.equal(JSON.parse(exportJSON(character)).meta.created_at, null);
+  assert.throws(() => exportJSON(character, "not-a-date"), /created_at must be/);
+  assert.throws(() => exportJSON(character, "2026-02-30T00:00:00.000Z"), /created_at must be/);
+  assert.throws(() => exportJSON(character, new Date("2026-10-28T00:00:00.000Z")), /created_at must be/);
   assert.equal(exported.profile.age, 42);
   assert.equal("rawAnswers" in exported, false);
   assert.equal("stats" in exported, false);
