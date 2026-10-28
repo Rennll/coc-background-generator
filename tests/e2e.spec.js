@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { readFile } from "node:fs/promises";
+import { readFile, mkdir } from "node:fs/promises";
 
 async function answer(page, optionId, {customOccupation} = {}) {
   await page.locator(`input[name="answer"][value="${optionId}"]`).check();
@@ -568,4 +568,35 @@ test("name generator candidate can be cancelled, rerolled, confirmed, and manual
   await expect(nameField).toContainText("手動自訂姓名");
   await expect(nameField.locator("[data-name-classification]")).toHaveText("自訂姓名");
   await expect(page.getByRole("heading",{name:"性別",exact:true})).toHaveCount(0);
+});
+
+
+test("capture real name-generator screenshots for CI artifacts", async ({ page }) => {
+  await page.goto("/");
+  await answer(page,"neat_reliable");
+  await answer(page,"truth_above_comfort");
+  await answer(page,"family_member");
+  await answer(page,"family_secret");
+  await answer(page,"mysterious_object");
+  await answer(page,"mystery_wrongness");
+  await answer(page,"deceived_again");
+  await answer(page,"deceived_misunderstood");
+  await answer(page,"quiet_listener");
+  await answer(page,"hometown");
+  await answer(page,"knowledge_research");
+  await answer(page,"research_contradiction");
+  await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
+
+  await mkdir("test-results", { recursive: true });
+  for (const [culture, filename] of [
+    ["taiwanHan", "test-results/random-name-taiwan.png"],
+    ["japanese", "test-results/random-name-japan.png"]
+  ]) {
+    await page.locator("#name-culture").selectOption(culture);
+    await page.locator("[data-generate-name]").click();
+    await expect(page.getByRole("group",{name:"姓名候選"})).toBeVisible();
+    await expect(page.locator("[data-name-candidate"])).toBeVisible();
+    await page.screenshot({ path: filename, fullPage: true, animations: "disabled" });
+    await page.locator("[data-name-cancel]").click();
+  }
 });
