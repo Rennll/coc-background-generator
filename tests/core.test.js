@@ -167,6 +167,23 @@ test("all occupation IDs are unique, source labels are present, and list is not 
   assert.match(occupations.sources.find(source=>source.id==="chaosium_official_rules_wiki_occupations").supports,/不證明.*官方繁中譯名/);
   assert.equal(occupations.occupations.length,91,"canonical handbook entries");
   assert.equal(occupations.aliases.length,21,"cross-reference aliases");
+  const expectedTags = {
+    "Alienist":["Classic"], "Explorer":["Classic"],
+    "Antiquarian":["Lovecraftian"], "Archaeologist":["Lovecraftian"],
+    "Author":["Lovecraftian"], "Dilettante":["Lovecraftian"],
+    "Doctor of Medicine":["Lovecraftian"], "Journalist":["Lovecraftian"],
+    "Librarian":["Lovecraftian"], "Occultist":["Lovecraftian"],
+    "Police Detective/Officer":["Lovecraftian"], "Professor":["Lovecraftian"],
+    "Computer Programmer/Technician/Hacker":["Modern"], "Deprogrammer":["Modern"]
+  };
+  for(const [english,tags] of Object.entries(expectedTags)){
+    const occupation=occupations.occupations.find(o=>o.englishCandidate===english);
+    assert.ok(occupation,english+" exists in canonical data");
+    assert.deepEqual(occupation.handbookTags,tags,english+" preserves the supplied handbook tag");
+  }
+  for(const occupation of occupations.occupations){
+    assert.ok(["1920s_applicability_not_individually_verified","classic_tag_requires_review","lovecraftian_tag_requires_review","modern_only"].includes(occupation.eraStatus),occupation.englishCandidate+" has explicit era status");
+  }
   const canonicalIds=new Set(occupations.occupations.map(o=>o.id));
   for(const alias of occupations.aliases){assert.ok(alias.isAlias);assert.ok(canonicalIds.has(alias.aliasOf),alias.id+" points to canonical entry");}
   for(const id of ["alias_aviator","alias_gun_moll"]){const alias=occupations.aliases.find(a=>a.id===id);assert.deepEqual(alias.handbookTags,["Classic"],id+" preserves the Handbook Classic tag");assert.equal(alias.eraStatus,"classic_tag_requires_review",id+" does not overclaim 1920s suitability");}
