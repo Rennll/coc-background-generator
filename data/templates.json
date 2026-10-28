@@ -86,7 +86,8 @@
       ],
       "prefix": "對他／她而言，最重要的人是",
       "separator": "；",
-      "note": "Q3b 是經歷補充，不自動轉換成人格特質。"
+      "note": "Q3b 是經歷補充，不自動轉換成人格特質。",
+      "suffix": "。"
     },
     "treasured_possession": {
       "questionIds": [
@@ -107,7 +108,8 @@
         }
       ],
       "prefix": "他／她珍藏著",
-      "separator": "；"
+      "separator": "；",
+      "suffix": "。"
     },
     "fear_or_concern": {
       "questionIds": [
@@ -129,7 +131,8 @@
       ],
       "prefix": "他／她最不希望發生的事是：",
       "separator": "。這份擔憂的來源是：",
-      "note": "Q6 與 Q7 組成敘事，不自動轉換成固定人格特質。"
+      "note": "Q6 與 Q7 組成敘事，不自動轉換成固定人格特質。",
+      "suffix": "。"
     },
     "personality": {
       "questionIds": [
