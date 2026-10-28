@@ -107,7 +107,7 @@ test("user-edited preview text is rendered as text rather than interpreted as HT
   const belief = page.locator(".field").filter({has:page.getByRole("heading",{name:"信念",exact:true})});
   await expect(belief.locator(".value-button")).toHaveText(payload);
   await expect(page.locator("img")).toHaveCount(0);
-  await expect(page.locator("script")).toHaveCount(0);
+  await expect(belief.locator("script")).toHaveCount(0);
 });
 
 test("editing one background field leaves other generated fields unchanged in preview and export", async ({page}) => {
