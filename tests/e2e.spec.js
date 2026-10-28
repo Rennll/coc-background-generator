@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+import { readFile } from "node:fs/promises";
 
 async function answer(page, optionId, {customOccupation} = {}) {
   await page.locator(`input[name="answer"][value="${optionId}"]`).check();
@@ -119,6 +120,11 @@ test("occupation selector preserves English names, source tags, and custom entry
   const occupationField=page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})});
   await occupationField.getByRole("button",{name:"編輯"}).click();
   const selector=page.locator("#occupation-select");
+  const occupationData=JSON.parse(await readFile(new URL("../data/occupations.json",import.meta.url),"utf8"));
+  await expect(selector.locator("option")).toHaveCount(occupationData.occupations.length+2);
+  for(const occupation of occupationData.occupations){
+    await expect(selector.locator(`option[value="${occupation.id}"]`),occupation.englishCandidate).toHaveCount(1);
+  }
   await expect(selector.locator("option")).toHaveCount(93);
   await expect(selector.locator('option[value="acrobat"]')).toContainText("雜技演員（Acrobat）");
   await expect(selector.locator('option[value="computer_programmer_technician_hacker"]')).toContainText("Modern");
