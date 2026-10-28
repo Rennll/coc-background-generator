@@ -71,10 +71,10 @@ test("validation rejects missing answers, invalid option IDs, and blank custom o
 });
 test("narrative templates join the Q3/Q4/Q6 answers without awkward duplicate punctuation", () => {
   const c=buildCharacter(completeAnswers(),templates,questions);
-  assert.match(c.background.significant_person,/父母或手足；他／她和家人共同經歷過/);
+  assert.match(c.background.significant_person,/父母或手足。 他／她和家人共同經歷過/);
   assert.doesNotMatch(c.background.significant_person,/。；|。。/);
-  assert.match(c.background.treasured_possession,/一件來歷不明、仍想查清楚的物品；他／她第一次見到它時/);
-  assert.match(c.background.fear_or_concern,/事是：再次相信某件後來證明是謊言的事。這份擔憂的來源是：他／她曾全心相信/);
+  assert.match(c.background.treasured_possession,/一件來歷不明、仍想查清楚的物品。 他／她第一次見到它時/);
+  assert.match(c.background.fear_or_concern,/他／她最不希望發生的事是再次相信某件後來證明是謊言的事。他／她曾因相信一項承諾而做出重大決定/);
   assert.equal(Object.keys(c.background).length,8);
 });
 test("every conditional branch option generates all eight background fields without broken punctuation", () => {
