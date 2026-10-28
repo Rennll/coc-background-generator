@@ -49,7 +49,11 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   const exported = JSON.parse(exportedText);
   expect(exported.background.belief).toBe("我只相信能夠查證的事實。");
   expect(exported.profile.occupation).toBe("大學教授");
-  for (const forbidden of ["rawAnswers","answers","stats","skills","Q1"]) expect(exported).not.toHaveProperty(forbidden);
+  expect(Object.keys(exported).sort()).toEqual(["background","meta","profile","version"]);
+  expect(Object.keys(exported.profile).sort()).toEqual(["age","birthplace","name","occupation","residence"]);
+  expect(Object.keys(exported.background).sort()).toEqual(["appearance","belief","fear_or_concern","investigation_hook","meaningful_location","personality","significant_person","treasured_possession"]);
+  expect(Object.keys(exported.meta).sort()).toEqual(["created_at","generator"]);
+  for (const forbidden of ["rawAnswers","answers","stats","skills","during_play","Q1"]) expect(exported).not.toHaveProperty(forbidden);
   page.once("dialog", dialog => dialog.dismiss());
   await page.locator("#restart").click();
   await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
