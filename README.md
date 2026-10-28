@@ -75,6 +75,10 @@ npm run test:e2e
 
 ## 驗收紀錄（2026-10-28）
 
+- 職業別名資料完整性提交 `e3f4aba`：核心測試 18/18、Playwright／Chromium E2E 10/10 通過。新增 canonical 與 alias 共用 ID 命名空間不得碰撞、alias 英文名稱唯一、每筆 alias 必須指向有效主要職業、附有說明及有效來源 ID 等檢查。截圖 Artifact 已上傳：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40637752658)。
+
+
+
 - Notion 規格逐字抽查（規格頁最後編輯時間 `2026-10-27T08:25:31Z`）：直接讀取規格頁並比對 `questions.json` 全部 104 個選項文案，12 個題目 ID／步驟均有對應，未發現任何缺少或不一致的選項文字。這是本輪人工／工具輔助的逐字比對結果，非新增遠端依賴；`npm test` 仍維持離線可執行。
 
 
