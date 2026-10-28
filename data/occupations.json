@@ -297,13 +297,11 @@
       ],
       "sourceStatus": "user_provided_handbook_list",
       "entryStatus": "handbook_list_user_provided",
-      "notes": "英文職業名稱由使用者從 Investigator Handbook 貼上；繁中名稱為專案工作譯名，尚未核對官方繁中版本。此項目是否適用於 1920 年代需依標籤與規則背景另行確認。",
+      "notes": "手冊清單中的 Pilot 未標註年代標籤；[Classic] 出現在 Aviator 交叉參照上，不能直接轉移到 Pilot。繁中名稱為專案工作譯名。",
       "eraStatus": "classic_tag_requires_review",
       "englishCandidate": "Pilot",
       "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition",
-      "handbookTags": [
-        "Classic"
-      ],
+      "handbookTags": [],
       "aliases": [
         "Aviator"
       ]
@@ -1677,11 +1675,13 @@
       ],
       "sourceStatus": "user_provided_handbook_list",
       "entryStatus": "cross_reference",
-      "notes": "手冊清單將此名稱指向「Pilot」；為避免重複職業選項，作為交叉參照保留。",
+      "notes": "手冊標記為 [Classic]，並指向 Pilot；此標籤屬交叉參照原文，年代適用性仍需按手冊背景理解。",
       "eraStatus": "inherited_from_referenced_occupation",
       "englishCandidate": "Aviator",
       "translationStatus": "not_applicable_alias",
-      "handbookTags": [],
+      "handbookTags": [
+        "Classic"
+      ],
       "aliasOf": "pilot",
       "isAlias": true
     },
