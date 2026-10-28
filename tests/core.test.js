@@ -231,6 +231,13 @@ test("manual edits, including age and custom occupation, are reflected in export
   for(const forbidden of ["rawAnswers","answers","stats","skills","during_play"]) assert.equal(Object.hasOwn(parsed,forbidden),false,forbidden+" is excluded from export");
   assert.equal(parsed.meta.created_at,"2026-10-28T00:00:00.000Z");
   assert.throws(()=>updateCharacterField(c,"profile","age","3.5"),/Age must be/);
+  assert.throws(()=>updateCharacterField(c,"profile","age","-1"),/Age must be/);
+  assert.throws(()=>updateCharacterField(c,"profile","age","abc"),/Age must be/);
+  c=updateCharacterField(c,"profile","age","");
+  assert.equal(c.profile.age,null);
+  assert.equal(JSON.parse(exportJSON(c)).profile.age,null);
+  assert.throws(()=>buildCharacter(completeAnswers(),templates,questions,{age:-1}),/Profile age must be/);
+  assert.throws(()=>buildCharacter(completeAnswers(),templates,questions,{age:3.5}),/Profile age must be/);
 });
 test("invalid answers and invalid template field references fail explicitly", () => {
   assert.throws(()=>buildCharacter(completeAnswers({Q3b:"wrong_branch"}),templates,questions),/Cannot build character/);
