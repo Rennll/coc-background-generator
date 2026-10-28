@@ -152,9 +152,12 @@
       "parts": [
         {
           "answerFrom": "Q9",
-          "format": "optionText"
+          "format": "optionText",
+          "stripTerminalPunctuation": true
         }
-      ]
+      ],
+      "prefix": "對他／她而言，特別有意義的地方是",
+      "suffix": "。"
     },
     "investigation_hook": {
       "questionIds": [
