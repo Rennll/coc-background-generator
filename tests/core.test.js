@@ -61,6 +61,8 @@ test("question options and dependency declarations reject malformed or unused da
   const questionIds = new Set(questions.questions.map(question => question.id));
   for (const question of questions.questions) {
     const allOptions = question.options ?? Object.values(question.optionsByParentOption ?? {}).flat();
+    const optionIds = allOptions.map(option => option.id);
+    assert.equal(new Set(optionIds).size, optionIds.length, question.id + " option IDs are unique across all branches");
     for (const option of allOptions) {
       assert.equal(typeof option.id, "string", question.id + " option has a string ID");
       assert.ok(option.id.trim(), question.id + " option ID is not blank");
@@ -74,6 +76,11 @@ test("question options and dependency declarations reject malformed or unused da
         question.id + " dependency references an existing question");
       assert.ok(question.optionsByParentOption && Object.keys(question.optionsByParentOption).length > 0,
         question.id + " conditional question has at least one declared branch");
+      const parent = questions.questions.find(candidate => candidate.id === question.dependsOn.questionId);
+      assert.ok(parent, question.id + " parent question exists");
+      const parentOptionIds = parent.options.map(option => option.id).sort();
+      assert.deepEqual(Object.keys(question.optionsByParentOption).sort(), parentOptionIds,
+        question.id + " branch keys exactly match parent option IDs (no missing or extra branches)");
       for (const [parentOptionId, branchOptions] of Object.entries(question.optionsByParentOption)) {
         assert.ok(Array.isArray(branchOptions) && branchOptions.length > 0,
           question.id + "/" + parentOptionId + " branch is a non-empty option array");
