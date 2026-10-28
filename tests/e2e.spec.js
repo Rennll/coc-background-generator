@@ -229,7 +229,7 @@ test("occupation selector preserves English names, source tags, and custom entry
   await answer(page,"knowledge_research");
   await answer(page,"research_contradiction");
   const occupationField=page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})});
-  await occupationField.getByRole("button",{name:"編輯"}).click();
+  await occupationField.locator('[data-edit="profile:occupation"]').click();
   const selector=page.locator("#occupation-select");
   const occupationData=JSON.parse(await readFile(new URL("../data/occupations.json",import.meta.url),"utf8"));
   await expect(selector.locator("option")).toHaveCount(occupationData.occupations.length+2);
@@ -256,7 +256,7 @@ test("occupation selector preserves English names, source tags, and custom entry
   await expect(selector.locator('option[value="criminal"]')).toContainText("Gun Moll");
   await selector.selectOption("other_custom");
   await page.locator("#occupation-custom").fill("鐘錶匠");
-  await occupationField.getByRole("button",{name:"儲存"}).click();
+  await occupationField.locator('[data-save="profile:occupation"]').click();
   await expect(occupationField.getByText("鐘錶匠")).toBeVisible();
 });
 test("restart confirmation preserves edits on cancel and resets on accept", async ({page}) => {
