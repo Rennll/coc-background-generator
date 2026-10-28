@@ -136,7 +136,6 @@ test("changing Q3a, Q4, and Q6 clears stale child answers in a real browser", as
   await answer(page,"family_member");
   await answer(page,"family_secret");
   await page.locator("#prev").click();
-  await page.locator("#prev").click();
   await page.locator('input[name="answer"][value="romantic_partner"]').check();
   await page.locator("#next").click();
   await expect(page.getByRole("heading",{name:"你們之間發生過什麼？"})).toBeVisible();
@@ -147,7 +146,6 @@ test("changing Q3a, Q4, and Q6 clears stale child answers in a real browser", as
   await answer(page,"mysterious_object");
   await answer(page,"mystery_wrongness");
   await page.locator("#prev").click();
-  await page.locator("#prev").click();
   await page.locator('input[name="answer"][value="profession_item"]').check();
   await page.locator("#next").click();
   await expect(page.getByRole("heading",{name:"那樣東西為什麼重要？"})).toBeVisible();
@@ -157,7 +155,6 @@ test("changing Q3a, Q4, and Q6 clears stale child answers in a real browser", as
 
   await answer(page,"deceived_again");
   await answer(page,"deceived_misunderstood");
-  await page.locator("#prev").click();
   await page.locator("#prev").click();
   await page.locator('input[name="answer"][value="helpless_witness"]').check();
   await page.locator("#next").click();
