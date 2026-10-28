@@ -318,6 +318,6 @@ test("blank background fields stay visible, full copy skips them, and single-fie
   expect(fullText).not.toContain("信念：");
   expect(fullText).toContain("外貌描述：");
 
-  await beliefField.getByRole("button",{name:"複製欄位"}).click();
+  await beliefField.locator('[data-copy="background:belief"]').click();
   expect(await page.evaluate(()=>navigator.clipboard.readText())).toBe("");
 });
