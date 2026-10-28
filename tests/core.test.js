@@ -148,8 +148,14 @@ test("all occupation IDs are unique, source labels are present, and list is not 
   assert.equal(new Set(occupations.occupations.map(o=>o.id)).size,occupations.occupations.length);
   assert.match(occupations.scope,/not an official complete list/i);
   assert.ok(occupations.sources.some(source=>source.id==="chaosium_official_rules_wiki_occupations"));
+  const sourceIds=new Set(occupations.sources.map(source=>source.id));
+  const sourceStatuses=new Set(["official_example_or_category_supported","official_product_page_example","official_example","to_verify_against_book","supplementary_unverified"]);
   for (const o of occupations.occupations) {
     assert.ok(o.name && o.category && o.sourceStatus && o.eraStatus && o.englishCandidate && o.translationStatus, o.id);
+    assert.ok(sourceStatuses.has(o.sourceStatus),o.id+" has recognized source status");
+    assert.ok(Array.isArray(o.sourceIds),o.id+" has source ID list");
+    for(const sourceId of o.sourceIds) assert.ok(sourceIds.has(sourceId),o.id+" references known source "+sourceId);
+    assert.equal(o.translationStatus,"project_candidate_not_verified_against_official_Chinese_edition",o.id+" does not overclaim official translation");
     if (o.sourceStatus === "supplementary_unverified") assert.equal(o.entryStatus,"supplementary");
   }
 });
