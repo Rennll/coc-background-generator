@@ -56,10 +56,11 @@ npm test
 
 ## 資料狀態與限制
 
-- `questions.json` 已依目前可讀取的 Notion 規格書整理；仍應在 UI 實測時逐題校對顯示與分支。
-- `templates.json` 的組合規則為初稿，尤其 Q3a/Q3b、Q4/Q5、Q6/Q7 的敘事銜接仍可進行文字潤飾。
+- `questions.json` 已依 Notion 規格校正 Q7、Q8、Q9、Q10、Q11 的選項與分支；Q10 自訂職業使用 `other_custom` 通用分支。正式題目編號有 11 個數字題號，但因 Q3a/Q3b 拆成兩個步驟，流程共有 12 個題目 ID／步驟。
+- `templates.json` 已調整重要之人、珍貴之物的分句標點，並清理恐懼與擔憂的重複句末標點；仍需進行真人閱讀與完整組合抽樣。
 - `occupations.json` 是 22 筆初步資料，不是官方完整職業清單。部分項目僅有官方商品頁範例、類別佐證或尚待核對；補充項目會明確標示，不可宣稱為官方已核實條目。
 - JSON 匯出是本專案自訂格式，不是 Chaosium 官方 JSON 標準。
-- 尚未完成完整的真實瀏覽器互動測試。核心商業邏輯目前有 Node 內建測試覆蓋，但不能取代跨瀏覽器及實際操作測試。
+- `tests/core.test.js` 覆蓋資料合約、條件分支、答案清除、模板、空白欄位、手動編輯與 JSON 匯出。新增 `tests/e2e.spec.js` 與 GitHub Actions Chromium 測試工作流程；需以 CI 實際執行結果作為瀏覽器驗收依據，本次尚未在互動式瀏覽器中直接執行。
 
 規格文件：[Notion 規格書](https://app.notion.com/p/CoC-4066bb2da397814999b8f86d64fc24e4?pvs=204)
+\n\n## 驗收紀錄（2026-10-28）\n\n- Repository 初始 HEAD：`190fd96043e04fda4186cadbacd34e443c02b550`（main）。\n- 對照 Notion 規格後，已在 `audit/spec-alignment` 分支調整問卷選項、背景模板、核心測試與 Chromium E2E 測試。\n- 職業資料維持 22 筆初步清單；官方商品頁僅能佐證部分範例，不代表逐項核實或官方完整清單。\n- 本環境可直接讀寫 GitHub，但沒有可供此回合啟動的互動式瀏覽器／本機 npm 執行環境；請以新分支上的 CI 測試結果補完實際執行紀錄。\n
