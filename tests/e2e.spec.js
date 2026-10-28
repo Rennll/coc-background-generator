@@ -125,6 +125,36 @@ test("all 13 preview editors expose field-specific accessible names", async ({pa
   }
 });
 
+test("preview occupation can be cleared and exported as an empty string", async ({page}) => {
+  await page.goto("/");
+  for (const optionId of [
+    "neat_reliable","truth_above_comfort","family_member","family_secret",
+    "mysterious_object","mystery_wrongness","deceived_again","deceived_misunderstood",
+    "quiet_listener","hometown","other_custom","custom_work_unusual_detail"
+  ]) {
+    if (optionId === "other_custom") await answer(page,optionId,{customOccupation:"鐘錶匠"});
+    else await answer(page,optionId);
+  }
+  await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
+  const occupationField=page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})});
+  await occupationField.locator('[data-edit="profile:occupation"]').click();
+  await page.locator("#occupation-select").selectOption("other_custom");
+  await page.locator("#occupation-custom").fill("");
+  await occupationField.locator('[data-save="profile:occupation"]').click();
+  await expect(occupationField.getByText("尚未填寫")).toBeVisible();
+
+  const downloadPromise=page.waitForEvent("download");
+  await page.locator("#export").click();
+  const download=await downloadPromise;
+  const stream=await download.createReadStream();
+  let exportedText="";
+  for await (const chunk of stream) exportedText+=chunk.toString("utf8");
+  const exported=JSON.parse(exportedText);
+  expect(exported.profile.occupation).toBe("");
+  expect(exported).not.toHaveProperty("customOccupation");
+  expect(exported).not.toHaveProperty("answers");
+});
+
 test("custom occupation uses the generic Q11 branch and remains editable in preview", async ({page}) => {
   await page.goto("/");
   await answer(page,"neat_reliable");
