@@ -77,7 +77,7 @@ test("narrative templates join the Q3/Q4/Q6 answers without awkward duplicate pu
   assert.match(c.background.fear_or_concern,/事是：再次相信某件後來證明是謊言的事。這份擔憂的來源是：他／她曾全心相信/);
   assert.equal(Object.keys(c.background).length,8);
 });
-test("every option can generate all eight background fields without broken punctuation", () => {
+test("every conditional branch option generates all eight background fields without broken punctuation", () => {
   const parents = [
     {parent:"Q3a",child:"Q3b"},
     {parent:"Q4",child:"Q5"},
