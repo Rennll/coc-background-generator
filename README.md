@@ -75,6 +75,10 @@ npm run test:e2e
 
 ## 驗收紀錄（2026-10-28）
 
+- Notion 規格逐字抽查（規格頁最後編輯時間 `2026-10-27T08:25:31Z`）：直接讀取規格頁並比對 `questions.json` 全部 104 個選項文案，12 個題目 ID／步驟均有對應，未發現任何缺少或不一致的選項文字。這是本輪人工／工具輔助的逐字比對結果，非新增遠端依賴；`npm test` 仍維持離線可執行。
+
+
+
 - 條件分支資料合約補強提交 `0b01958`（含 `4717a76`）：核心測試 18/18、Playwright／Chromium E2E 10/10 通過。新增測試確保 `questions.json` 的頂層 `dependencies` 與各題 `dependsOn` 完全一致、四組分支都能在缺少摘要資料時清除失效答案，且每個條件子題都為父題每個選項定義分支，並只使用支援的 `equals_option_id` 運算子。視覺截圖已上傳：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40637386598)。
 
 
