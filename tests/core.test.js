@@ -103,7 +103,8 @@ test("manual edits update character; full background omits blank fields and sing
   assert.throws(()=>buildFieldText(c,"not_a_field"),/Unknown background field/);
 });
 test("blank fields remain in the character model and JSON export; empty age becomes null", () => {
-  const c=buildCharacter(completeAnswers(),templates,questions);
+  let c=buildCharacter(completeAnswers(),templates,questions);
+  c=updateCharacterField(c,"background","belief","");
   const parsed=JSON.parse(exportJSON(c,"2026-10-27T00:00:00.000Z"));
   assert.equal(parsed.profile.age,null);
   assert.deepEqual(Object.keys(parsed.profile),["name","occupation","age","birthplace","residence"]);
