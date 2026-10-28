@@ -33,6 +33,13 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   await page.locator("#export").click();
   const download = await downloadPromise;
   expect(download.suggestedFilename()).toBe("coc-investigator-background.json");
+  const stream = await download.createReadStream();
+  let exportedText = "";
+  for await (const chunk of stream) exportedText += chunk.toString("utf8");
+  const exported = JSON.parse(exportedText);
+  expect(exported.background.belief).toBe("我只相信能夠查證的事實。");
+  expect(exported.profile.occupation).toBe("學者／大學教授");
+  for (const forbidden of ["rawAnswers","answers","stats","skills","Q1"]) expect(exported).not.toHaveProperty(forbidden);
   page.once("dialog", dialog => dialog.dismiss());
   await page.locator("#restart").click();
   await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
