@@ -84,6 +84,43 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   await expect(page.getByRole("heading",{name:"你的角色長什麼樣子？"})).toBeVisible();
 });
 
+test("all 13 preview editors expose field-specific accessible names", async ({page}) => {
+  await page.goto("/");
+  await answer(page,"neat_reliable");
+  await answer(page,"truth_above_comfort");
+  await answer(page,"family_member");
+  await answer(page,"family_secret");
+  await answer(page,"mysterious_object");
+  await answer(page,"mystery_wrongness");
+  await answer(page,"deceived_again");
+  await answer(page,"deceived_misunderstood");
+  await answer(page,"quiet_listener");
+  await answer(page,"hometown");
+  await answer(page,"knowledge_research");
+  await answer(page,"research_contradiction");
+  await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
+
+  const fields=[
+    ["profile:name","姓名"],["profile:occupation","職業"],["profile:age","年齡"],
+    ["profile:birthplace","出生地"],["profile:residence","居住地"],
+    ["background:appearance","外貌描述"],["background:belief","信念"],
+    ["background:significant_person","重要之人"],["background:treasured_possession","珍貴之物"],
+    ["background:fear_or_concern","恐懼與擔憂"],["background:personality","個性"],
+    ["background:meaningful_location","有意義的地點"],["background:investigation_hook","與調查的連結"]
+  ];
+  for (const [key,label] of fields) {
+    await page.locator(`[data-edit="${key}"]`).click();
+    if (key==="profile:occupation") {
+      await expect(page.getByLabel("選擇職業")).toBeVisible();
+    } else {
+      await expect(page.locator("#editor")).toHaveAttribute("aria-label",label);
+    }
+    await expect(page.locator(`[data-save="${key}"]`)).toHaveAttribute("aria-label",`儲存：${label}`);
+    await expect(page.locator(`[data-cancel="${key}"]`)).toHaveAttribute("aria-label",`取消編輯：${label}`);
+    await page.locator(`[data-cancel="${key}"]`).click();
+  }
+});
+
 test("custom occupation uses the generic Q11 branch and remains editable in preview", async ({page}) => {
   await page.goto("/");
   await answer(page,"neat_reliable");
