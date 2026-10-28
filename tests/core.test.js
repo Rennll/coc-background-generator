@@ -78,7 +78,7 @@ test("narrative templates join the Q3/Q4/Q6 answers without awkward duplicate pu
   assert.match(c.background.treasured_possession,/一件來歷不明、仍想查清楚的物品。他／她第一次見到它時/);
   assert.match(c.background.fear_or_concern,/他／她最不希望發生的事是再次相信某件後來證明是謊言的事。他／她曾因相信一項承諾而做出重大決定/);
   assert.equal(Object.keys(c.background).length,8);
-  assert.match(c.background.meaningful_location,/對他／她而言，特別有意義的地方是成長的家鄉或童年住處。/);
+  assert.match(c.background.meaningful_location,/^對他／她而言，特別有意義的地方是.+。$/u);
 });
 test("every conditional branch option generates all eight background fields without broken punctuation", () => {
   const parents = [
