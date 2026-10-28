@@ -74,3 +74,17 @@ test("questionnaire and preview remain usable at phone, tablet, and desktop widt
     }
   }
 });
+
+test("keyboard focus remains visible on questionnaire controls", async ({page}) => {
+  await page.setViewportSize({width:390,height:844});
+  await page.goto("/");
+  await page.keyboard.press("Tab");
+  const focused = page.locator(":focus");
+  await expect(focused).toBeVisible();
+  const style = await focused.evaluate(el => {
+    const css = getComputedStyle(el);
+    return {outlineStyle:css.outlineStyle,outlineWidth:css.outlineWidth};
+  });
+  expect(style.outlineStyle).not.toBe("none");
+  expect(Number.parseFloat(style.outlineWidth)).toBeGreaterThan(0);
+});
