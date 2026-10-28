@@ -61,6 +61,11 @@ test("all four conditional branches offer the expected number of options", () =>
     for (const [parent,opts] of Object.entries(q.optionsByParentOption)) assert.equal(opts.length,count, id+"/"+parent);
   }
   assert.deepEqual(Object.fromEntries(questions.dependencies.map(d=>[d.parentQuestionId,d.childQuestionId])),{Q3a:"Q3b",Q4:"Q5",Q6:"Q7",Q10:"Q11"});
+  const dependenciesFromQuestions = questions.questions
+    .filter(question => question.dependsOn)
+    .map(question => ({parentQuestionId:question.dependsOn.questionId,childQuestionId:question.id}));
+  assert.deepEqual(questions.dependencies,dependenciesFromQuestions,
+    "the convenience dependency summary must match each question's dependsOn source of truth");
 });
 test("conditional options are selected by stable parent option ID, not label or array position", () => {
   assert.equal(getQuestionOptions("Q3b",{Q3a:"mentor"},questions)[0].id,"mentor_unthanked");
@@ -86,6 +91,11 @@ test("changing a parent clears invalid dependent answers and preserves valid one
   assert.equal("Q3b" in q3WithoutSummary,false);
   const q4WithoutSummary = clearInvalidDependentAnswers("Q4",{Q4:"profession_item",Q5:"mystery_wrongness"},withoutDependencySummary);
   assert.equal("Q5" in q4WithoutSummary,false);
+  const q6WithoutSummary = clearInvalidDependentAnswers("Q6",{Q6:"helpless_witness",Q7:"deceived_misunderstood"},withoutDependencySummary);
+  assert.equal("Q7" in q6WithoutSummary,false);
+  const q10WithoutSummary = clearInvalidDependentAnswers("Q10",{Q10:"other_custom",Q11:"research_contradiction",customOccupation:"Clockmaker"},withoutDependencySummary);
+  assert.equal("Q11" in q10WithoutSummary,false);
+  assert.equal(q10WithoutSummary.customOccupation,"Clockmaker");
   const q10 = clearInvalidDependentAnswers("Q10",{Q10:"other_custom",Q11:"research_contradiction",customOccupation:"Clockmaker"},questions);
   assert.equal("Q11" in q10,false);
   assert.equal(q10.customOccupation,"Clockmaker");
