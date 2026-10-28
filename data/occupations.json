@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "locale": "zh-TW",
-  "scope": "Occupation names transcribed from a user-provided List of Occupations pasted from Investigator Handbook. This transcription is user-supplied and has not been independently checked against the book. The list is not filtered to 1920s occupations; era tags and applicability require review. This is not an official complete list unless independently confirmed against the source edition.",
+  "scope": "Occupation names are transcribed from the English List of Occupations supplied by the user. The user confirms the English names were checked word-for-word against a physical Investigator Handbook; the project has not independently inspected that physical copy. This is not an official complete list unless independently confirmed against the source edition. The list is not filtered to 1920s occupations; era tags and applicability require review. Traditional Chinese display names are project working translations, not verified official translations.",
   "sources": [
     {
       "id": "chaosium_investigator_handbook_7e",
@@ -36,8 +36,8 @@
       "title": "Call of Cthulhu Investigator Handbook — List of Occupations (user-provided transcription)",
       "url": "",
       "sourceType": "user_provided_transcription",
-      "supports": "User supplied the English list in chat. This source record documents provenance only; it is not independent verification of the book or page.",
-      "verificationStatus": "user_provided_not_independently_verified"
+      "supports": "The user supplied the English list in chat and confirms it was checked word-for-word against a physical Investigator Handbook. This records user-confirmed provenance; the project has not independently inspected the physical book or verified official Traditional Chinese translations.",
+      "verificationStatus": "user_confirmed_physical_handbook_check_not_independently_repeated"
     }
   ],
   "occupations": [
