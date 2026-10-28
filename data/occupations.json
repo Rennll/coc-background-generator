@@ -45,7 +45,9 @@
       "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
       "notes": "官方快速入門範例包含 University Professor；中文名稱為本專案譯名。 官方規則 Wiki 可支持相關英文職業概念；本專案繁中譯名仍為編者譯名，非經核實的官方繁中用語。",
-      "eraStatus": "1920s_example_verified"
+      "eraStatus": "1920s_example_verified",
+      "englishCandidate": "University Professor",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "teacher",
@@ -58,7 +60,9 @@
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
       "notes": "尚未在目前核對的官方公開商品頁或規則 Wiki 範例中逐項找到；需對照手冊正式職業條目。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Teacher",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "librarian",
@@ -71,7 +75,9 @@
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
       "notes": "尚未在目前核對的官方公開商品頁或規則 Wiki 範例中逐項找到；需對照手冊正式職業條目。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Librarian",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "journalist",
@@ -85,7 +91,9 @@
       "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
       "notes": "官方手冊商品頁職業例子。 官方規則 Wiki 可支持相關英文職業概念；本專案繁中譯名仍為編者譯名，非經核實的官方繁中用語。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Journalist",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "private_detective",
@@ -99,7 +107,9 @@
       "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
       "notes": "官方商品頁提及 detective；具體條目仍待核對。 官方規則 Wiki 可支持相關英文職業概念；本專案繁中譯名仍為編者譯名，非經核實的官方繁中用語。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Private Investigator",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "police_officer",
@@ -113,7 +123,9 @@
       "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
       "notes": "官方商品頁提及 police officer；正式分類待核對。 官方規則 Wiki 可支持相關英文職業概念；本專案繁中譯名仍為編者譯名，非經核實的官方繁中用語。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Police Officer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "physician",
@@ -126,7 +138,9 @@
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
       "notes": "待對照手冊正式職業條目及譯名。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Doctor of Medicine / Physician",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "nurse",
@@ -139,7 +153,9 @@
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
       "notes": "待對照手冊正式職業條目及譯名。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Nurse",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "social_worker",
@@ -150,7 +166,9 @@
       "sourceStatus": "supplementary_unverified",
       "entryStatus": "supplementary",
       "notes": "補充職稱，尚未核實為官方條目。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Social Worker",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "businessperson",
@@ -163,7 +181,9 @@
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
       "notes": "待對照手冊正式職業條目及譯名。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Businessperson / Merchant",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "antique_dealer",
@@ -177,7 +197,9 @@
       "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
       "notes": "官方商品頁職業範例。 官方規則 Wiki 亦列有 Antiquarian；Antiquarian 與 Antique Dealer 是不同英文職業名，請勿視為同一條目。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Antique Dealer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "innkeeper",
@@ -188,7 +210,9 @@
       "sourceStatus": "supplementary_unverified",
       "entryStatus": "supplementary",
       "notes": "補充職稱，待核實。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Innkeeper",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "engineer",
@@ -199,7 +223,9 @@
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
       "notes": "待核對手冊條目與專業分類。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Engineer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "mechanic",
@@ -210,7 +236,9 @@
       "sourceStatus": "supplementary_unverified",
       "entryStatus": "supplementary",
       "notes": "補充職稱，待核實。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Mechanic",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "chauffeur",
@@ -221,7 +249,9 @@
       "sourceStatus": "supplementary_unverified",
       "entryStatus": "supplementary",
       "notes": "補充職稱，待核實年代用語。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Chauffeur",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "writer",
@@ -232,7 +262,9 @@
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
       "notes": "待核對手冊正式職業條目及譯名。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Author / Writer",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "painter",
@@ -243,7 +275,9 @@
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
       "notes": "待核對手冊正式職業條目及譯名。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Artist / Painter",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "actor",
@@ -254,7 +288,9 @@
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
       "notes": "待核對手冊正式職業條目及譯名。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Actor",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "musician",
@@ -265,7 +301,9 @@
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
       "notes": "待核對手冊正式職業條目及譯名。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Musician",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "student",
@@ -276,7 +314,9 @@
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
       "notes": "常見角色背景，獨立職業定位待核對。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Student",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "retired_person",
@@ -287,7 +327,9 @@
       "sourceStatus": "supplementary_unverified",
       "entryStatus": "supplementary",
       "notes": "背景狀態，不一定是規則書獨立職業。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Retired Person",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     },
     {
       "id": "independently_wealthy",
@@ -298,7 +340,9 @@
       "sourceStatus": "supplementary_unverified",
       "entryStatus": "supplementary",
       "notes": "描述生活來源，不宣稱為官方職業條目。",
-      "eraStatus": "1920s_plausible_not_individually_verified"
+      "eraStatus": "1920s_plausible_not_individually_verified",
+      "englishCandidate": "Independent Means / Wealthy Dilettante",
+      "translationStatus": "project_candidate_not_verified_against_official_Chinese_edition"
     }
   ],
   "customOccupation": {
