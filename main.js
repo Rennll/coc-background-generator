@@ -86,5 +86,5 @@ function occupationEditor(display){
   const groups=Object.entries(grouped).map(([category,items])=>`<optgroup label="${esc(categories[category]??category)}">${items.map(o=>`<option value="${esc(o.id)}" ${selected===o.id?"selected":""}>${esc(o.name)}（${esc(o.englishCandidate)}） ${esc(statusLabel(o))}</option>`).join("")}</optgroup>`).join("");
   return `<label class="field-label" for="occupation-select">選擇職業</label><select id="occupation-select" class="input"><option value="" ${selected===""?"selected":""}>不設定職業</option>${groups}<option value="other_custom" ${selected==="other_custom"?"selected":""}>其他：自行填寫職業</option></select><p class="muted">清單依使用者提供且已逐字與實體 Investigator Handbook 核對的英文清單整理。括號保留英文原名與手冊標籤；繁中名稱為專案工作譯名，1920 年代適用性仍須逐項確認。</p><div id="occupation-custom-wrap" ${selected==="other_custom"?"":"hidden"}><label class="field-label" for="occupation-custom">自訂職業名稱</label><input id="occupation-custom" class="input" value="${selected==="other_custom"?esc(display):""}" placeholder="例如：鐘錶匠" maxlength="120"></div>`;
 }
-function reset(){state.answers={};state.step=0;state.character=null;state.editing=null;state.error="";renderQuestion();}
+function reset(){state.answers={};state.step=0;state.character=null;state.editing=null;state.error="";state.generatedNames.clear();state.nameClassification=null;state.pendingName=null;renderQuestion();}
 init();
