@@ -147,8 +147,7 @@ test("user-edited preview text is rendered as text rather than interpreted as HT
   await page.locator("#editor").fill(payload);
   await page.locator('[data-save="background:belief"]').click();
 
-  const belief = page.locator(".field").filter({has:page.getByRole("heading",{name:"信念",exact:true})});
-  await expect(belief.locator(".value-button")).toHaveText(payload);
+  const belief = page.locator(".field").filter({has:page.getByRole("heading",{name:"信念",exact:true})});  await expect(belief.locator(".value-button")).toHaveText(payload);
   await expect(page.locator("img")).toHaveCount(0);
   await expect(belief.locator("script")).toHaveCount(0);
 
@@ -297,8 +296,7 @@ test("custom occupation uses the generic Q11 branch and remains editable in prev
 });
 
 test("changing Q10 clears the stale Q11 child answer in a real browser", async ({page}) => {
-  await page.goto("/");
-  await answer(page,"neat_reliable");
+  await page.goto("/");  await answer(page,"neat_reliable");
   await answer(page,"truth_above_comfort");
   await answer(page,"family_member");
   await answer(page,"family_secret");
@@ -448,7 +446,6 @@ test("restart confirmation preserves edits on cancel and resets on accept", asyn
   await expect(page.getByRole("heading",{name:"你的角色長什麼樣子？"})).toBeVisible();
   await expect(page.getByRole("heading",{name:"背景預覽"})).toHaveCount(0);
 });
-
 test("questionnaire and preview remain free of horizontal overflow at mobile, tablet, and desktop widths", async ({page}) => {
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({width, height: 900});
@@ -598,5 +595,62 @@ test("capture real name-generator screenshots for CI artifacts", async ({ page }
     await expect(page.locator("[data-name-candidate]")).toBeVisible();
     await page.screenshot({ path: filename, fullPage: true, animations: "disabled" });
     await page.locator("[data-name-cancel]").click();
+
+test("saved generated and manual names survive candidate cancellation and culture changes", async ({ page }) => {
+  await page.goto("/");
+  for (const optionId of [
+    "neat_reliable","truth_above_comfort","family_member","family_secret",
+    "mysterious_object","mystery_wrongness","deceived_again","deceived_misunderstood",
+    "quiet_listener","hometown","knowledge_research","research_contradiction"
+  ]) {
+    await answer(page, optionId);
   }
+  await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
+
+  const nameField = page.locator(".field").filter({has:page.getByRole("heading",{name:"姓名",exact:true})});
+  await nameField.locator("#name-culture").selectOption("taiwanHan");
+  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  const initialCandidate = (await nameField.locator("[data-name-candidate]").textContent())?.trim();
+  expect(initialCandidate).toBeTruthy();
+  await nameField.getByRole("button",{name:"確認套用"}).click();
+
+  const savedGeneratedName = (await nameField.locator(".value-button").textContent())?.trim();
+  const savedGeneratedClassification = (await nameField.locator("[data-name-classification]").textContent())?.trim();
+  expect(savedGeneratedName).toBe(initialCandidate);
+  expect(savedGeneratedClassification).toMatch(/男性常用名|女性常用名/);
+
+  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
+  await nameField.getByRole("button",{name:"取消",exact:true}).click();
+  await expect(nameField.locator(".value-button")).toHaveText(savedGeneratedName);
+  await expect(nameField.locator("[data-name-classification]")).toHaveText(savedGeneratedClassification);
+
+  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
+  await nameField.locator("#name-culture").selectOption("japanese");
+  await expect(nameField.locator("[data-name-candidate]")).toHaveCount(0);
+  await expect(nameField.locator(".value-button")).toHaveText(savedGeneratedName);
+  await expect(nameField.locator("[data-name-classification]")).toHaveText(savedGeneratedClassification);
+
+  await nameField.locator('[data-edit="profile:name"]').click();
+  await page.locator("#editor").fill("手動覆寫姓名");
+  await nameField.getByRole("button",{name:"儲存"}).click();
+  await expect(nameField.locator(".value-button")).toHaveText("手動覆寫姓名");
+  await expect(nameField.locator("[data-name-classification]")).toHaveText("自訂姓名");
+
+  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
+  await nameField.getByRole("button",{name:"取消",exact:true}).click();
+  await expect(nameField.locator(".value-button")).toHaveText("手動覆寫姓名");
+  await expect(nameField.locator("[data-name-classification]")).toHaveText("自訂姓名");
+
+  const downloadPromise = page.waitForEvent("download");
+  await page.locator("#export").click();
+  const download = await downloadPromise;
+  const stream = await download.createReadStream();
+  let exportedText = "";
+  for await (const chunk of stream) exportedText += chunk.toString("utf8");
+  const exported = JSON.parse(exportedText);
+  expect(exported.profile.name).toBe("手動覆寫姓名");
 });
+
