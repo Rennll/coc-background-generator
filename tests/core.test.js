@@ -308,4 +308,8 @@ test("invalid answers and invalid template field references fail explicitly", ()
   assert.throws(()=>buildCharacter(completeAnswers(),missingRule,questions),/Missing generation rule for background field: personality/);
   const orphanRule={...templates,generationRules:{...templates.generationRules,unknown_field:{parts:[]}}};
   assert.throws(()=>buildCharacter(completeAnswers(),orphanRule,questions),/Generation rule references unknown background field: unknown_field/);
+  const malformedRule={...templates,generationRules:{...templates.generationRules,appearance:{}}};
+  assert.throws(()=>buildCharacter(completeAnswers(),malformedRule,questions),/Invalid generation rule for background field: appearance/);
+  const malformedPart={...templates,generationRules:{...templates.generationRules,appearance:{parts:[{}]}}};
+  assert.throws(()=>buildCharacter(completeAnswers(),malformedPart,questions),/Invalid template part for background field: appearance/);
 });
