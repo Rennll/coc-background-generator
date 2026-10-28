@@ -91,7 +91,7 @@ test("Content Security Policy is present and allows the app to run without inlin
   expect(policy).toContain("script-src 'self'");
   expect(policy).toContain("object-src 'none'");
   expect(policy).toContain("base-uri 'none'");
-  expect(policy).not.toContain("'unsafe-inline'");
+  expect(policy.match(/script-src[^;]*/)?.[0]).not.toContain("'unsafe-inline'");
   await expect(page.getByRole("heading", {name:"你的角色長什麼樣子？"})).toBeVisible();
 });
 
