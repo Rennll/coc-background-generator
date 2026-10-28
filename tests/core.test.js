@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import { getQuestionOptions, validateAnswers, clearInvalidDependentAnswers, getActiveFlow } from "../lib/questionnaire.js";
-import { buildCharacter, buildBackgroundText, buildFieldText, updateCharacterField } from "../lib/character.js";
+import { buildCharacter, buildBackground, buildBackgroundText, buildFieldText, updateCharacterField } from "../lib/character.js";
 import { exportJSON } from "../lib/export.js";
 
 const questions = JSON.parse(fs.readFileSync(new URL("../data/questions.json", import.meta.url), "utf8"));
@@ -242,6 +242,19 @@ test("validation rejects missing answers, invalid option IDs, and blank custom o
   assert.ok(validateAnswers(missing,questions).errors.some(e=>e.questionId==="Q8"&&e.code==="required"));
   assert.ok(validateAnswers(completeAnswers({Q10:"other_custom",Q11:"custom_work_unusual_detail",customOccupation:"  "}),questions).errors.some(e=>e.code==="custom_occupation_required"));
 });
+test("missing source answers leave generated background fields blank instead of dangling prefixes", () => {
+  const answers = {};
+  const background = buildBackground(answers, templates, questions);
+  for (const fieldId of ["appearance", "belief", "significant_person", "treasured_possession", "fear_or_concern", "personality", "meaningful_location", "investigation_hook"]) {
+    assert.equal(background[fieldId], "", `${fieldId} should remain blank when all source answers are absent`);
+  }
+  const partial = buildBackground({Q3a:"family_member"}, templates, questions);
+  assert.match(partial.significant_person, /^對他／她而言，最重要的人是父母或手足。$/u);
+  assert.equal(partial.treasured_possession, "");
+  assert.equal(partial.fear_or_concern, "");
+  assert.equal(partial.meaningful_location, "");
+});
+
 test("narrative templates join the Q3/Q4/Q6 answers without awkward duplicate punctuation", () => {
   const c=buildCharacter(completeAnswers(),templates,questions);
   assert.match(c.background.significant_person,/父母或手足。他／她和家人共同經歷過/);
