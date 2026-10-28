@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-Hant"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CoC 7e 調查員背景產生器</title>
+<style>
+:root{font-family:system-ui,"Noto Sans TC",sans-serif;color:#29251f;background:#f3efe6}body{margin:0;padding:24px}.wrap{max-width:800px;margin:auto}.panel{background:#fffdf8;border:1px solid #d9d2c4;border-radius:14px;padding:clamp(18px,4vw,36px)}h1{line-height:1.25}.muted{color:#6e6a60}.progress{height:5px;background:#e8dfd1;margin:20px 0}.progress div{height:100%;background:#5a4635}.options{display:grid;gap:10px}.option{display:flex;gap:10px;padding:12px;border:1px solid #d9d2c4;border-radius:9px}.option:has(input:checked){background:#f1e8db;border-color:#5a4635}button{font:inherit;padding:10px 14px;border-radius:8px;border:1px solid #d9d2c4;background:#fffdf8;cursor:pointer}.primary{background:#5a4635;color:white}.actions{display:flex;justify-content:space-between;gap:10px;margin-top:24px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{border:1px solid #d9d2c4;border-radius:9px;padding:12px}.field label{font-weight:650}.field textarea{width:100%;min-height:90px;margin-top:8px;box-sizing:border-box;font:inherit;padding:8px;border:1px solid #d9d2c4;border-radius:6px}.toolbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}@media(max-width:600px){.grid{grid-template-columns:1fr}}
+</style>
+<main class="wrap"><p class="muted">CALL OF CTHULHU · 7TH EDITION</p><h1>調查員背景產生器</h1><p class="muted">第一版原型。回答問卷後可編輯背景、複製文字或匯出 JSON。</p><div id="app" class="panel">載入中…</div><p class="muted">不會自動儲存。請自行匯出 JSON 保存。</p></main>
+<script>
+const qs=[
+{id:"Q1",title:"調查員給人的第一印象是？",opts:["整潔可靠","疲憊而沉默","熱情健談","古怪難以捉摸"]},
+{id:"Q2",title:"調查員最重視什麼？",opts:["真相","家人與朋友","知識","秩序與責任"]},
+{id:"Q3",title:"誰對調查員最重要？",opts:["家人","導師","摯友","曾經的對手"]},
+{id:"Q4",title:"調查員珍藏什麼？",opts:["神祕物件","一封信","舊照片","家族遺物"]},
+{id:"Q5",title:"這件物品為何重要？",opts:["牽涉未解之謎","提醒自己某段往事","來自重要的人"]},
+{id:"Q6",title:"調查員最害怕什麼？",opts:["再次受騙","失去重要之人","失去控制","面對未知"]},
+{id:"Q7",title:"這份恐懼從何而來？",opts:["曾相信錯誤的事","曾經歷難以解釋的事件","曾被親近的人背叛"]},
+{id:"Q8",title:"調查員的個性如何？",opts:["安靜善於傾聽","固執而有原則","機敏多疑","樂觀務實"]},
+{id:"Q9",title:"哪裡對調查員有特殊意義？",opts:["安靜的私人角落","家鄉","圖書館或書房","曾發生重大事件的地方"]},
+{id:"Q10",title:"調查員的職業類型是？",opts:["研究與知識工作","調查與執法工作","醫療或照護工作","其他自訂職業"]},
+{id:"Q11",title:"這份工作如何牽連調查？",opts:["發現資料中的矛盾","工作中遇見異常事件","日常工作出現不尋常細節"]}
+];
+const labels={appearance:"外貌描述",belief:"信念",significant_person:"重要之人",treasured_possession:"珍貴之物",fear_or_concern:"恐懼與擔憂",personality:"個性",meaningful_location:"有意義的地點",investigation_hook:"與調查的連結"};
+const answers={};let step=0,character=null;
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function render(){const app=document.querySelector("#app");if(character){preview();return}const q=qs[step];app.innerHTML='<div class="muted">問卷進度 '+(step+1)+' / '+qs.length+'</div><div class="progress"><div style="width:'+((step+1)/qs.length*100)+'%"></div></div><h2>'+q.title+'</h2><div class="options">'+q.opts.map((o,i)=>'<label class="option"><input type="radio" name="a" value="'+i+'" '+(answers[q.id]===String(i)?'checked':'')+'><span>'+o+'</span></label>').join('')+'</div>'+(q.id==="Q10"&&answers.Q10==="3"?'<p><label>自訂職業 <input id="job" value="'+esc(answers.job||'')+'" placeholder="例如：鐘錶匠"></label></p>':'')+'<div class="actions"><button id="prev" '+(!step?'disabled':'')+'>上一題</button><button class="primary" id="next">'+(step===qs.length-1?'產生背景':'下一題')+'</button></div>';
+app.querySelectorAll('input[name=a]').forEach(el=>el.onchange=()=>{answers[q.id]=el.value;if(q.id==="Q10"&&el.value!=="3")delete answers.job;render()});
+document.querySelector("#job")?.addEventListener("input",e=>answers.job=e.target.value);
+document.querySelector("#prev").onclick=()=>{if(step>0)step--;render()};
+document.querySelector("#next").onclick=()=>{if(answers[q.id]===undefined){alert("請先選擇一個答案。");return}if(q.id==="Q10"&&answers.Q10==="3"&&!answers.job?.trim()){alert("請填寫自訂職業。");return}if(step<qs.length-1){step++;render()}else makeCharacter()};
+}
+function makeCharacter(){const val=id=>qs.find(q=>q.id===id).opts[Number(answers[id])]||"";const job=answers.Q10==="3"?answers.job:val("Q10");character={profile:{name:"",occupation:job,age:null,birthplace:"",residence:""},background:{appearance:val("Q1"),belief:val("Q2"),significant_person:val("Q3"),treasured_possession:val("Q4")+"；"+val("Q5"),fear_or_concern:val("Q6")+"；"+val("Q7"),personality:val("Q8"),meaningful_location:val("Q9"),investigation_hook:val("Q11")}};preview()}
+function preview(){const app=document.querySelector("#app");const fields=[...Object.entries(character.profile).map(([k,v])=>({k,label:({name:"姓名",occupation:"職業",age:"年齡",birthplace:"出生地",residence:"居住地"})[k],v,group:"profile"})),...Object.entries(character.background).map(([k,v])=>({k,label:labels[k],v,group:"background"}))];app.innerHTML='<h2>背景預覽</h2><div class="toolbar"><button id="copy">複製完整背景</button><button id="json">匯出 JSON</button><button id="restart">重新產生</button></div><div class="grid">'+fields.map(f=>'<div class="field"><label>'+f.label+'</label><textarea data-group="'+f.group+'" data-key="'+f.k+'">'+esc(f.v??"")+'</textarea></div>').join('')+'</div>';app.querySelectorAll("textarea").forEach(el=>el.oninput=()=>{character[el.dataset.group][el.dataset.key]=el.value});document.querySelector("#copy").onclick=async()=>{const text=fields.map(f=>{const v=character[f.group][f.k];return String(v??"").trim()?f.label+"："+v:""}).filter(Boolean).join("\n");try{await navigator.clipboard.writeText(text);alert("已複製")}catch{prompt("請手動複製以下文字",text)}};document.querySelector("#json").onclick=()=>{const data={version:1,meta:{created_at:new Date().toISOString(),generator:"CoC Investigator Background Generator"},profile:character.profile,background:character.background};const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:"application/json"}));a.download="coc-investigator-background.json";a.click();URL.revokeObjectURL(a.href)};document.querySelector("#restart").onclick=()=>{if(confirm("重新產生會清除目前答案與編輯內容，確定繼續？")){Object.keys(answers).forEach(k=>delete answers[k]);character=null;step=0;render()}}}
+render();
+</script></html>
