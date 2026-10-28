@@ -295,6 +295,9 @@ test("JSON export validates the complete version-1 contract and ignores extra ch
   assert.equal(exported.meta.created_at, "2026-10-28T00:00:00.000Z");
   assert.equal(JSON.parse(exportJSON(character)).meta.created_at, null);
   assert.equal(JSON.parse(exportJSON(character, "2026-10-28T08:00:00+08:00")).meta.created_at, "2026-10-28T08:00:00+08:00");
+  assert.equal(JSON.parse(exportJSON(character, "2026-10-28T14:00:00+14:00")).meta.created_at, "2026-10-28T14:00:00+14:00");
+  assert.throws(() => exportJSON(character, "2026-10-28T14:01:00+14:01"), /created_at must be/);
+  assert.throws(() => exportJSON(character, "2026-10-28T15:00:00+15:00"), /created_at must be/);
   assert.throws(() => exportJSON(character, "not-a-date"), /created_at must be/);
   assert.throws(() => exportJSON(character, "2026-02-30T00:00:00.000Z"), /created_at must be/);
   assert.throws(() => exportJSON(character, new Date("2026-10-28T00:00:00.000Z")), /created_at must be/);
