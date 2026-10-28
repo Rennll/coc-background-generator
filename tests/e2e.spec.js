@@ -322,6 +322,12 @@ test("questionnaire and preview remain free of horizontal overflow at mobile, ta
     }));
     expect(previewOverflow.document, `preview document overflow at ${width}px: ${JSON.stringify(previewOverflow)}`).toBeLessThanOrEqual(width);
     expect(previewOverflow.body, `preview body overflow at ${width}px: ${JSON.stringify(previewOverflow)}`).toBeLessThanOrEqual(width);
+    for (const label of ["姓名","職業","年齡","出生地","居住地","外貌描述","信念","重要之人","珍貴之物","恐懼與擔憂","個性","有意義的地點","與調查的連結"]) {
+      const field = page.locator(".field").filter({has:page.getByRole("heading",{name:label,exact:true})});
+      await expect(field, `${label} remains visible at ${width}px`).toBeVisible();
+    }
+    await expect(page.locator("#copyAll"), `full-background copy control visible at ${width}px`).toBeVisible();
+    await expect(page.locator("#export"), `JSON export control visible at ${width}px`).toBeVisible();
   }
 });
 
