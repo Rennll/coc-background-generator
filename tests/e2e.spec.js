@@ -41,6 +41,22 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   await occupationField.getByRole("button",{name:"儲存"}).click();
   await expect(occupationField).toContainText("大學教授");
 
+  // Exercise all remaining basic profile editors, including blank age -> JSON null.
+  for (const [field,value] of [["profile:name","林明遠"],["profile:birthplace","臺南市"],["profile:residence","臺北市"]]) {
+    await page.locator(`[data-edit="${field}"]`).click();
+    await page.locator("#editor").fill(value);
+    await page.locator(`[data-save="${field}"]`).click();
+    await expect(page.locator(`.field [data-edit="${field}"]`).locator("..")).toBeVisible();
+  }
+  await page.locator('[data-edit="profile:age"]').click();
+  await page.locator("#editor").fill("42");
+  await page.locator('[data-save="profile:age"]').click();
+  await expect(page.locator(".field").filter({has:page.getByRole("heading",{name:"年齡",exact:true})})).toContainText("42");
+  await page.locator('[data-edit="profile:age"]').click();
+  await page.locator("#editor").fill("");
+  await page.locator('[data-save="profile:age"]').click();
+  await expect(page.locator(".field").filter({has:page.getByRole("heading",{name:"年齡",exact:true})})).toContainText("尚未填寫");
+
   const downloadPromise = page.waitForEvent("download");
   await page.locator("#export").click();
   const download = await downloadPromise;
@@ -51,6 +67,10 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   const exported = JSON.parse(exportedText);
   expect(exported.background.belief).toBe("我只相信能夠查證的事實。");
   expect(exported.profile.occupation).toBe("大學教授");
+  expect(exported.profile.name).toBe("林明遠");
+  expect(exported.profile.birthplace).toBe("臺南市");
+  expect(exported.profile.residence).toBe("臺北市");
+  expect(exported.profile.age).toBeNull();
   expect(Object.keys(exported).sort()).toEqual(["background","meta","profile","version"]);
   expect(Object.keys(exported.profile).sort()).toEqual(["age","birthplace","name","occupation","residence"]);
   expect(Object.keys(exported.background).sort()).toEqual(["appearance","belief","fear_or_concern","investigation_hook","meaningful_location","personality","significant_person","treasured_possession"]);
