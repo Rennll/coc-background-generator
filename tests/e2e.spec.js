@@ -133,6 +133,40 @@ test("occupation selector preserves English names, source tags, and custom entry
   await occupationField.getByRole("button",{name:"儲存"}).click();
   await expect(occupationField.getByText("鐘錶匠")).toBeVisible();
 });
+test("restart confirmation preserves edits on cancel and resets on accept", async ({page}) => {
+  await page.goto("/");
+  await answer(page,"neat_reliable");
+  await answer(page,"truth_above_comfort");
+  await answer(page,"family_member");
+  await answer(page,"family_secret");
+  await answer(page,"mysterious_object");
+  await answer(page,"mystery_wrongness");
+  await answer(page,"deceived_again");
+  await answer(page,"deceived_misunderstood");
+  await answer(page,"quiet_listener");
+  await answer(page,"hometown");
+  await answer(page,"knowledge_research");
+  await answer(page,"research_contradiction");
+  await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
+
+  await page.locator('[data-edit="background:belief"]').click();
+  await page.locator("#editor").fill("手動編輯後應該保留。");
+  await page.locator('[data-save="background:belief"]').click();
+
+  page.once("dialog",async dialog=>{
+    expect(dialog.message()).toContain("重新產生會清除問卷答案與手動編輯");
+    await dialog.dismiss();
+  });
+  await page.locator("#restart").click();
+  await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
+  await expect(page.getByText("手動編輯後應該保留。")).toBeVisible();
+
+  page.once("dialog",async dialog=>{ await dialog.accept(); });
+  await page.locator("#restart").click();
+  await expect(page.getByRole("heading",{name:"你的角色長什麼樣子？"})).toBeVisible();
+  await expect(page.getByRole("heading",{name:"背景預覽"})).toHaveCount(0);
+});
+
 test("blank background fields stay visible, full copy skips them, and single-field copy is empty", async ({page,context}) => {
   await context.grantPermissions(["clipboard-read","clipboard-write"]);
   await page.goto("/");
