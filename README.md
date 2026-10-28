@@ -74,6 +74,9 @@ npm run test:e2e
 
 ## 驗收紀錄（2026-10-28）
 
+- 響應式視覺檢查提交 `80aa74a`：核心測試 16/16、Chromium E2E 8/8、響應式／鍵盤焦點視覺測試 2/2 通過。已在 320、390、768、1440 CSS px 檢查問卷與預覽頁無水平溢位，並由 CI 產生手機與桌面完整頁面截圖；截圖 Artifact 保留至 2026-11-11：[GitHub Actions 與截圖下載](https://github.com/Rennll/coc-background-generator/actions/runs/40628388355)。這是自動化視覺檢查，仍不等於真人實機驗收。
+
+
 - 年齡空白值邊界測試提交 `af14998`：核心測試 16/16、Chromium E2E 8/8 通過。空字串與純空白字串都正規化為 `null`，不會被 JavaScript 的數字轉換誤判為 0；同時保留負數、非整數與非數字輸入拒絕驗證：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40627619880)。
 
 
