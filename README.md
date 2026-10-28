@@ -76,4 +76,4 @@ npm run test:e2e
 - 對照 Notion 規格後，已在 `audit/spec-alignment` 分支調整問卷選項、背景模板、核心測試與 Chromium E2E 測試。
 - 職業資料維持 22 筆初步清單；官方商品頁僅能佐證部分範例，不代表逐項核實或官方完整清單。
 - 官方規則 Wiki 已補入職業資料來源。來源頁面可佐證部分英文職業範例，但無法核實完整 1920 年代清單或官方繁中譯名。
-- 最近一次已完成驗證：核心測試通過，Chromium E2E 3/3 通過；之後新增了空白欄位／剪貼簿、匯出 JSON 內容，以及職業譯名核實欄位斷言，需以新一輪 CI 結果確認。先前結果：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40615268670)。
+- 最近一次已完成驗證：核心測試通過，Chromium E2E 3/3 通過；之後最新 GitHub Actions 已通過核心測試及 4 項 Chromium E2E：標準問卷與 JSON 內容、自訂職業、修改 Q10 後清除舊 Q11 答案、空白欄位與剪貼簿行為。另已加入英文候選職稱與繁中譯名狀態的資料契約檢查。驗收紀錄：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40615678504)。
