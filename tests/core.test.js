@@ -503,6 +503,34 @@ Zookeeper`.split("\n");
   assert.deepEqual(occupations.occupations.find(o=>o.id==="physician").crossReferences,["Psychiatrist"]);
   assert.deepEqual(occupations.occupations.find(o=>o.id==="pilot").crossReferences,["Aviator"]);
 });
+test("occupation cross-references resolve bidirectionally and era tags remain conservative", () => {
+  const canonical = new Map(occupations.occupations.map(entry => [entry.englishCandidate, entry]));
+  const aliasesByName = new Map(occupations.aliases.map(entry => [entry.englishCandidate, entry]));
+  const sources = new Set(occupations.sources.map(source => source.id));
+  for (const entry of occupations.occupations) {
+    for (const reference of entry.crossReferences ?? []) {
+      const target = canonical.get(reference) ?? aliasesByName.get(reference);
+      assert.ok(target, entry.englishCandidate + " cross-reference resolves: " + reference);
+      assert.ok(target.isAlias ? target.aliasOf === entry.id : target.id === entry.id || target.crossReferences?.includes(entry.englishCandidate),
+        entry.englishCandidate + " cross-reference target is consistent: " + reference);
+    }
+    for (const sourceId of entry.sourceIds) assert.ok(sources.has(sourceId), entry.englishCandidate + " source exists");
+    if ((entry.handbookTags ?? []).includes("Modern")) {
+      assert.equal(entry.eraStatus, "modern_only", entry.englishCandidate + " Modern tag is not presented as 1920s-verified");
+    }
+    if (entry.eraStatus === "modern_only") {
+      assert.ok((entry.handbookTags ?? []).includes("Modern"), entry.englishCandidate + " modern-only status is supported by a Modern tag");
+    }
+  }
+  for (const alias of occupations.aliases) {
+    const target = occupations.occupations.find(entry => entry.id === alias.aliasOf);
+    assert.ok(target, alias.englishCandidate + " alias target is canonical");
+    assert.ok(target.crossReferences?.includes(alias.englishCandidate),
+      alias.englishCandidate + " is referenced by its canonical entry");
+    for (const sourceId of alias.sourceIds) assert.ok(sources.has(sourceId), alias.englishCandidate + " source exists");
+  }
+});
+
 test("editing one background field preserves every other generated field and custom occupation stays in profile", () => {
   const answers = completeAnswers({
     Q10: "other_custom",
