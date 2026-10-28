@@ -807,7 +807,7 @@ test("name generation returns a non-empty name and a data-backed classification 
   assert.equal(generated.label, "男性常用名");
   assert.equal(generated.cultureLabel, names.pools.taiwanHan.label);
   assert.ok(generated.name.length > 0);
-  const female = generateName(names, { random: () => 0.3 });
+  const female = generateName(names, { random: () => 0.75 });
   assert.equal(female.gender, "female");
   assert.equal(female.label, "女性常用名");
 });
