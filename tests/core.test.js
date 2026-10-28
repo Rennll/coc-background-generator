@@ -13,7 +13,7 @@ function completeAnswers(overrides = {}) {
 }
 
 test("data files parse and agree on the eight background fields and five profile fields", () => {
-  assert.equal(questions.questions.length, 11);
+  assert.equal(questions.questions.length, 12);
   assert.equal(questions.dependencies.length, 4);
   assert.equal(templates.profileFields.length, 5);
   assert.equal(Object.keys(templates.fieldLabels).length, 8);
@@ -73,7 +73,7 @@ test("narrative templates join the Q3/Q4/Q6 answers without awkward duplicate pu
   const c=buildCharacter(completeAnswers(),templates,questions);
   assert.match(c.background.significant_person,/父母或手足；他／她和家人共同經歷過/);
   assert.doesNotMatch(c.background.significant_person,/。；|。。/);
-  assert.match(c.background.treasured_possession,/一件來歷不明；他／她第一次見到它時/);
+  assert.match(c.background.treasured_possession,/一件來歷不明、仍想查清楚的物品；他／她第一次見到它時/);
   assert.match(c.background.fear_or_concern,/事是：再次相信某件後來證明是謊言的事。這份擔憂的來源是：他／她曾全心相信/);
   assert.equal(Object.keys(c.background).length,8);
 });
