@@ -595,7 +595,7 @@ test("capture real name-generator screenshots for CI artifacts", async ({ page }
     await page.locator("#name-culture").selectOption(culture);
     await page.locator("[data-generate-name]").click();
     await expect(page.getByRole("group",{name:"姓名候選"})).toBeVisible();
-    await expect(page.locator("[data-name-candidate]"))).toBeVisible();
+    await expect(page.locator("[data-name-candidate]")).toBeVisible();
     await page.screenshot({ path: filename, fullPage: true, animations: "disabled" });
     await page.locator("[data-name-cancel]").click();
   }
