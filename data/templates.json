@@ -1,0 +1,17 @@
+{
+  "schemaVersion":1,"locale":"zh-TW",
+  "fieldLabels":{"appearance":"外貌描述","belief":"信念","significant_person":"重要之人","treasured_possession":"珍貴之物","fear_or_concern":"恐懼與擔憂","personality":"個性","meaningful_location":"有意義的地點","investigation_hook":"與調查的連結"},
+  "profileFields":[{"id":"name","label":"姓名","type":"text","optional":true},{"id":"occupation","label":"職業","type":"text","optional":true},{"id":"age","label":"年齡","type":"number","optional":true},{"id":"birthplace","label":"出生地","type":"text","optional":true},{"id":"residence","label":"居住地","type":"text","optional":true}],
+  "generationRules":{
+    "appearance":{"questionIds":["Q1"],"parts":[{"answerFrom":"Q1","format":"optionText"}]},
+    "belief":{"questionIds":["Q2"],"parts":[{"answerFrom":"Q2","format":"optionText"}]},
+    "significant_person":{"questionIds":["Q3a","Q3b"],"parts":[{"answerFrom":"Q3a","format":"optionText","stripTerminalPunctuation":true},{"answerFrom":"Q3b","format":"optionText","separator":" "}],"prefix":"對他／她而言，最重要的人是","separator":"。","note":"Q3b 是經歷補充，不自動轉換成人格特質。"},
+    "treasured_possession":{"questionIds":["Q4","Q5"],"parts":[{"answerFrom":"Q4","format":"optionText","stripTerminalPunctuation":true},{"answerFrom":"Q5","format":"optionText","separator":" "}],"prefix":"他／她珍藏著","separator":"。"},
+    "fear_or_concern":{"questionIds":["Q6","Q7"],"parts":[{"answerFrom":"Q6","format":"optionText","stripTerminalPunctuation":true},{"answerFrom":"Q7","format":"optionText","separator":" "}],"prefix":"他／她最不希望發生的事是：","separator":"。這份擔憂的來源是：","note":"Q6 與 Q7 組成敘事，不自動轉換成固定人格特質。"},
+    "personality":{"questionIds":["Q8"],"parts":[{"answerFrom":"Q8","format":"optionText"}]},
+    "meaningful_location":{"questionIds":["Q9"],"parts":[{"answerFrom":"Q9","format":"optionText"}]},
+    "investigation_hook":{"questionIds":["Q10","Q11"],"parts":[{"answerFrom":"Q11","format":"optionText"}],"note":"Q10 只決定 Q11 分支；具體職業名稱由 profile.occupation 獨立記錄。"}
+  },
+  "composition":{"trimParts":true,"joinNonEmptyPartsWith":" ","trimFinalWhitespace":true,"punctuation":"Source option text is preserved except where a part explicitly sets stripTerminalPunctuation=true.","missingAnswer":"Return an empty string for that field part; never stringify missing values.","invalidAnswer":"Raise an explicit validation error in business logic."},
+  "exportContract":{"version":1,"meta":{"created_at":"ISO-8601 timestamp or null before export","generator":"CoC Investigator Background Generator"},"profile":{"name":"","occupation":"","age":null,"birthplace":"","residence":""},"background":{"appearance":"","belief":"","significant_person":"","treasured_possession":"","fear_or_concern":"","personality":"","meaningful_location":"","investigation_hook":""},"exclude":["rawAnswers","stats","skills","during_play"]}
+}
