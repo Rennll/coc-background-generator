@@ -60,6 +60,8 @@ test("question and option IDs are unique and all conditional branches have valid
 test("question flow and template formats reject incomplete or unsupported schema declarations", () => {
   const questionIds = questions.questions.map(question => question.id);
   assert.equal(new Set(questions.flow).size, questions.flow.length, "flow IDs are unique");
+  assert.deepEqual([...questions.flow].sort(), [...questionIds].sort(),
+    "every declared question appears exactly once in the user-facing flow");
   for (const questionId of questions.flow) assert.ok(questionIds.includes(questionId), "flow references known question " + questionId);
   for (const question of questions.questions) {
     assert.equal(Boolean(question.dependsOn), Boolean(question.optionsByParentOption),
@@ -70,6 +72,10 @@ test("question flow and template formats reject incomplete or unsupported schema
     }
   }
   for (const [fieldId, rule] of Object.entries(templates.generationRules)) {
+    assert.deepEqual([...new Set(rule.parts.map(part => part.answerFrom))].sort(), [...rule.questionIds].sort(),
+      fieldId + " questionIds must exactly match the questions actually used by its template parts");
+    assert.equal(new Set(rule.questionIds).size, rule.questionIds.length,
+      fieldId + " questionIds must not contain duplicates");
     for (const part of rule.parts) {
       assert.equal(part.format, "optionText", fieldId + " uses a supported template format");
       if (Object.hasOwn(part, "stripTerminalPunctuation")) {
