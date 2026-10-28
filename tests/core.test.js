@@ -241,7 +241,16 @@ test("all occupation IDs are unique, source labels are present, and list is not 
     assert.ok(["1920s_applicability_not_individually_verified","classic_tag_requires_review","lovecraftian_tag_requires_review","modern_only"].includes(occupation.eraStatus),occupation.englishCandidate+" has explicit era status");
   }
   const canonicalIds=new Set(occupations.occupations.map(o=>o.id));
-  for(const alias of occupations.aliases){assert.ok(alias.isAlias);assert.ok(canonicalIds.has(alias.aliasOf),alias.id+" points to canonical entry");}
+  const allOccupationIds=[...occupations.occupations,...occupations.aliases].map(o=>o.id);
+  assert.equal(new Set(allOccupationIds).size,allOccupationIds.length,"canonical and alias IDs share one collision-free namespace");
+  assert.equal(new Set(occupations.aliases.map(o=>o.englishCandidate)).size,occupations.aliases.length,"alias English names are unique");
+  for(const alias of occupations.aliases){
+    assert.ok(alias.isAlias);
+    assert.ok(canonicalIds.has(alias.aliasOf),alias.id+" points to canonical entry");
+    assert.ok(alias.englishCandidate && alias.name && alias.notes,alias.id+" has a display name and cross-reference explanation");
+    assert.ok(Array.isArray(alias.sourceIds) && alias.sourceIds.length>0,alias.id+" has provenance");
+    for(const sourceId of alias.sourceIds) assert.ok(sourceIds.has(sourceId),alias.id+" references known source "+sourceId);
+  }
   for(const id of ["alias_aviator","alias_gun_moll"]){const alias=occupations.aliases.find(a=>a.id===id);assert.deepEqual(alias.handbookTags,["Classic"],id+" preserves the Handbook Classic tag");assert.equal(alias.eraStatus,"classic_tag_requires_review",id+" does not overclaim 1920s suitability");}
   const pilot=occupations.occupations.find(o=>o.id==="pilot");assert.deepEqual(pilot.handbookTags,[]);assert.equal(pilot.eraStatus,"1920s_applicability_not_individually_verified","Aviator’s Classic tag must not transfer to Pilot");
   for(const alias of occupations.aliases){const target=occupations.occupations.find(o=>o.id===alias.aliasOf);assert.ok(target.crossReferences?.includes(alias.englishCandidate),`${alias.englishCandidate} cross-reference is visible on ${target.englishCandidate}`);}
