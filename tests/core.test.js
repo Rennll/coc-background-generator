@@ -50,6 +50,9 @@ test("question and option IDs are unique and all conditional branches have valid
       const parent = questions.questions.find(p => p.id === q.dependsOn.questionId);
       assert.ok(parent, q.id + " parent exists");
       const parentIds = new Set((parent.options ?? []).map(o => o.id));
+      assert.equal(q.dependsOn.operator,"equals_option_id",q.id+" declares a supported dependency operator");
+      assert.deepEqual(Object.keys(q.optionsByParentOption).sort(),[...parentIds].sort(),
+        q.id+" defines exactly one branch for every parent option");
       for (const parentOptionId of Object.keys(q.optionsByParentOption)) assert.ok(parentIds.has(parentOptionId), q.id + "/" + parentOptionId);
     }
   }
