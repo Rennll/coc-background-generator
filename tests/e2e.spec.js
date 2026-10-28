@@ -85,3 +85,36 @@ test("changing Q10 clears the stale Q11 child answer in a real browser", async (
   await expect(page.locator('input[name="answer"][value="research_contradiction"]')).toBeVisible();
   await expect(page.locator('input[name="answer"][value="research_contradiction"]')).not.toBeChecked();
 });
+
+test("blank background fields stay visible, full copy skips them, and single-field copy is empty", async ({page,context}) => {
+  await context.grantPermissions(["clipboard-read","clipboard-write"]);
+  await page.goto("/");
+  await answer(page,"neat_reliable");
+  await answer(page,"truth_above_comfort");
+  await answer(page,"family_member");
+  await answer(page,"family_secret");
+  await answer(page,"mysterious_object");
+  await answer(page,"mystery_wrongness");
+  await answer(page,"deceived_again");
+  await answer(page,"deceived_misunderstood");
+  await answer(page,"quiet_listener");
+  await answer(page,"hometown");
+  await answer(page,"knowledge_research");
+  await answer(page,"research_contradiction");
+  await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
+
+  const beliefField=page.locator(".field").filter({has:page.getByRole("heading",{name:"信念",exact:true})});
+  await beliefField.getByRole("button",{name:"編輯"}).click();
+  await page.locator("#editor").fill("");
+  await beliefField.getByRole("button",{name:"儲存"}).click();
+  await expect(beliefField).toBeVisible();
+  await expect(beliefField.getByText("尚未填寫")).toBeVisible();
+
+  await page.locator("#copyAll").click();
+  const fullText=await page.evaluate(()=>navigator.clipboard.readText());
+  expect(fullText).not.toContain("信念：");
+  expect(fullText).toContain("外貌描述：");
+
+  await beliefField.getByRole("button",{name:"複製欄位"}).click();
+  expect(await page.evaluate(()=>navigator.clipboard.readText())).toBe("");
+});
