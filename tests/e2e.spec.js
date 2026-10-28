@@ -135,6 +135,7 @@ test("occupation selector preserves English names, source tags, and custom entry
   await expect(selector.locator('option[value="antiquarian"]')).toContainText("Lovecraftian");
   await expect(selector.locator('option[value="antiquarian"]')).toContainText("官方規則 Wiki 範例已佐證");
   await expect(selector.locator('option[value="accountant"]')).toContainText("1920年代適用性未逐項核實");
+  await expect(page.getByText("清單依使用者提供且已逐字與實體 Investigator Handbook 核對的英文清單整理。")).toBeVisible();
   await expect(selector.locator('option[value="criminal"]')).toContainText("另見：Gangster");
   await expect(selector.locator('option[value="physician"]')).toContainText("另見：Psychiatrist");
   await expect(selector.locator('option[value="pilot"]')).toContainText("另見：Aviator");
