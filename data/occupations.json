@@ -44,7 +44,8 @@
       ],
       "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
-      "notes": "官方快速入門範例包含 University Professor；中文名稱為本專案譯名。 官方規則 Wiki 可支持相關英文職業概念；本專案繁中譯名仍為編者譯名，非經核實的官方繁中用語。"
+      "notes": "官方快速入門範例包含 University Professor；中文名稱為本專案譯名。 官方規則 Wiki 可支持相關英文職業概念；本專案繁中譯名仍為編者譯名，非經核實的官方繁中用語。",
+      "eraStatus": "1920s_example_verified"
     },
     {
       "id": "teacher",
@@ -54,9 +55,10 @@
       "sourceIds": [
         "chaosium_investigator_handbook_7e"
       ],
-      "sourceStatus": "official_product_page_example",
+      "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
-      "notes": "官方手冊商品頁職業例子。"
+      "notes": "尚未在目前核對的官方公開商品頁或規則 Wiki 範例中逐項找到；需對照手冊正式職業條目。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "librarian",
@@ -66,9 +68,10 @@
       "sourceIds": [
         "chaosium_investigator_handbook_7e"
       ],
-      "sourceStatus": "official_product_page_example",
+      "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
-      "notes": "官方手冊商品頁職業例子。"
+      "notes": "尚未在目前核對的官方公開商品頁或規則 Wiki 範例中逐項找到；需對照手冊正式職業條目。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "journalist",
@@ -81,7 +84,8 @@
       ],
       "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
-      "notes": "官方手冊商品頁職業例子。 官方規則 Wiki 可支持相關英文職業概念；本專案繁中譯名仍為編者譯名，非經核實的官方繁中用語。"
+      "notes": "官方手冊商品頁職業例子。 官方規則 Wiki 可支持相關英文職業概念；本專案繁中譯名仍為編者譯名，非經核實的官方繁中用語。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "private_detective",
@@ -94,7 +98,8 @@
       ],
       "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
-      "notes": "官方商品頁提及 detective；具體條目仍待核對。 官方規則 Wiki 可支持相關英文職業概念；本專案繁中譯名仍為編者譯名，非經核實的官方繁中用語。"
+      "notes": "官方商品頁提及 detective；具體條目仍待核對。 官方規則 Wiki 可支持相關英文職業概念；本專案繁中譯名仍為編者譯名，非經核實的官方繁中用語。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "police_officer",
@@ -107,7 +112,8 @@
       ],
       "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
-      "notes": "官方商品頁提及 police officer；正式分類待核對。 官方規則 Wiki 可支持相關英文職業概念；本專案繁中譯名仍為編者譯名，非經核實的官方繁中用語。"
+      "notes": "官方商品頁提及 police officer；正式分類待核對。 官方規則 Wiki 可支持相關英文職業概念；本專案繁中譯名仍為編者譯名，非經核實的官方繁中用語。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "physician",
@@ -119,7 +125,8 @@
       ],
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
-      "notes": "待對照手冊正式職業條目及譯名。"
+      "notes": "待對照手冊正式職業條目及譯名。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "nurse",
@@ -131,7 +138,8 @@
       ],
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
-      "notes": "待對照手冊正式職業條目及譯名。"
+      "notes": "待對照手冊正式職業條目及譯名。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "social_worker",
@@ -141,7 +149,8 @@
       "sourceIds": [],
       "sourceStatus": "supplementary_unverified",
       "entryStatus": "supplementary",
-      "notes": "補充職稱，尚未核實為官方條目。"
+      "notes": "補充職稱，尚未核實為官方條目。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "businessperson",
@@ -153,7 +162,8 @@
       ],
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
-      "notes": "待對照手冊正式職業條目及譯名。"
+      "notes": "待對照手冊正式職業條目及譯名。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "antique_dealer",
@@ -166,7 +176,8 @@
       ],
       "sourceStatus": "official_example_or_category_supported",
       "entryStatus": "starter_entry",
-      "notes": "官方商品頁職業範例。 官方規則 Wiki 亦列有 Antiquarian；Antiquarian 與 Antique Dealer 是不同英文職業名，請勿視為同一條目。"
+      "notes": "官方商品頁職業範例。 官方規則 Wiki 亦列有 Antiquarian；Antiquarian 與 Antique Dealer 是不同英文職業名，請勿視為同一條目。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "innkeeper",
@@ -176,7 +187,8 @@
       "sourceIds": [],
       "sourceStatus": "supplementary_unverified",
       "entryStatus": "supplementary",
-      "notes": "補充職稱，待核實。"
+      "notes": "補充職稱，待核實。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "engineer",
@@ -186,7 +198,8 @@
       "sourceIds": [],
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
-      "notes": "待核對手冊條目與專業分類。"
+      "notes": "待核對手冊條目與專業分類。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "mechanic",
@@ -196,7 +209,8 @@
       "sourceIds": [],
       "sourceStatus": "supplementary_unverified",
       "entryStatus": "supplementary",
-      "notes": "補充職稱，待核實。"
+      "notes": "補充職稱，待核實。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "chauffeur",
@@ -206,7 +220,8 @@
       "sourceIds": [],
       "sourceStatus": "supplementary_unverified",
       "entryStatus": "supplementary",
-      "notes": "補充職稱，待核實年代用語。"
+      "notes": "補充職稱，待核實年代用語。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "writer",
@@ -216,7 +231,8 @@
       "sourceIds": [],
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
-      "notes": "待核對手冊正式職業條目及譯名。"
+      "notes": "待核對手冊正式職業條目及譯名。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "painter",
@@ -226,7 +242,8 @@
       "sourceIds": [],
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
-      "notes": "待核對手冊正式職業條目及譯名。"
+      "notes": "待核對手冊正式職業條目及譯名。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "actor",
@@ -236,7 +253,8 @@
       "sourceIds": [],
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
-      "notes": "待核對手冊正式職業條目及譯名。"
+      "notes": "待核對手冊正式職業條目及譯名。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "musician",
@@ -246,7 +264,8 @@
       "sourceIds": [],
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
-      "notes": "待核對手冊正式職業條目及譯名。"
+      "notes": "待核對手冊正式職業條目及譯名。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "student",
@@ -256,7 +275,8 @@
       "sourceIds": [],
       "sourceStatus": "to_verify_against_book",
       "entryStatus": "starter_entry",
-      "notes": "常見角色背景，獨立職業定位待核對。"
+      "notes": "常見角色背景，獨立職業定位待核對。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "retired_person",
@@ -266,7 +286,8 @@
       "sourceIds": [],
       "sourceStatus": "supplementary_unverified",
       "entryStatus": "supplementary",
-      "notes": "背景狀態，不一定是規則書獨立職業。"
+      "notes": "背景狀態，不一定是規則書獨立職業。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     },
     {
       "id": "independently_wealthy",
@@ -276,7 +297,8 @@
       "sourceIds": [],
       "sourceStatus": "supplementary_unverified",
       "entryStatus": "supplementary",
-      "notes": "描述生活來源，不宣稱為官方職業條目。"
+      "notes": "描述生活來源，不宣稱為官方職業條目。",
+      "eraStatus": "1920s_plausible_not_individually_verified"
     }
   ],
   "customOccupation": {
