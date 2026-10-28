@@ -43,7 +43,7 @@
   "occupations": [
     {
       "id": "accountant",
-      "name": "會計師",
+      "name": "會計人員",
       "category": "business_trade",
       "era": "review_required",
       "sourceIds": [
@@ -559,7 +559,7 @@
     },
     {
       "id": "deprogrammer",
-      "name": "思想改造專家",
+      "name": "反洗腦專家",
       "category": "health_care",
       "era": "review_required",
       "sourceIds": [
@@ -1619,7 +1619,7 @@
     },
     {
       "id": "union_activist",
-      "name": "工會運動者",
+      "name": "工會活動人士",
       "category": "labor",
       "era": "review_required",
       "sourceIds": [
