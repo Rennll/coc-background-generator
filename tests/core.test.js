@@ -60,9 +60,11 @@ test("question and option IDs are unique and all conditional branches have valid
 test("question option IDs are globally unique and output fields map to declared background fields", () => {
   const seenOptionIds = new Map();
   const backgroundFieldIds = new Set(Object.keys(templates.fieldLabels));
+  const profileFieldIds = new Set(templates.profileFields.map(field => field.id));
+  const declaredOutputIds = new Set([...backgroundFieldIds, ...profileFieldIds]);
   for (const question of questions.questions) {
-    assert.ok(backgroundFieldIds.has(question.outputField),
-      question.id + " outputField references a declared background field");
+    assert.ok(declaredOutputIds.has(question.outputField),
+      question.id + " outputField references a declared background or profile field");
     const optionGroups = question.options
       ? [question.options]
       : Object.values(question.optionsByParentOption ?? {});
