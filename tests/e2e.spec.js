@@ -70,7 +70,7 @@ test("changing Q10 clears the stale Q11 child answer in a real browser", async (
   await answer(page,"mysterious_object");
   await answer(page,"mystery_wrongness");
   await answer(page,"deceived_again");
-  await answer(page,"helpless_could_not_help");
+  await answer(page,"deceived_misunderstood");
   await answer(page,"quiet_listener");
   await answer(page,"hometown");
   await answer(page,"other_custom",{customOccupation:"鐘錶匠"});
