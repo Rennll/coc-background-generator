@@ -250,6 +250,9 @@ test("manual edits, including age and custom occupation, are reflected in export
   assert.equal(JSON.parse(exportJSON(c)).profile.age,null);
   assert.equal(JSON.parse(exportJSON({...c,profile:{...c.profile,age:"   "}})).profile.age,null);
   assert.equal(JSON.parse(exportJSON({...c,profile:{...c.profile,age:""}})).profile.age,null);
+  assert.equal(JSON.parse(exportJSON({...c,profile:{...c.profile,age:"42"}})).profile.age,42);
+  assert.throws(()=>exportJSON({...c,profile:{...c.profile,age:false}}),/Age must be/);
+  assert.throws(()=>exportJSON({...c,profile:{...c.profile,age:-1}}),/Age must be/);
   c=updateCharacterField(c,"profile","age","   ");
   assert.equal(c.profile.age,null);
   assert.equal(buildCharacter(completeAnswers(),templates,questions,{age:"   "}).profile.age,null);
