@@ -85,7 +85,7 @@
         }
       ],
       "prefix": "對他／她而言，最重要的人是",
-      "separator": "；",
+      "separator": "。",
       "note": "Q3b 是經歷補充，不自動轉換成人格特質。",
       "suffix": "。"
     },
@@ -108,7 +108,7 @@
         }
       ],
       "prefix": "他／她珍藏著",
-      "separator": "；",
+      "separator": "。",
       "suffix": "。"
     },
     "fear_or_concern": {
@@ -129,9 +129,9 @@
           "stripTerminalPunctuation": true
         }
       ],
-      "prefix": "他／她最不希望發生的事是：",
-      "separator": "。這份擔憂的來源是：",
-      "note": "Q6 與 Q7 組成敘事，不自動轉換成固定人格特質。",
+      "prefix": "他／她最不希望發生的事是",
+      "separator": "。",
+      "note": "Q6 表達核心恐懼，Q7 補充具體經歷；使用句號分隔，避免分號將兩個完整句子接成病句。",
       "suffix": "。"
     },
     "personality": {
