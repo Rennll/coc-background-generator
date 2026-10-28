@@ -84,6 +84,17 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   await expect(page.getByRole("heading",{name:"你的角色長什麼樣子？"})).toBeVisible();
 });
 
+test("Content Security Policy is present and allows the app to run without inline scripts", async ({page}) => {
+  await page.goto("/");
+  const policy = await page.locator('meta[http-equiv="Content-Security-Policy"]').getAttribute("content");
+  expect(policy).toContain("default-src 'self'");
+  expect(policy).toContain("script-src 'self'");
+  expect(policy).toContain("object-src 'none'");
+  expect(policy).toContain("base-uri 'none'");
+  expect(policy).not.toContain("'unsafe-inline'");
+  await expect(page.getByRole("heading", {name:"你的角色長什麼樣子？"})).toBeVisible();
+});
+
 test("user-edited preview text is rendered as text rather than interpreted as HTML", async ({page}) => {
   await page.goto("/");
   await answer(page,"neat_reliable");
