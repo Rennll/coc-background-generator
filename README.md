@@ -75,6 +75,10 @@ npm run test:e2e
 
 ## 驗收紀錄（2026-10-28）
 
+- 資料結構與模板防呆補強提交 `a299a90`：核心測試 18/18、Chromium E2E 10/10 通過。新增模板題目引用／基本資料欄位 metadata 一致性測試、JSON v1 白名單與建立時間測試，並讓缺少 `parts` 或無效模板 part 的錯誤訊息明確化。CI 已重新產生並上傳視覺截圖：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40631515239)。
+
+
+
 - JSON 年齡匯出與型別驗證加強提交 `b7a5252`：核心測試 16/16、Chromium E2E 10/10 通過。`exportJSON` 對空字串及純空白年齡輸出 `null`，合法數字字串轉成數字；初始資料、手動編輯與匯出均拒絕布林值、物件、負數及非整數，避免 `false` 被 JavaScript 轉成 0。CI 同時成功上傳視覺驗收截圖：[GitHub Actions](https://github.com/Rennll/coc-background-generator/actions/runs/40630038384)。
 
 
