@@ -221,6 +221,12 @@ test("manual edits, including age and custom occupation, are reflected in export
   const parsed=JSON.parse(exportJSON(c,"2026-10-28T00:00:00.000Z"));
   assert.equal(parsed.profile.occupation,"鐘錶匠"); assert.equal(parsed.profile.age,42);
   assert.equal(parsed.background.belief,"我只相信證據。");
+  assert.deepEqual(Object.keys(parsed).sort(),["background","meta","profile","version"]);
+  assert.deepEqual(Object.keys(parsed.profile).sort(),["age","birthplace","name","occupation","residence"]);
+  assert.deepEqual(Object.keys(parsed.background).sort(),["appearance","belief","fear_or_concern","investigation_hook","meaningful_location","personality","significant_person","treasured_possession"]);
+  assert.deepEqual(Object.keys(parsed.meta).sort(),["created_at","generator"]);
+  for(const forbidden of ["rawAnswers","answers","stats","skills","during_play"]) assert.equal(Object.hasOwn(parsed,forbidden),false,forbidden+" is excluded from export");
+  assert.equal(parsed.meta.created_at,"2026-10-28T00:00:00.000Z");
   assert.throws(()=>updateCharacterField(c,"profile","age","3.5"),/Age must be/);
 });
 test("invalid answers and invalid template field references fail explicitly", () => {
