@@ -62,6 +62,7 @@ function renderPreview(){
     }catch(e){state.error=e.message;}renderPreview();});
     document.querySelector(`[data-cancel="${key}"]`)?.addEventListener("click",()=>{state.editing=null;state.error="";renderPreview();});
   }
+  // Updates candidate/error state only; callers control when the preview is rendered.
   const createNameCandidate=()=>{try{if(!state.names)throw new Error(state.nameDataError||"姓名資料尚未載入");state.pendingName=generateName(state.names,{excludeNames:state.generatedNames,culture:state.selectedNameCulture});state.generatedNames.add(state.pendingName.name);state.error="";}catch(e){state.pendingName=null;state.error=`無法產生姓名：${e.message}`;}};
   document.querySelector("[data-name-culture]")?.addEventListener("change",event=>{state.selectedNameCulture=event.target.value;createNameCandidate();renderPreview();});
   document.querySelector("[data-name-reroll]")?.addEventListener("click",()=>{createNameCandidate();renderPreview();});
