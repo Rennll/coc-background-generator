@@ -790,7 +790,7 @@ test("invalid answers and invalid template field references fail explicitly", ()
 
 test("name pools are complete, non-empty, unique, and limited to the declared 1920s cultures", () => {
   assert.equal(validateNameData(names), true);
-  for (const culture of ["taiwanHan", "japanese"]) {
+  for (const culture of ["taiwanHan", "japanese", "american"]) {
     const pool = names.pools[culture];
     assert.equal(pool.period, "1920-1929");
     for (const values of [pool.surnames, pool.givenNames.male, pool.givenNames.female]) {
@@ -820,7 +820,13 @@ test("name generation can be constrained to a selected culture without selecting
   const femaleJapanese = generateName(names, { random: () => 0.75, culture: "japanese" });
   assert.equal(femaleJapanese.culture, "japanese");
   assert.equal(femaleJapanese.label, "女性常用名");
-  assert.throws(() => generateName(names, { culture: "american" }), /不支援的姓名文化/);
+  const american = generateName(names, { random: () => 0, culture: "american" });
+  assert.equal(american.culture, "american");
+  assert.equal(american.cultureLabel, "美國");
+  assert.equal(american.gender, "male");
+  assert.equal(american.name, `${names.pools.american.givenNames.male[0]} ${names.pools.american.surnames[0]}`);
+  assert.match(american.name, /^[A-Z][a-z]+ [A-Z][a-z]+$/);
+  assert.throws(() => generateName(names, { culture: "unknownCulture" }), /不支援的姓名文化/);
 });
 
 test("name generation excludes existing candidates and handles malformed or empty data explicitly", () => {
