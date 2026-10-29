@@ -557,7 +557,7 @@ test("name generator candidate can be cancelled, rerolled, confirmed, and manual
   expect(candidate).toBeTruthy();
   expect(candidate).not.toBe(firstCandidate);
   await nameField.getByRole("button",{name:"確認套用"}).click();
-  await expect(nameField).toContainText(candidate);
+  await expect(nameField.locator("#editor")).toHaveValue(candidate);
   await expect(nameField.locator("[data-name-classification]")).toContainText(/男性常用名|女性常用名/);
   await nameField.locator('[data-save="profile:name"]').click();
   await expect(nameField.locator("#name-culture")).toHaveCount(0);
