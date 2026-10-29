@@ -567,6 +567,14 @@ test("name generator candidate can be cancelled, rerolled, confirmed, and manual
   await expect(nameField).toContainText("手動自訂姓名");
   await expect(nameField.locator("[data-name-classification]")).toHaveCount(0);
   await nameField.locator('[data-edit="profile:name"]').click();
+  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await nameField.getByRole("button",{name:"確認套用"}).click();
+  const regeneratedName = await nameField.locator("#editor").inputValue();
+  await expect(nameField.locator("[data-name-classification]")).toContainText(/男性常用名|女性常用名/);
+  await nameField.locator('[data-save="profile:name"]').click();
+  await expect(nameField.locator(".value-button")).toHaveText(regeneratedName);
+  await expect(nameField.locator("[data-name-classification]")).toContainText(/男性常用名|女性常用名/);
+  await nameField.locator('[data-edit="profile:name"]').click();
   await page.locator("#editor").fill("取消不應保存");
   await nameField.locator('[data-cancel="profile:name"]').click();
   await expect(nameField).toContainText("手動自訂姓名");
