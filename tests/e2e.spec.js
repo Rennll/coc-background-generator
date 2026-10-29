@@ -548,7 +548,8 @@ test("name generator candidate can be cancelled, rerolled, confirmed, and manual
   await nameField.getByRole("button",{name:"產生姓名"}).click();
   const firstCandidate = await nameField.locator("[data-name-candidate]").textContent();
   await nameField.getByRole("button",{name:"取消",exact:true}).click();
-  await expect(nameField).toContainText("尚未填寫");
+  await expect(page.locator("#editor")).toHaveValue("");
+  await expect(nameField.locator("[data-name-candidate]")).toHaveCount(0);
   await expect(nameField.locator("[data-name-classification]")).toHaveCount(0);
   await nameField.getByRole("button",{name:"產生姓名"}).click();
   await nameField.getByRole("button",{name:"重新抽取"}).click();
