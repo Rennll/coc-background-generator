@@ -1,12 +1,14 @@
 import { test, expect } from "@playwright/test";
 import { readFile, mkdir } from "node:fs/promises";
 
-async function generateCandidateByCulture(page) {
+async function generateCandidateByCulture(page, targetCulture) {
   const selector = page.locator("[data-name-culture]");
   const current = await selector.inputValue();
-  const alternate = current === "japanese" ? "taiwanHan" : "japanese";
-  await selector.selectOption(alternate);
-  await selector.selectOption(current);
+  const target = targetCulture ?? (current === "japanese" ? "taiwanHan" : "japanese");
+  expect(["taiwanHan", "japanese"]).toContain(target);
+  expect(target).not.toBe(current);
+  await selector.selectOption(target);
+  await expect(page.locator(".name-candidate")).toContainText(target === "japanese" ? "日本" : "台灣漢人");
 }
 
 async function answer(page, optionId, {customOccupation} = {}) {
@@ -547,13 +549,13 @@ test("name generator candidate can be cancelled, rerolled, confirmed, and manual
   await nameField.locator('[data-edit="profile:name"]').click();
   await expect(nameField.locator("[data-name-culture]")).toHaveValue("taiwanHan");
   await nameField.locator("[data-name-culture]").selectOption("japanese");
-  await generateCandidateByCulture(page);
+  await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
   await expect(nameField.getByText("候選姓名：")).toBeVisible();
   await expect(nameField.locator(".name-candidate")).toContainText("日本");
   await nameField.locator("[data-name-culture]").selectOption("taiwanHan");
-  await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
+  await expect(nameField.locator(".name-candidate")).toContainText("台灣漢人");
   await nameField.locator("[data-name-culture]").selectOption("japanese");
-  await generateCandidateByCulture(page);
+  await expect(nameField.locator(".name-candidate")).toContainText("日本");
   const firstCandidate = await nameField.locator("[data-name-candidate]").textContent();
   await nameField.getByRole("button",{name:"取消",exact:true}).click();
   await expect(page.locator("#editor")).toHaveValue("");
@@ -612,11 +614,11 @@ test("capture real name-generator screenshots for CI artifacts", async ({ page }
   await nameField.locator('[data-edit="profile:name"]').click();
   await mkdir("test-results", { recursive: true });
   for (const [culture, filename] of [
-    ["taiwanHan", "test-results/random-name-taiwan.png"],
-    ["japanese", "test-results/random-name-japan.png"]
+    ["japanese", "test-results/random-name-japan.png"],
+    ["taiwanHan", "test-results/random-name-taiwan.png"]
   ]) {
     await page.locator("[data-name-culture]").selectOption(culture);
-    await generateCandidateByCulture(page);
+    await expect(page.locator(".name-candidate")).toContainText(culture === "japanese" ? "日本" : "台灣漢人");
     await expect(page.getByRole("group",{name:"姓名候選"})).toBeVisible();
     await expect(page.locator("[data-name-candidate]")).toBeVisible();
     await page.screenshot({ path: filename, fullPage: true, animations: "disabled" });
@@ -638,7 +640,6 @@ test("saved generated and manual names survive candidate cancellation and cultur
   const nameField = page.locator(".field").filter({has:page.getByRole("heading",{name:"姓名",exact:true})});
   await expect(nameField.locator("[data-name-culture]")).toHaveCount(0);
   await nameField.locator('[data-edit="profile:name"]').click();
-  await nameField.locator("[data-name-culture]").selectOption("taiwanHan");
   await generateCandidateByCulture(page);
   const initialCandidate = (await nameField.locator("[data-name-candidate]").textContent())?.trim();
   expect(initialCandidate).toBeTruthy();
@@ -661,8 +662,8 @@ test("saved generated and manual names survive candidate cancellation and cultur
   await nameField.locator('[data-edit="profile:name"]').click();
   await generateCandidateByCulture(page);
   await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
-  await nameField.locator("[data-name-culture]").selectOption("japanese");
-  await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
+  await nameField.locator("[data-name-culture]").selectOption("taiwanHan");
+  await expect(nameField.locator(".name-candidate")).toContainText("台灣漢人");
   await expect(nameField.locator("#editor")).toHaveValue(savedGeneratedName);
   await expect(nameField.locator("[data-name-classification]")).toHaveText(savedGeneratedClassification);
 
