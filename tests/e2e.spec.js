@@ -77,6 +77,8 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   const exported = JSON.parse(exportedText);
   expect(exported.background.belief).toBe("我只相信能夠查證的事實。");
   expect(exported.profile.occupation).toBe("大學教授");
+  // This route uses a custom/unresolved occupation, so the English field is intentionally blank.
+  // Known occupation bilingual export is covered by the dedicated test below.
   expect(exported.profile.occupation_en).toBe("");
   expect(exported.profile.name).toBe("林明遠");
   expect(exported.profile.birthplace).toBe("臺南市");
