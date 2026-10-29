@@ -759,7 +759,7 @@ test("JSON export reflects edits across profile and background and excludes stal
   character.skills = ["must_not_export"];
   const exported = JSON.parse(exportJSON(character));
   assert.deepEqual(exported.profile, {
-    name: "手動姓名", occupation: "鐘錶匠", age: 0, birthplace: "", residence: "基隆"
+    name: "手動姓名", occupation: "鐘錶匠", occupation_en: "", age: 0, birthplace: "", residence: "基隆"
   });
   assert.deepEqual(exported.background, {
     appearance: "手動外貌描述。",
