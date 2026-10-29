@@ -675,7 +675,7 @@ test("saved generated and manual names survive candidate cancellation and cultur
   await expect(nameField.locator("[data-name-classification]")).toHaveCount(0);
 
   await nameField.locator('[data-edit="profile:name"]').click();
-  await generateCandidateByCulture(page, "taiwanHan");
+  await generateCandidateByCulture(page, "japanese");
   await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
   await nameField.getByRole("button",{name:"取消",exact:true}).click();
   await nameField.locator('[data-cancel="profile:name"]').click();
