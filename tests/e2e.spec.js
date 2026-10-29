@@ -405,9 +405,9 @@ test("occupation selector keeps English names and custom entry without verbose m
   await expect(selector.locator('option[value="marine"]')).toContainText("海軍陸戰隊員（Marine）");
   await expect(selector.locator('option[value="soldier_marine"]')).toHaveCount(0);
   for (const id of ["boxer","wrestler","butler","valet","maid","computer_programmer","technician","hacker","cowboy","cowgirl","police_detective","police_officer","psychologist","psychoanalyst","student","intern","waitress","waiter","forger","counterfeiter"]) await expect(selector.locator(`option[value="${id}"]`)).toHaveCount(1);
-  await expect(selector.locator('option[value="computer_programmer_technician_hacker"]')).toContainText("Computer Programmer/Technician/Hacker");
+  await expect(selector.locator('option[value="computer_programmer"]')).toContainText("電腦程式設計師（Computer Programmer）");
   await expect(selector.locator('option[value="antiquarian"]')).toContainText("Antiquarian");
-  await expect(selector.locator('option[value="computer_programmer_technician_hacker"]')).not.toContainText("Modern");
+  await expect(selector.locator('option[value="computer_programmer"]')).not.toContainText("Modern");
   await expect(selector.locator('option[value="antiquarian"]')).not.toContainText("Lovecraftian");
   await expect(selector.locator('option[value="antiquarian"]')).not.toContainText("官方規則 Wiki");
   await expect(selector.locator('option[value="accountant"]')).not.toContainText("1920年代");
