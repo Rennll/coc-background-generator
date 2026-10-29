@@ -793,6 +793,7 @@ test("name pools are complete, non-empty, unique, and limited to the declared 19
   for (const culture of ["taiwanHan", "japanese", "american"]) {
     const pool = names.pools[culture];
     assert.equal(pool.period, "1920-1929");
+    assert.ok(["surnameFirst", "givenFirst"].includes(pool.nameOrder));
     for (const values of [pool.surnames, pool.givenNames.male, pool.givenNames.female]) {
       assert.ok(values.length > 0);
       assert.ok(values.every(value => typeof value === "string" && value.trim().length > 0));
@@ -826,6 +827,9 @@ test("name generation can be constrained to a selected culture without selecting
   assert.equal(american.gender, "male");
   assert.equal(american.name, `${names.pools.american.givenNames.male[0]} ${names.pools.american.surnames[0]}`);
   assert.match(american.name, /^[A-Z][a-z]+ [A-Z][a-z]+$/);
+  assert.equal(names.pools.american.nameOrder, "givenFirst");
+  assert.equal(names.pools.taiwanHan.nameOrder, "surnameFirst");
+  assert.equal(names.pools.japanese.nameOrder, "surnameFirst");
   assert.throws(() => generateName(names, { culture: "unknownCulture" }), /不支援的姓名文化/);
 });
 
