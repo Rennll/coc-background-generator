@@ -633,6 +633,7 @@ test("American name candidate supports cancel, reroll, confirm, and manual edit"
   await nameField.locator("[data-name-reroll]").click();
   const rerolledCandidate = (await nameField.locator("[data-name-candidate]").textContent())?.trim();
   expect(rerolledCandidate).toMatch(/^[A-Z][a-z]+ [A-Z][a-z]+$/);
+  // The generator tracks generatedNames and passes them as excludeNames, so a reroll must be a new full name unless the pool is exhausted.
   expect(rerolledCandidate).not.toBe(beforeReroll);
 
   await nameField.locator("[data-name-confirm]").click();
