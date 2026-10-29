@@ -646,7 +646,9 @@ test("saved generated and manual names survive candidate cancellation and cultur
   const initialCandidate = (await nameField.locator("[data-name-candidate]").textContent())?.trim();
   expect(initialCandidate).toBeTruthy();
   await nameField.getByRole("button",{name:"確認套用"}).click();
-  await nameField.locator('[data-save="profile:name"]').click();
+  await expect(nameField.locator(".name-candidate")).toHaveCount(0);
+  await expect(nameField.locator("#editor")).toHaveCount(0);
+  await expect(nameField.locator('[data-save="profile:name"]')).toHaveCount(0);
 
   const savedGeneratedName = (await nameField.locator(".value-button").textContent())?.trim();
   const savedGeneratedClassification = (await nameField.locator("[data-name-classification]").textContent())?.trim();
@@ -721,4 +723,68 @@ test("name candidate omits removed helper text and remains usable on a narrow vi
     content: document.documentElement.scrollWidth
   }));
   expect(dimensions.content).toBeLessThanOrEqual(dimensions.viewport);
+});
+
+
+test("background preview keeps reading hierarchy and responsive layout on desktop and mobile", async ({page}) => {
+  await page.setViewportSize({width:1280,height:900});
+  await page.goto("/");
+  for (const optionId of [
+    "neat_reliable","truth_above_comfort","family_member","family_secret",
+    "mysterious_object","mystery_wrongness","deceived_again","deceived_misunderstood",
+    "quiet_listener","hometown","knowledge_research","research_contradiction"
+  ]) {
+    await answer(page,optionId);
+  }
+
+  const grid = page.locator(".grid");
+  const nameField = page.locator(".field").filter({has:page.getByRole("heading",{name:"姓名",exact:true})});
+  const backgroundField = page.locator(".field.full").first();
+  await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
+  await expect(nameField).toBeVisible();
+  await expect(backgroundField).toBeVisible();
+
+  const desktop = await page.evaluate(() => {
+    const grid = document.querySelector(".grid");
+    const backgroundField = document.querySelector(".field.full");
+    const primary = document.querySelector(".btn-primary");
+    const regular = document.querySelector(".btn");
+    return {
+      viewport: document.documentElement.clientWidth,
+      content: document.documentElement.scrollWidth,
+      columns: getComputedStyle(grid).gridTemplateColumns,
+      backgroundColumnEnd: getComputedStyle(backgroundField).gridColumnEnd,
+      buttonRadius: getComputedStyle(regular).borderRadius,
+      primaryRadius: getComputedStyle(primary).borderRadius,
+      buttonPadding: getComputedStyle(regular).padding,
+      primaryPadding: getComputedStyle(primary).padding
+    };
+  });
+  expect(desktop.content).toBeLessThanOrEqual(desktop.viewport);
+  expect(desktop.backgroundColumnEnd).toBe("-1");
+  expect(desktop.buttonRadius).toBe(desktop.primaryRadius);
+  expect(desktop.buttonPadding).toBe(desktop.primaryPadding);
+
+  await nameField.locator('[data-edit="profile:name"]').click();
+  const candidate = nameField.locator(".name-candidate");
+  await expect(candidate).toBeVisible();
+  const candidateBorder = await candidate.evaluate(el => getComputedStyle(el).borderTopStyle);
+  const fieldBorder = await nameField.evaluate(el => getComputedStyle(el).borderTopStyle);
+  expect(candidateBorder).toBe("dashed");
+  expect(fieldBorder).toBe("solid");
+
+  await page.setViewportSize({width:375,height:812});
+  const mobile = await page.evaluate(() => ({
+    viewport: document.documentElement.clientWidth,
+    content: document.documentElement.scrollWidth,
+    columns: getComputedStyle(document.querySelector(".grid")).gridTemplateColumns,
+    backgroundColumnEnd: getComputedStyle(document.querySelector(".field.full")).gridColumnEnd
+  }));
+  expect(mobile.content).toBeLessThanOrEqual(mobile.viewport);
+  expect(mobile.columns).not.toBe(desktop.columns);
+  expect(mobile.backgroundColumnEnd).toBe("auto");
+  await expect(nameField.locator("[data-name-culture]")).toBeVisible();
+  await expect(nameField.locator("[data-name-cancel]")).toBeVisible();
+  await expect(nameField.locator("[data-name-reroll]")).toBeVisible();
+  await expect(nameField.locator("[data-name-confirm]")).toBeVisible();
 });
