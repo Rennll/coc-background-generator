@@ -77,12 +77,15 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
   const exported = JSON.parse(exportedText);
   expect(exported.background.belief).toBe("我只相信能夠查證的事實。");
   expect(exported.profile.occupation).toBe("大學教授");
+  // This route uses a custom/unresolved occupation, so the English field is intentionally blank.
+  // Known occupation bilingual export is covered by the dedicated test below.
+  expect(exported.profile.occupation_en).toBe("");
   expect(exported.profile.name).toBe("林明遠");
   expect(exported.profile.birthplace).toBe("臺南市");
   expect(exported.profile.residence).toBe("臺北市");
   expect(exported.profile.age).toBeNull();
   expect(Object.keys(exported).sort()).toEqual(["background","meta","profile","version"]);
-  expect(Object.keys(exported.profile).sort()).toEqual(["age","birthplace","name","occupation","residence"]);
+  expect(Object.keys(exported.profile).sort()).toEqual(["age","birthplace","name","occupation","occupation_en","residence"]);
   expect(Object.keys(exported.background).sort()).toEqual(["appearance","belief","fear_or_concern","investigation_hook","meaningful_location","personality","significant_person","treasured_possession"]);
   expect(Object.keys(exported.meta).sort()).toEqual(["created_at","generator"]);
   for (const forbidden of ["rawAnswers","answers","stats","skills","during_play","Q1"]) expect(exported).not.toHaveProperty(forbidden);
@@ -282,6 +285,7 @@ test("preview occupation can be cleared and exported as an empty string", async 
   for await (const chunk of stream) exportedText+=chunk.toString("utf8");
   const exported=JSON.parse(exportedText);
   expect(exported.profile.occupation).toBe("");
+  expect(exported.profile.occupation_en).toBe("");
   expect(exported).not.toHaveProperty("customOccupation");
   expect(exported).not.toHaveProperty("answers");
 });
@@ -380,20 +384,13 @@ test("changing Q3a, Q4, and Q6 clears stale child answers in a real browser", as
   await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
 });
 
-test("occupation selector preserves English names, source tags, and custom entry", async ({page}) => {
+test("occupation selector keeps English names and custom entry without verbose metadata", async ({page}) => {
   await page.goto("/");
-  await answer(page,"neat_reliable");
-  await answer(page,"truth_above_comfort");
-  await answer(page,"family_member");
-  await answer(page,"family_secret");
-  await answer(page,"mysterious_object");
-  await answer(page,"mystery_wrongness");
-  await answer(page,"deceived_again");
-  await answer(page,"deceived_misunderstood");
-  await answer(page,"quiet_listener");
-  await answer(page,"hometown");
-  await answer(page,"knowledge_research");
-  await answer(page,"research_contradiction");
+  for (const optionId of [
+    "neat_reliable","truth_above_comfort","family_member","family_secret",
+    "mysterious_object","mystery_wrongness","deceived_again","deceived_misunderstood",
+    "quiet_listener","hometown","knowledge_research","research_contradiction"
+  ]) await answer(page,optionId);
   const occupationField=page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})});
   await occupationField.locator('[data-edit="profile:occupation"]').click();
   const selector=page.locator("#occupation-select");
@@ -404,27 +401,57 @@ test("occupation selector preserves English names, source tags, and custom entry
   }
   await expect(selector.locator("option")).toHaveCount(93);
   await expect(selector.locator('option[value="acrobat"]')).toContainText("雜技演員（Acrobat）");
-  await expect(selector.locator('option[value="computer_programmer_technician_hacker"]')).toContainText("Modern");
-  await expect(selector.locator('option[value="antiquarian"]')).toContainText("Lovecraftian");
-  await expect(selector.locator('option[value="antiquarian"]')).toContainText("官方規則 Wiki 範例已佐證");
-  await expect(selector.locator('option[value="accountant"]')).toContainText("1920年代適用性未逐項核實");
-  await expect(page.getByText("清單依使用者提供且已逐字與實體 Investigator Handbook 核對的英文清單整理。")).toBeVisible();
-  await expect(selector.locator('option[value="criminal"]')).toContainText("另見：Gangster");
-  await expect(selector.locator('option[value="physician"]')).toContainText("另見：Psychiatrist");
-  await expect(selector.locator('option[value="pilot"]')).toContainText("另見：Aviator");
-  await expect(selector.locator('option[value="butler_valet_maid"]')).toContainText("另見：Maid、Valet");
-  await expect(selector.locator('option[value="computer_programmer_technician_hacker"]')).toContainText("另見：Hacker");
-  await expect(selector.locator('option[value="driver"]')).toContainText("另見：Chauffeur、Taxi Driver");
-  await expect(selector.locator('option[value="journalist"]')).toContainText("另見：Reporter");
-  await expect(selector.locator('option[value="laborer"]')).toContainText("另見：Lumberjack、Miner");
-  await expect(selector.locator('option[value="photographer"]')).toContainText("另見：Photojournalist");
-  await expect(selector.locator('option[value="criminal"]')).toContainText("Assassin");
-  await expect(selector.locator('option[value="criminal"]')).toContainText("Gun Moll");
+  await expect(selector.locator('option[value="computer_programmer_technician_hacker"]')).toContainText("Computer Programmer/Technician/Hacker");
+  await expect(selector.locator('option[value="antiquarian"]')).toContainText("Antiquarian");
+  await expect(selector.locator('option[value="computer_programmer_technician_hacker"]')).not.toContainText("Modern");
+  await expect(selector.locator('option[value="antiquarian"]')).not.toContainText("Lovecraftian");
+  await expect(selector.locator('option[value="antiquarian"]')).not.toContainText("官方規則 Wiki");
+  await expect(selector.locator('option[value="accountant"]')).not.toContainText("1920年代");
+  await expect(page.getByText("依分類選擇職業，或自行填寫清單以外的職業。括號內為英文原名。")).toBeVisible();
+  for(const id of ["criminal","physician","pilot","butler_valet_maid","computer_programmer_technician_hacker","driver","journalist","laborer","photographer"]){
+    const option=occupationData.occupations.find(o=>o.id===id);
+    expect(option,"canonical occupation " + id).toBeTruthy();
+    if(option.crossReferences?.length) expect(option.crossReferences.length).toBeGreaterThan(0);
+  }
   await selector.selectOption("other_custom");
   await page.locator("#occupation-custom").fill("鐘錶匠");
   await occupationField.locator('[data-save="profile:occupation"]').click();
   await expect(occupationField.getByText("鐘錶匠")).toBeVisible();
 });
+test("known occupation is bilingual in copied text and JSON export", async ({page}) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator,"clipboard",{configurable:true,value:{writeText:async text=>{window.__copiedText=String(text);}}});
+  });
+  await page.goto("/");
+  for (const optionId of [
+    "neat_reliable","truth_above_comfort","family_member","family_secret",
+    "mysterious_object","mystery_wrongness","deceived_again","deceived_misunderstood",
+    "quiet_listener","hometown","knowledge_research","research_contradiction"
+  ]) await answer(page,optionId);
+  const occupationField=page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})});
+  await occupationField.locator('[data-edit="profile:occupation"]').click();
+  await page.locator("#occupation-select").selectOption("journalist");
+  await occupationField.locator('[data-save="profile:occupation"]').click();
+  await expect(occupationField.locator(".value-button")).toHaveText("新聞記者");
+
+  await occupationField.locator('[data-copy="profile:occupation"]').click();
+  await expect.poll(()=>page.evaluate(()=>window.__copiedText)).toBe("新聞記者（Journalist）");
+
+  await page.locator("#copyAll").click();
+  await expect.poll(()=>page.evaluate(()=>window.__copiedText)).toContain("職業：新聞記者（Journalist）");
+
+  const downloadPromise=page.waitForEvent("download");
+  await page.locator("#export").click();
+  const download=await downloadPromise;
+  const stream=await download.createReadStream();
+  let exportedText="";
+  for await (const chunk of stream) exportedText+=chunk.toString("utf8");
+  const exported=JSON.parse(exportedText);
+  expect(exported.version).toBe(2);
+  expect(exported.profile.occupation).toBe("新聞記者");
+  expect(exported.profile.occupation_en).toBe("Journalist");
+});
+
 test("restart confirmation preserves edits on cancel and resets on accept", async ({page}) => {
   await page.goto("/");
   await answer(page,"neat_reliable");
@@ -523,12 +550,14 @@ test("blank background fields stay visible, full copy skips them, and single-fie
   await expect(beliefField.getByText("尚未填寫")).toBeVisible();
 
   await page.locator("#copyAll").click();
+  await expect(page.getByRole("status")).toContainText("已複製完整背景。");
   const fullText=await page.evaluate(()=>navigator.clipboard.readText());
   expect(fullText).not.toContain("信念：");
   expect(fullText).toContain("外貌描述：");
 
   await beliefField.locator('[data-copy="background:belief"]').click();
-  expect(await page.evaluate(()=>navigator.clipboard.readText())).toBe("");
+  await expect(page.getByRole("status")).toContainText("已複製欄位內容。");
+  await expect.poll(()=>page.evaluate(()=>navigator.clipboard.readText())).toBe("");
 });
 
 

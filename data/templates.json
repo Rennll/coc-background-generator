@@ -182,7 +182,7 @@
     "invalidAnswer": "Raise an explicit validation error in business logic."
   },
   "exportContract": {
-    "version": 1,
+    "version": 2,
     "meta": {
       "created_at": "ISO-8601 timestamp or null before export",
       "generator": "CoC Investigator Background Generator"
@@ -192,7 +192,8 @@
       "occupation": "",
       "age": null,
       "birthplace": "",
-      "residence": ""
+      "residence": "",
+      "occupation_en": ""
     },
     "background": {
       "appearance": "",

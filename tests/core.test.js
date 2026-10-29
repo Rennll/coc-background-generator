@@ -637,7 +637,7 @@ test("blank fields remain in the character model and JSON export; empty age beco
   c=updateCharacterField(c,"background","belief","");
   const parsed=JSON.parse(exportJSON(c,"2026-10-27T00:00:00.000Z"));
   assert.equal(parsed.profile.age,null);
-  assert.deepEqual(Object.keys(parsed.profile),["name","occupation","age","birthplace","residence"]);
+  assert.deepEqual(Object.keys(parsed.profile),["name","occupation","occupation_en","age","birthplace","residence"]);
   assert.deepEqual(Object.keys(parsed.background).sort(),Object.keys(templates.fieldLabels).sort());
   assert.equal(parsed.background.belief,"");
   for (const forbidden of ["rawAnswers","answers","stats","skills","during_play"]) assert.equal(forbidden in parsed,false);
@@ -648,10 +648,11 @@ test("manual edits, including age and custom occupation, are reflected in export
   c=updateCharacterField(c,"profile","age","42");
   c=updateCharacterField(c,"background","belief","我只相信證據。");
   const parsed=JSON.parse(exportJSON(c,"2026-10-28T00:00:00.000Z"));
-  assert.equal(parsed.profile.occupation,"鐘錶匠"); assert.equal(parsed.profile.age,42);
+  assert.equal(parsed.profile.occupation,"鐘錶匠");
+  assert.equal(parsed.profile.occupation_en,""); assert.equal(parsed.profile.age,42);
   assert.equal(parsed.background.belief,"我只相信證據。");
   assert.deepEqual(Object.keys(parsed).sort(),["background","meta","profile","version"]);
-  assert.deepEqual(Object.keys(parsed.profile).sort(),["age","birthplace","name","occupation","residence"]);
+  assert.deepEqual(Object.keys(parsed.profile).sort(),["age","birthplace","name","occupation","occupation_en","residence"]);
   assert.deepEqual(Object.keys(parsed.background).sort(),["appearance","belief","fear_or_concern","investigation_hook","meaningful_location","personality","significant_person","treasured_possession"]);
   assert.deepEqual(Object.keys(parsed.meta).sort(),["created_at","generator"]);
   for(const forbidden of ["rawAnswers","answers","stats","skills","during_play"]) assert.equal(Object.hasOwn(parsed,forbidden),false,forbidden+" is excluded from export");
@@ -690,17 +691,19 @@ test("full background text omits whitespace-only fields but preserves nonblank e
   assert.doesNotMatch(text, /外貌描述：  外貌文字  /);
 });
 
-test("JSON export validates the complete version-1 contract and ignores extra character data", () => {
+test("JSON export validates the complete version-2 contract and ignores extra character data", () => {
   const character = buildCharacter(completeAnswers(), templates, questions, {
-    name: "測試角色", occupation: "研究員", age: 42, birthplace: "臺北", residence: "臺北"
+    name: "測試角色", occupation: "記者", age: 42, birthplace: "臺北", residence: "臺北"
   });
   character.rawAnswers = completeAnswers();
   character.stats = { STR: 99 };
   character.skills = ["occult"];
   character.background.unexpected = "must not export";
-  const exported = JSON.parse(exportJSON(character, "2026-10-28T00:00:00.000Z"));
+  const exported = JSON.parse(exportJSON(character, "2026-10-28T00:00:00.000Z", "Journalist"));
+  assert.equal(exported.profile.occupation_en, "Journalist");
+  assert.equal(exported.version, 2);
   assert.deepEqual(Object.keys(exported).sort(), ["background", "meta", "profile", "version"]);
-  assert.deepEqual(Object.keys(exported.profile).sort(), ["age", "birthplace", "name", "occupation", "residence"]);
+  assert.deepEqual(Object.keys(exported.profile).sort(), ["age", "birthplace", "name", "occupation", "occupation_en", "residence"]);
   assert.deepEqual(Object.keys(exported.background).sort(), Object.keys(templates.fieldLabels).sort());
   assert.equal(exported.meta.created_at, "2026-10-28T00:00:00.000Z");
   assert.equal(JSON.parse(exportJSON(character)).meta.created_at, null);
@@ -756,7 +759,7 @@ test("JSON export reflects edits across profile and background and excludes stal
   character.skills = ["must_not_export"];
   const exported = JSON.parse(exportJSON(character));
   assert.deepEqual(exported.profile, {
-    name: "手動姓名", occupation: "鐘錶匠", age: 0, birthplace: "", residence: "基隆"
+    name: "手動姓名", occupation: "鐘錶匠", occupation_en: "", age: 0, birthplace: "", residence: "基隆"
   });
   assert.deepEqual(exported.background, {
     appearance: "手動外貌描述。",
