@@ -553,13 +553,13 @@ test("name generator candidate can be cancelled, rerolled, confirmed, and manual
   await nameField.locator("[data-name-culture]").selectOption("taiwanHan");
   await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
   await nameField.locator("[data-name-culture]").selectOption("japanese");
-  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await generateCandidateByCulture(page);
   const firstCandidate = await nameField.locator("[data-name-candidate]").textContent();
   await nameField.getByRole("button",{name:"取消",exact:true}).click();
   await expect(page.locator("#editor")).toHaveValue("");
   await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
   await expect(nameField.locator("[data-name-classification]")).toHaveCount(0);
-  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await generateCandidateByCulture(page);
   await nameField.getByRole("button",{name:"重新抽取"}).click();
   const candidate = (await nameField.locator("[data-name-candidate]").textContent())?.trim();
   expect(candidate).toBeTruthy();
@@ -575,7 +575,7 @@ test("name generator candidate can be cancelled, rerolled, confirmed, and manual
   await expect(nameField).toContainText("手動自訂姓名");
   await expect(nameField.locator("[data-name-classification]")).toHaveCount(0);
   await nameField.locator('[data-edit="profile:name"]').click();
-  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await generateCandidateByCulture(page);
   await nameField.getByRole("button",{name:"確認套用"}).click();
   const regeneratedName = await nameField.locator("#editor").inputValue();
   await expect(nameField.locator("[data-name-classification]")).toContainText(/男性常用名|女性常用名/);
@@ -639,7 +639,7 @@ test("saved generated and manual names survive candidate cancellation and cultur
   await expect(nameField.locator("[data-name-culture]")).toHaveCount(0);
   await nameField.locator('[data-edit="profile:name"]').click();
   await nameField.locator("[data-name-culture]").selectOption("taiwanHan");
-  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await generateCandidateByCulture(page);
   const initialCandidate = (await nameField.locator("[data-name-candidate]").textContent())?.trim();
   expect(initialCandidate).toBeTruthy();
   await nameField.getByRole("button",{name:"確認套用"}).click();
@@ -651,7 +651,7 @@ test("saved generated and manual names survive candidate cancellation and cultur
   expect(savedGeneratedClassification).toMatch(/男性常用名|女性常用名/);
 
   await nameField.locator('[data-edit="profile:name"]').click();
-  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await generateCandidateByCulture(page);
   await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
   await nameField.getByRole("button",{name:"取消",exact:true}).click();
   await nameField.locator('[data-cancel="profile:name"]').click();
@@ -659,10 +659,10 @@ test("saved generated and manual names survive candidate cancellation and cultur
   await expect(nameField.locator("[data-name-classification]")).toHaveText(savedGeneratedClassification);
 
   await nameField.locator('[data-edit="profile:name"]').click();
-  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await generateCandidateByCulture(page);
   await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
   await nameField.locator("[data-name-culture]").selectOption("japanese");
-  await expect(nameField.locator("[data-name-candidate]")).toHaveCount(0);
+  await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
   await expect(nameField.locator("#editor")).toHaveValue(savedGeneratedName);
   await expect(nameField.locator("[data-name-classification]")).toHaveText(savedGeneratedClassification);
 
@@ -674,7 +674,7 @@ test("saved generated and manual names survive candidate cancellation and cultur
   await expect(nameField.locator("[data-name-classification]")).toHaveCount(0);
 
   await nameField.locator('[data-edit="profile:name"]').click();
-  await nameField.getByRole("button",{name:"產生姓名"}).click();
+  await generateCandidateByCulture(page);
   await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
   await nameField.getByRole("button",{name:"取消",exact:true}).click();
   await nameField.locator('[data-cancel="profile:name"]').click();
