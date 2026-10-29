@@ -412,7 +412,7 @@ test("occupation selector keeps English names and custom entry without verbose m
   await expect(selector.locator('option[value="antiquarian"]')).not.toContainText("官方規則 Wiki");
   await expect(selector.locator('option[value="accountant"]')).not.toContainText("1920年代");
   await expect(page.getByText("選擇其中一種方式。自訂職業會取代既有職業，並保留你輸入的名稱。")).toBeVisible();
-  for(const id of ["criminal","physician","pilot","butler_valet_maid","computer_programmer_technician_hacker","driver","journalist","laborer","photographer"]){
+  for(const id of ["criminal","physician","pilot","butler","computer_programmer","driver","journalist","laborer","photographer"]){
     const option=occupationData.occupations.find(o=>o.id===id);
     expect(option,"canonical occupation " + id).toBeTruthy();
     if(option.crossReferences?.length) expect(option.crossReferences.length).toBeGreaterThan(0);
