@@ -548,6 +548,8 @@ test("name generator candidate can be cancelled, rerolled, confirmed, and manual
   await expect(nameField.locator("[data-name-culture]")).toHaveCount(0);
   await nameField.locator('[data-edit="profile:name"]').click();
   await expect(nameField.locator("[data-name-culture]")).toHaveValue("taiwanHan");
+  await expect(nameField.locator(".name-candidate")).toContainText("台灣漢人");
+  await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
   await nameField.locator("[data-name-culture]").selectOption("japanese");
   await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
   await expect(nameField.getByText("候選姓名：")).toBeVisible();
