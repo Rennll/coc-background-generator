@@ -365,8 +365,8 @@ test("all occupation IDs are unique, source labels are present, and list is not 
   assert.equal(officialExamples.length,8,"only eight entries are corroborated as official wiki examples");
   for(const o of officialExamples){assert.equal(o.officialCorroboration,"chaosium_official_rules_wiki_occupations");assert.match(o.notes,/不等於已核對 Investigator Handbook 原頁/);}
   assert.match(occupations.sources.find(source=>source.id==="chaosium_official_rules_wiki_occupations").supports,/不證明.*官方繁中譯名/);
-  assert.equal(occupations.occupations.length,91,"canonical handbook entries");
-  assert.equal(occupations.aliases.length,21,"cross-reference aliases");
+  assert.equal(occupations.occupations.length,107,"selectable occupations after splitting compound entries");
+  assert.equal(occupations.aliases.length,17,"cross-reference aliases after promoting distinct roles");
   const expectedHandbookNames = `Accountant
 Acrobat
 Actor
@@ -389,14 +389,20 @@ Big Game Hunter
 Book Dealer
 Bootlegger
 Bounty Hunter
-Boxer/Wrestler
+Boxer
+Wrestler
 Burglar
-Butler/Valet/Maid
+Butler
+Valet
+Maid
 Chauffeur
 Clergy, Member of the
-Computer Programmer/Technician/Hacker
+Computer Programmer
+Technician
+Hacker
 Conman
-Cowboy/girl
+Cowboy
+Cowgirl
 Craftsperson
 Criminal
 Cult Leader
@@ -418,12 +424,13 @@ Fence
 Firefighter
 Foreign Correspondent
 Forensic Surgeon
-Forger/Counterfeiter
+Forger
+Counterfeiter
 Gambler
 Gangster
 Gun Moll
-Gentleman/Lady
-Hacker
+Gentleman
+Lady
 Hobo
 Hospital Orderly
 Journalist
@@ -433,8 +440,8 @@ Laborer
 Lawyer
 Librarian
 Lumberjack
-Maid
-Mechanic (and Skilled Trades)
+Mechanic
+Skilled Trades
 Military Officer
 Miner
 Missionary
@@ -443,19 +450,22 @@ Museum Curator
 Musician
 Nurse
 Occultist
-Outdoorsman/Outdoorswoman
+Outdoorsman
+Outdoorswoman
 Parapsychologist
 Pharmacist
 Photographer
 Photojournalist
 Pilot
-Police Detective/Officer
+Police Detective
+Police Officer
 Private Investigator
 Professor
 Prospector
 Prostitute
 Psychiatrist
-Psychologist/Psychoanalyst
+Psychologist
+Psychoanalyst
 Reporter
 Researcher
 Sailor
@@ -464,23 +474,25 @@ Scientist
 Secretary
 Shopkeeper
 Smuggler
-Soldier/Marine
+Soldier
+Marine
 Spy
 Street Punk
-Student/Intern
+Student
+Intern
 Stuntman
 Taxi Driver
 Thug
 Tribe Member
 Undertaker
 Union Activist
-Valet
-Waitress/Waiter
+Waitress
+Waiter
 White-collar Worker
 Zealot
 Zookeeper`.split("\n");
   const actualHandbookNames = [...occupations.occupations,...occupations.aliases].map(o=>o.englishCandidate).sort();
-  assert.equal(expectedHandbookNames.length,112,"the supplied Handbook list has 112 canonical names and see-aliases");
+  assert.equal(expectedHandbookNames.length,124,"all split source occupations and cross-references are represented");
   assert.deepEqual(actualHandbookNames,[...expectedHandbookNames].sort(),
     "all supplied Handbook entries are represented exactly once, with no omissions or invented names");
   const expectedTags = {
@@ -489,8 +501,8 @@ Zookeeper`.split("\n");
     "Author":["Lovecraftian"], "Dilettante":["Lovecraftian"],
     "Doctor of Medicine":["Lovecraftian"], "Journalist":["Lovecraftian"],
     "Librarian":["Lovecraftian"], "Occultist":["Lovecraftian"],
-    "Police Detective/Officer":["Lovecraftian"], "Professor":["Lovecraftian"],
-    "Computer Programmer/Technician/Hacker":["Modern"], "Deprogrammer":["Modern"]
+    "Police Detective":["Lovecraftian"], "Police Officer":["Lovecraftian"], "Professor":["Lovecraftian"],
+    "Computer Programmer":["Modern"], "Technician":["Modern"], "Hacker":["Modern"], "Deprogrammer":["Modern"]
   };
   for(const [english,tags] of Object.entries(expectedTags)){
     const occupation=occupations.occupations.find(o=>o.englishCandidate===english);
@@ -514,7 +526,7 @@ Zookeeper`.split("\n");
   for(const id of ["alias_aviator","alias_gun_moll"]){const alias=occupations.aliases.find(a=>a.id===id);assert.deepEqual(alias.handbookTags,["Classic"],id+" preserves the Handbook Classic tag");assert.equal(alias.eraStatus,"classic_tag_requires_review",id+" does not overclaim 1920s suitability");}
   const pilot=occupations.occupations.find(o=>o.id==="pilot");assert.deepEqual(pilot.handbookTags,[]);assert.equal(pilot.eraStatus,"1920s_applicability_not_individually_verified","Aviator’s Classic tag must not transfer to Pilot");
   for(const alias of occupations.aliases){const target=occupations.occupations.find(o=>o.id===alias.aliasOf);assert.ok(target.crossReferences?.includes(alias.englishCandidate),`${alias.englishCandidate} cross-reference is visible on ${target.englishCandidate}`);}
-  assert.deepEqual(occupations.occupations.find(o=>o.id==="criminal").crossReferences,["Gangster","Assassin","Bank Robber","Bootlegger","Burglar","Conman","Fence","Forger/Counterfeiter","Gun Moll","Smuggler","Street Punk","Thug"]);
+  assert.deepEqual(occupations.occupations.find(o=>o.id==="criminal").crossReferences,["Gangster","Assassin","Bank Robber","Bootlegger","Burglar","Conman","Fence","Gun Moll","Smuggler","Street Punk","Thug"]);
   assert.deepEqual(occupations.occupations.find(o=>o.id==="physician").crossReferences,["Psychiatrist"]);
   assert.deepEqual(occupations.occupations.find(o=>o.id==="pilot").crossReferences,["Aviator"]);
 });
