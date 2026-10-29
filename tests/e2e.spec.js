@@ -256,6 +256,28 @@ test("all 13 preview editors expose field-specific accessible names", async ({pa
   }
 });
 
+test("occupation picker keeps categories but hides verification notes and cross-references", async ({page}) => {
+  await page.goto("/");
+  for (const optionId of [
+    "neat_reliable","truth_above_comfort","family_member","family_secret",
+    "mysterious_object","mystery_wrongness","deceived_again","deceived_misunderstood",
+    "quiet_listener","hometown","knowledge_research","research_contradiction"
+  ]) await answer(page,optionId);
+  const occupationField=page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})});
+  await occupationField.locator('[data-edit="profile:occupation"]').click();
+  const optionInfo=await page.locator("#occupation-select").evaluate(select => ({
+    optionTexts:[...select.options].map(option=>option.textContent.trim()),
+    categoryCount:select.querySelectorAll("optgroup").length
+  }));
+  expect(optionInfo.categoryCount).toBeGreaterThan(1);
+  expect(optionInfo.optionTexts.some(text=>text.includes("另見："))).toBe(false);
+  expect(optionInfo.optionTexts.some(text=>text.includes("1920年代"))).toBe(false);
+  expect(optionInfo.optionTexts.some(text=>text.includes("手冊標籤："))).toBe(false);
+  expect(optionInfo.optionTexts.some(text=>text.includes("官方規則 Wiki"))).toBe(false);
+  expect(optionInfo.optionTexts.some(text=>text.includes("（Journalist）"))).toBe(true);
+  await expect(page.getByText("依分類選擇職業，或自行填寫清單以外的職業。括號內為英文原名。")).toBeVisible();
+});
+
 test("preview occupation can be cleared and exported as an empty string", async ({page}) => {
   await page.goto("/");
   for (const optionId of [
