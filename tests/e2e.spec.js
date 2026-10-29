@@ -839,6 +839,8 @@ test("optional JSON datasets are not fetched before their features are needed", 
     if(url.pathname.endsWith(".json")) dataRequests.push(url.pathname);
   });
   await page.goto("/");
+  await page.evaluate(() => localStorage.removeItem("coc-background-generator.progress.v1"));
+  await page.reload();
   await expect(page.getByRole("heading",{name:"你的角色長什麼樣子？"})).toBeVisible();
   expect(dataRequests).toContain("/data/questions.json");
   expect(dataRequests).not.toContain("/data/templates.json");
