@@ -256,28 +256,6 @@ test("all 13 preview editors expose field-specific accessible names", async ({pa
   }
 });
 
-test("occupation picker keeps categories but hides verification notes and cross-references", async ({page}) => {
-  await page.goto("/");
-  for (const optionId of [
-    "neat_reliable","truth_above_comfort","family_member","family_secret",
-    "mysterious_object","mystery_wrongness","deceived_again","deceived_misunderstood",
-    "quiet_listener","hometown","knowledge_research","research_contradiction"
-  ]) await answer(page,optionId);
-  const occupationField=page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})});
-  await occupationField.locator('[data-edit="profile:occupation"]').click();
-  const optionInfo=await page.locator("#occupation-select").evaluate(select => ({
-    optionTexts:[...select.options].map(option=>option.textContent.trim()),
-    categoryCount:select.querySelectorAll("optgroup").length
-  }));
-  expect(optionInfo.categoryCount).toBeGreaterThan(1);
-  expect(optionInfo.optionTexts.some(text=>text.includes("另見："))).toBe(false);
-  expect(optionInfo.optionTexts.some(text=>text.includes("1920年代"))).toBe(false);
-  expect(optionInfo.optionTexts.some(text=>text.includes("手冊標籤："))).toBe(false);
-  expect(optionInfo.optionTexts.some(text=>text.includes("官方規則 Wiki"))).toBe(false);
-  expect(optionInfo.optionTexts.some(text=>text.includes("（Journalist）"))).toBe(true);
-  await expect(page.getByText("依分類選擇職業，或自行填寫清單以外的職業。括號內為英文原名。")).toBeVisible();
-});
-
 test("preview occupation can be cleared and exported as an empty string", async ({page}) => {
   await page.goto("/");
   for (const optionId of [
@@ -402,20 +380,13 @@ test("changing Q3a, Q4, and Q6 clears stale child answers in a real browser", as
   await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
 });
 
-test("occupation selector preserves English names, source tags, and custom entry", async ({page}) => {
+test("occupation selector keeps English names and custom entry without verbose metadata", async ({page}) => {
   await page.goto("/");
-  await answer(page,"neat_reliable");
-  await answer(page,"truth_above_comfort");
-  await answer(page,"family_member");
-  await answer(page,"family_secret");
-  await answer(page,"mysterious_object");
-  await answer(page,"mystery_wrongness");
-  await answer(page,"deceived_again");
-  await answer(page,"deceived_misunderstood");
-  await answer(page,"quiet_listener");
-  await answer(page,"hometown");
-  await answer(page,"knowledge_research");
-  await answer(page,"research_contradiction");
+  for (const optionId of [
+    "neat_reliable","truth_above_comfort","family_member","family_secret",
+    "mysterious_object","mystery_wrongness","deceived_again","deceived_misunderstood",
+    "quiet_listener","hometown","knowledge_research","research_contradiction"
+  ]) await answer(page,optionId);
   const occupationField=page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})});
   await occupationField.locator('[data-edit="profile:occupation"]').click();
   const selector=page.locator("#occupation-select");
@@ -426,22 +397,18 @@ test("occupation selector preserves English names, source tags, and custom entry
   }
   await expect(selector.locator("option")).toHaveCount(93);
   await expect(selector.locator('option[value="acrobat"]')).toContainText("雜技演員（Acrobat）");
-  await expect(selector.locator('option[value="computer_programmer_technician_hacker"]')).toContainText("Modern");
-  await expect(selector.locator('option[value="antiquarian"]')).toContainText("Lovecraftian");
-  await expect(selector.locator('option[value="antiquarian"]')).toContainText("官方規則 Wiki 範例已佐證");
-  await expect(selector.locator('option[value="accountant"]')).toContainText("1920年代適用性未逐項核實");
-  await expect(page.getByText("清單依使用者提供且已逐字與實體 Investigator Handbook 核對的英文清單整理。")).toBeVisible();
-  await expect(selector.locator('option[value="criminal"]')).toContainText("另見：Gangster");
-  await expect(selector.locator('option[value="physician"]')).toContainText("另見：Psychiatrist");
-  await expect(selector.locator('option[value="pilot"]')).toContainText("另見：Aviator");
-  await expect(selector.locator('option[value="butler_valet_maid"]')).toContainText("另見：Maid、Valet");
-  await expect(selector.locator('option[value="computer_programmer_technician_hacker"]')).toContainText("另見：Hacker");
-  await expect(selector.locator('option[value="driver"]')).toContainText("另見：Chauffeur、Taxi Driver");
-  await expect(selector.locator('option[value="journalist"]')).toContainText("另見：Reporter");
-  await expect(selector.locator('option[value="laborer"]')).toContainText("另見：Lumberjack、Miner");
-  await expect(selector.locator('option[value="photographer"]')).toContainText("另見：Photojournalist");
-  await expect(selector.locator('option[value="criminal"]')).toContainText("Assassin");
-  await expect(selector.locator('option[value="criminal"]')).toContainText("Gun Moll");
+  await expect(selector.locator('option[value="computer_programmer_technician_hacker"]')).toContainText("Computer Programmer/Technician/Hacker");
+  await expect(selector.locator('option[value="antiquarian"]')).toContainText("Antiquarian");
+  await expect(selector.locator('option[value="computer_programmer_technician_hacker"]')).not.toContainText("Modern");
+  await expect(selector.locator('option[value="antiquarian"]')).not.toContainText("Lovecraftian");
+  await expect(selector.locator('option[value="antiquarian"]')).not.toContainText("官方規則 Wiki");
+  await expect(selector.locator('option[value="accountant"]')).not.toContainText("1920年代");
+  await expect(page.getByText("依分類選擇職業，或自行填寫清單以外的職業。括號內為英文原名。")).toBeVisible();
+  for(const id of ["criminal","physician","pilot","butler_valet_maid","computer_programmer_technician_hacker","driver","journalist","laborer","photographer"]){
+    const option=occupationData.occupations.find(o=>o.id===id);
+    expect(option,"canonical occupation " + id).toBeTruthy();
+    if(option.crossReferences?.length) expect(option.crossReferences.length).toBeGreaterThan(0);
+  }
   await selector.selectOption("other_custom");
   await page.locator("#occupation-custom").fill("鐘錶匠");
   await occupationField.locator('[data-save="profile:occupation"]').click();
