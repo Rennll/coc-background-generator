@@ -799,13 +799,13 @@ test("questionnaire progress is restored after a page reload", async ({page}) =>
   await expect(page.getByRole("heading",{name:"你的角色長什麼樣子？"})).toBeVisible();
   await page.locator('input[name="answer"][value="neat_reliable"]').check();
   await page.locator("#next").click();
-  await expect(page.getByRole("heading",{name:"你的角色相信什麼？"})).toBeVisible();
+  await expect(page.getByRole("heading",{name:"他／她相信什麼？"})).toBeVisible();
   await page.reload();
-  await expect(page.getByRole("heading",{name:"你的角色相信什麼？"})).toBeVisible();
+  await expect(page.getByRole("heading",{name:"他／她相信什麼？"})).toBeVisible();
   await page.locator("#prev").click();
   await expect(page.locator('input[name="answer"][value="neat_reliable"]')).toBeChecked();
   await page.locator("#next").click();
-  await expect(page.getByRole("heading",{name:"你的角色相信什麼？"})).toBeVisible();
+  await expect(page.getByRole("heading",{name:"他／她相信什麼？"})).toBeVisible();
 });
 
 test("completed character and manual edits survive reload, and restart clears saved progress", async ({page}) => {
