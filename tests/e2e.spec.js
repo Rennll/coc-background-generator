@@ -399,11 +399,12 @@ test("occupation selector keeps English names and custom entry without verbose m
   for(const occupation of occupationData.occupations){
     await expect(selector.locator(`option[value="${occupation.id}"]`),occupation.englishCandidate).toHaveCount(1);
   }
-  await expect(selector.locator("option")).toHaveCount(93);
+  await expect(selector.locator("option")).toHaveCount(108);
   await expect(selector.locator('option[value="acrobat"]')).toContainText("雜技演員（Acrobat）");
   await expect(selector.locator('option[value="soldier"]')).toContainText("士兵（Soldier）");
   await expect(selector.locator('option[value="marine"]')).toContainText("海軍陸戰隊員（Marine）");
   await expect(selector.locator('option[value="soldier_marine"]')).toHaveCount(0);
+  for (const id of ["boxer","wrestler","butler","valet","maid","computer_programmer","technician","hacker","cowboy","cowgirl","police_detective","police_officer","psychologist","psychoanalyst","student","intern","waitress","waiter","forger","counterfeiter"]) await expect(selector.locator(`option[value="${id}"]`)).toHaveCount(1);
   await expect(selector.locator('option[value="computer_programmer_technician_hacker"]')).toContainText("Computer Programmer/Technician/Hacker");
   await expect(selector.locator('option[value="antiquarian"]')).toContainText("Antiquarian");
   await expect(selector.locator('option[value="computer_programmer_technician_hacker"]')).not.toContainText("Modern");
