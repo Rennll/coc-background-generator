@@ -46,7 +46,7 @@ test("standard route: branch navigation, editable preview, and JSON export", asy
 
   const occupationField=page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})});
   await occupationField.locator('[data-edit="profile:occupation"]').click();
-  await page.locator("#occupation-select").selectOption("other_custom");
+  await page.locator('input[name="occupation-mode"][value="custom"]').check();
   await page.locator("#occupation-custom").fill("大學教授");
   await occupationField.locator('[data-save="profile:occupation"]').click();
   await expect(occupationField).toContainText("大學教授");
@@ -167,7 +167,7 @@ test("user-edited preview text is rendered as text rather than interpreted as HT
 
   const occupation = page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})});
   await occupation.locator('[data-edit="profile:occupation"]').click();
-  await page.locator("#occupation-select").selectOption("other_custom");
+  await page.locator('input[name="occupation-mode"][value="custom"]').check();
   await page.locator("#occupation-custom").fill(payload);
   await occupation.locator('[data-save="profile:occupation"]').click();
   await expect(occupation.locator(".value-button")).toHaveText(payload);
@@ -272,7 +272,7 @@ test("preview occupation can be cleared and exported as an empty string", async 
   await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
   const occupationField=page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})});
   await occupationField.locator('[data-edit="profile:occupation"]').click();
-  await page.locator("#occupation-select").selectOption("other_custom");
+  await page.locator('input[name="occupation-mode"][value="custom"]').check();
   await page.locator("#occupation-custom").fill("");
   await occupationField.locator('[data-save="profile:occupation"]').click();
   await expect(occupationField.getByText("尚未填寫")).toBeVisible();
@@ -395,12 +395,15 @@ test("occupation selector keeps English names and custom entry without verbose m
   await occupationField.locator('[data-edit="profile:occupation"]').click();
   const selector=page.locator("#occupation-select");
   const occupationData=JSON.parse(await readFile(new URL("../data/occupations.json",import.meta.url),"utf8"));
-  await expect(selector.locator("option")).toHaveCount(occupationData.occupations.length+2);
+  await expect(selector.locator("option")).toHaveCount(occupationData.occupations.length+1);
   for(const occupation of occupationData.occupations){
     await expect(selector.locator(`option[value="${occupation.id}"]`),occupation.englishCandidate).toHaveCount(1);
   }
   await expect(selector.locator("option")).toHaveCount(93);
   await expect(selector.locator('option[value="acrobat"]')).toContainText("雜技演員（Acrobat）");
+  await expect(selector.locator('option[value="soldier"]')).toContainText("士兵（Soldier）");
+  await expect(selector.locator('option[value="marine"]')).toContainText("海軍陸戰隊員（Marine）");
+  await expect(selector.locator('option[value="soldier_marine"]')).toHaveCount(0);
   await expect(selector.locator('option[value="computer_programmer_technician_hacker"]')).toContainText("Computer Programmer/Technician/Hacker");
   await expect(selector.locator('option[value="antiquarian"]')).toContainText("Antiquarian");
   await expect(selector.locator('option[value="computer_programmer_technician_hacker"]')).not.toContainText("Modern");
@@ -413,11 +416,34 @@ test("occupation selector keeps English names and custom entry without verbose m
     expect(option,"canonical occupation " + id).toBeTruthy();
     if(option.crossReferences?.length) expect(option.crossReferences.length).toBeGreaterThan(0);
   }
-  await selector.selectOption("other_custom");
+  await expect(page.locator('input[name="occupation-mode"][value="preset"]')).toBeChecked();
+  await page.locator('input[name="occupation-mode"][value="custom"]').check();
+  await expect(page.locator("#occupation-select")).toBeHidden();
   await page.locator("#occupation-custom").fill("鐘錶匠");
   await occupationField.locator('[data-save="profile:occupation"]').click();
   await expect(occupationField.getByText("鐘錶匠")).toBeVisible();
 });
+
+test("custom occupation mode overrides a previously selected known occupation", async ({page}) => {
+  await page.goto("/");
+  for (const optionId of [
+    "neat_reliable","truth_above_comfort","family_member","family_secret",
+    "mysterious_object","mystery_wrongness","deceived_again","deceived_misunderstood",
+    "quiet_listener","hometown","knowledge_research","research_contradiction"
+  ]) await answer(page,optionId);
+  const occupationField=page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})});
+  await occupationField.locator('[data-edit="profile:occupation"]').click();
+  await page.locator("#occupation-select").selectOption("soldier");
+  await page.locator('input[name="occupation-mode"][value="custom"]').check();
+  await page.locator("#occupation-custom").fill("私人偵探");
+  await occupationField.locator('[data-save="profile:occupation"]').click();
+  await expect(occupationField.locator(".value-button")).toHaveText("私人偵探");
+  await occupationField.locator('[data-edit="profile:occupation"]').click();
+  await expect(page.locator('input[name="occupation-mode"][value="custom"]')).toBeChecked();
+  await expect(page.locator("#occupation-custom")).toHaveValue("私人偵探");
+  await expect(page.locator("#occupation-select")).toBeHidden();
+});
+
 test("known occupation is bilingual in copied text and JSON export", async ({page}) => {
   await page.addInitScript(() => {
     Object.defineProperty(navigator,"clipboard",{configurable:true,value:{writeText:async text=>{window.__copiedText=String(text);}}});

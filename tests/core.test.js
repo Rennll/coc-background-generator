@@ -365,7 +365,7 @@ test("all occupation IDs are unique, source labels are present, and list is not 
   assert.equal(officialExamples.length,8,"only eight entries are corroborated as official wiki examples");
   for(const o of officialExamples){assert.equal(o.officialCorroboration,"chaosium_official_rules_wiki_occupations");assert.match(o.notes,/不等於已核對 Investigator Handbook 原頁/);}
   assert.match(occupations.sources.find(source=>source.id==="chaosium_official_rules_wiki_occupations").supports,/不證明.*官方繁中譯名/);
-  assert.equal(occupations.occupations.length,91,"canonical handbook entries");
+  assert.equal(occupations.occupations.length,92,"canonical handbook entries after splitting Soldier and Marine");
   assert.equal(occupations.aliases.length,21,"cross-reference aliases");
   const expectedHandbookNames = `Accountant
 Acrobat
@@ -464,7 +464,8 @@ Scientist
 Secretary
 Shopkeeper
 Smuggler
-Soldier/Marine
+Soldier
+Marine
 Spy
 Street Punk
 Student/Intern
@@ -480,7 +481,7 @@ White-collar Worker
 Zealot
 Zookeeper`.split("\n");
   const actualHandbookNames = [...occupations.occupations,...occupations.aliases].map(o=>o.englishCandidate).sort();
-  assert.equal(expectedHandbookNames.length,112,"the supplied Handbook list has 112 canonical names and see-aliases");
+  assert.equal(expectedHandbookNames.length,113,"splitting Soldier/Marine preserves both distinct canonical names and see-aliases");
   assert.deepEqual(actualHandbookNames,[...expectedHandbookNames].sort(),
     "all supplied Handbook entries are represented exactly once, with no omissions or invented names");
   const expectedTags = {

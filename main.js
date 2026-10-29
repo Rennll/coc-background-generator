@@ -116,14 +116,16 @@ function renderPreview(){
     document.querySelector(`[data-edit="${key}"]`)?.addEventListener("click",beginEdit);
     document.querySelector(`[data-edit-value="${key}"]`)?.addEventListener("click",beginEdit);
     document.querySelector(`[data-copy="${key}"]`)?.addEventListener("click",async()=>{try{let text=f.section==="profile"?String(state.character.profile[f.id]??""):buildFieldText(state.character,f.id);if(f.section==="profile"&&f.id==="occupation"){await loadOccupations();text=formatOccupation(text);}await copyText(text);state.error="已複製欄位內容。";}catch(e){state.error=`複製失敗：${e.message}`;}renderPreview();});
-    if(f.section==="profile"&&f.id==="occupation") document.querySelector("#occupation-select")?.addEventListener("change",event=>{const wrap=document.querySelector("#occupation-custom-wrap");if(wrap)wrap.hidden=event.target.value!=="other_custom";});
+    if(f.section==="profile"&&f.id==="occupation") document.querySelectorAll('input[name="occupation-mode"]').forEach(input=>input.addEventListener("change",event=>{const customMode=event.target.value==="custom";const listWrap=document.querySelector("#occupation-list-wrap"),customWrap=document.querySelector("#occupation-custom-wrap");if(listWrap)listWrap.hidden=customMode;if(customWrap)customWrap.hidden=!customMode;}));
     document.querySelector(`[data-save="${key}"]`)?.addEventListener("click",()=>{try{
       let value=document.querySelector("#editor")?.value ?? "";
       if(f.section==="profile"&&f.id==="occupation"){
-        const selected=document.querySelector("#occupation-select")?.value ?? "";
-        if(selected==="other_custom") value=document.querySelector("#occupation-custom")?.value.trim() ?? "";
-        else if(selected==="") value="";
-        else value=state.occupations.occupations.find(o=>o.id===selected)?.name ?? "";
+        const mode=document.querySelector('input[name="occupation-mode"]:checked')?.value ?? "preset";
+        if(mode==="custom") value=document.querySelector("#occupation-custom")?.value.trim() ?? "";
+        else {
+          const selected=document.querySelector("#occupation-select")?.value ?? "";
+          value=selected ? (state.occupations.occupations.find(o=>o.id===selected)?.name ?? "") : "";
+        }
       }
       if(f.section==="profile"&&f.id==="name"){const previousName=String(state.character.profile.name??"");value=String(value).trim();if(value!==previousName)state.nameClassification=null;state.pendingName=null;}state.character=updateCharacterField(state.character,f.section,f.id,value);state.editing=null;state.error="";saveProgress();
     }catch(e){state.error=e.message;}renderPreview();});
@@ -151,11 +153,12 @@ function getOccupationEnglish(name){return state.occupations?.occupations.find(o
 function formatOccupation(name){const value=String(name??"");const english=getOccupationEnglish(value);return english?`${value}（${english}）`:value;}
 function withOccupationDisplay(character){return {...character,profile:{...character.profile,occupation:formatOccupation(character.profile?.occupation)}};}
 function occupationEditor(display){
-  const known=state.occupations.occupations.find(o=>o.name===display),selected=known?.id ?? (display?"other_custom":"");
+  const known=state.occupations.occupations.find(o=>o.name===display),selected=known?.id ?? "";
+  const mode=known||!display?"preset":"custom";
   const categories={education_research:"教育與研究",media_communication:"媒體與傳播",investigation_law:"調查與法律",health_care:"醫療與照護",business_trade:"商業與貿易",technical_manual:"技術與實務",transport:"交通運輸",arts_entertainment:"藝術與娛樂",other_livelihood:"其他生活來源",outdoors:"戶外與探險",service:"服務業",religion:"宗教",crime:"犯罪與地下活動",labor:"勞動與採掘",government:"政府與公共事務",public_service:"公共服務",military:"軍事",office:"辦公與行政",occult:"神秘學",community:"社群與文化",animal_care:"動物照護"},grouped={};
   for(const o of state.occupations.occupations){(grouped[o.category]??=[]).push(o);}
   const groups=Object.entries(grouped).map(([category,items])=>`<optgroup label="${esc(categories[category]??category)}">${items.map(o=>`<option value="${esc(o.id)}" ${selected===o.id?"selected":""}>${esc(o.name)}（${esc(o.englishCandidate)}）</option>`).join("")}</optgroup>`).join("");
-  return `<label class="field-label" for="occupation-select">選擇職業</label><select id="occupation-select" class="input"><option value="" ${selected===""?"selected":""}>不設定職業</option>${groups}<option value="other_custom" ${selected==="other_custom"?"selected":""}>其他：自行填寫職業</option></select><p class="muted">依分類選擇職業，或自行填寫清單以外的職業。括號內為英文原名。</p><div id="occupation-custom-wrap" ${selected==="other_custom"?"":"hidden"}><label class="field-label" for="occupation-custom">自訂職業名稱</label><input id="occupation-custom" class="input" value="${selected==="other_custom"?esc(display):""}" placeholder="例如：鐘錶匠" maxlength="120"></div>`;
+  return `<div class="occupation-editor"><p class="field-label">職業來源</p><div class="occupation-mode"><label class="option"><input type="radio" name="occupation-mode" value="preset" ${mode==="preset"?"checked":""}><span>從既有職業列表選擇</span></label><label class="option"><input type="radio" name="occupation-mode" value="custom" ${mode==="custom"?"checked":""}><span>自行填寫其他職業</span></label></div><div id="occupation-list-wrap" ${mode==="custom"?"hidden":""}><label class="field-label" for="occupation-select">既有職業</label><select id="occupation-select" class="input"><option value="" ${selected===""?"selected":""}>不設定職業</option>${groups}</select></div><div id="occupation-custom-wrap" ${mode==="custom"?"":"hidden"}><label class="field-label" for="occupation-custom">自訂職業名稱</label><input id="occupation-custom" class="input" value="${mode==="custom"?esc(display):""}" placeholder="例如：鐘錶匠" maxlength="120"></div><p class="muted">選擇其中一種方式。自訂職業會取代既有職業，並保留你輸入的名稱。</p></div>`;
 }
 function reset(){state.answers={};state.step=0;state.character=null;state.editing=null;state.error="";state.generatedNames.clear();state.nameClassification=null;state.pendingName=null;try{localStorage.removeItem(STORAGE_KEY);}catch{
   // Ignore errors when browser storage is unavailable or restricted.
