@@ -691,7 +691,7 @@ test("full background text omits whitespace-only fields but preserves nonblank e
   assert.doesNotMatch(text, /外貌描述：  外貌文字  /);
 });
 
-test("JSON export validates the complete version-1 contract and ignores extra character data", () => {
+test("JSON export validates the complete version-2 contract and ignores extra character data", () => {
   const character = buildCharacter(completeAnswers(), templates, questions, {
     name: "測試角色", occupation: "研究員", age: 42, birthplace: "臺北", residence: "臺北"
   });
@@ -699,7 +699,9 @@ test("JSON export validates the complete version-1 contract and ignores extra ch
   character.stats = { STR: 99 };
   character.skills = ["occult"];
   character.background.unexpected = "must not export";
-  const exported = JSON.parse(exportJSON(character, "2026-10-28T00:00:00.000Z"));
+  const exported = JSON.parse(exportJSON(character, "2026-10-28T00:00:00.000Z", "Journalist"));
+  assert.equal(exported.profile.occupation_en, "Journalist");
+  assert.equal(exported.version, 2);
   assert.deepEqual(Object.keys(exported).sort(), ["background", "meta", "profile", "version"]);
   assert.deepEqual(Object.keys(exported.profile).sort(), ["age", "birthplace", "name", "occupation", "occupation_en", "residence"]);
   assert.deepEqual(Object.keys(exported.background).sort(), Object.keys(templates.fieldLabels).sort());
