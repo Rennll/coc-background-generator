@@ -625,7 +625,7 @@ test("American name candidate supports cancel, reroll, confirm, and manual edit"
 
   await nameField.locator("[data-name-cancel]").click();
   await expect(nameField.locator("[data-name-candidate]")).toHaveCount(0);
-  await expect(nameField.locator(".value-button")).toHaveText("尚未填寫");
+  await expect(nameField.locator("#editor")).toHaveValue("");
 
   await nameField.locator('[data-edit="profile:name"]').click();
   await expect(nameField.locator("[data-name-culture]")).toHaveValue("american");
