@@ -58,7 +58,7 @@ function renderPreview(){
         else if(selected==="") value="";
         else value=state.occupations.occupations.find(o=>o.id===selected)?.name ?? "";
       }
-      if(f.section==="profile"&&f.id==="name"){const previousName=String(state.character.profile.name??"");value=String(value).trim();if(value!==previousName)state.nameClassification=value?{label:"自訂姓名",source:"custom"}:null;state.pendingName=null;}state.character=updateCharacterField(state.character,f.section,f.id,value);state.editing=null;state.error="";
+      if(f.section==="profile"&&f.id==="name"){const previousName=String(state.character.profile.name??"");value=String(value).trim();if(value!==previousName)state.nameClassification=null;state.pendingName=null;}state.character=updateCharacterField(state.character,f.section,f.id,value);state.editing=null;state.error="";
     }catch(e){state.error=e.message;}renderPreview();});
     document.querySelector(`[data-cancel="${key}"]`)?.addEventListener("click",()=>{state.editing=null;state.error="";renderPreview();});
   }
