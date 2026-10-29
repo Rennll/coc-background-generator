@@ -462,6 +462,8 @@ test("questionnaire and preview remain free of horizontal overflow at mobile, ta
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({width, height: 900});
     await page.goto("/");
+    await page.evaluate(() => localStorage.removeItem("coc-background-generator.progress.v1"));
+    await page.reload();
     await expect(page.getByRole("heading", {name:"你的角色長什麼樣子？"})).toBeVisible();
     const questionnaireOverflow = await page.evaluate(() => ({
       viewport: window.innerWidth,
@@ -791,4 +793,57 @@ test("background preview keeps reading hierarchy and responsive layout on deskto
   await expect(nameField.locator("[data-name-cancel]")).toBeVisible();
   await expect(nameField.locator("[data-name-reroll]")).toBeVisible();
   await expect(nameField.locator("[data-name-confirm]")).toBeVisible();
+});
+
+
+test("questionnaire progress is restored after a page reload", async ({page}) => {
+  await page.goto("/");
+  await expect(page.getByRole("heading",{name:"你的角色長什麼樣子？"})).toBeVisible();
+  await page.locator('input[name="answer"][value="neat_reliable"]').check();
+  await page.locator("#next").click();
+  await expect(page.getByRole("heading",{name:"他／她相信什麼？"})).toBeVisible();
+  await page.reload();
+  await expect(page.getByRole("heading",{name:"他／她相信什麼？"})).toBeVisible();
+  await page.locator("#prev").click();
+  await expect(page.locator('input[name="answer"][value="neat_reliable"]')).toBeChecked();
+  await page.locator("#next").click();
+  await expect(page.getByRole("heading",{name:"他／她相信什麼？"})).toBeVisible();
+});
+
+test("completed character and manual edits survive reload, and restart clears saved progress", async ({page}) => {
+  await page.goto("/");
+  for (const optionId of [
+    "neat_reliable","truth_above_comfort","family_member","family_secret",
+    "mysterious_object","mystery_wrongness","deceived_again","deceived_misunderstood",
+    "quiet_listener","hometown","knowledge_research","research_contradiction"
+  ]) await answer(page,optionId);
+  await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
+  const nameField=page.locator(".field").filter({has:page.getByRole("heading",{name:"姓名",exact:true})});
+  await nameField.locator('[data-edit="profile:name"]').click();
+  await page.locator("#editor").fill("林測試保存");
+  await nameField.getByRole("button",{name:"儲存"}).click();
+  await page.reload();
+  await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
+  await expect(nameField.locator(".value-button")).toHaveText("林測試保存");
+  await page.once("dialog",dialog=>dialog.accept());
+  await page.locator("#restart").click();
+  await expect(page.getByRole("heading",{name:"你的角色長什麼樣子？"})).toBeVisible();
+  const saved=await page.evaluate(()=>localStorage.getItem("coc-background-generator.progress.v1"));
+  expect(saved).toBeNull();
+});
+
+test("optional JSON datasets are not fetched before their features are needed", async ({page}) => {
+  const dataRequests=[];
+  page.on("request",request=>{
+    const url=new URL(request.url());
+    if(url.pathname.endsWith(".json")) dataRequests.push(url.pathname);
+  });
+  await page.goto("/");
+  await page.evaluate(() => localStorage.removeItem("coc-background-generator.progress.v1"));
+  await page.reload();
+  await expect(page.getByRole("heading",{name:"你的角色長什麼樣子？"})).toBeVisible();
+  expect(dataRequests).toContain("/data/questions.json");
+  expect(dataRequests).not.toContain("/data/templates.json");
+  expect(dataRequests).not.toContain("/data/occupations.json");
+  expect(dataRequests).not.toContain("/data/names.json");
 });
