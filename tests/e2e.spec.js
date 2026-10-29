@@ -430,13 +430,13 @@ test("known occupation is bilingual in copied text and JSON export", async ({pag
   await occupationField.locator('[data-edit="profile:occupation"]').click();
   await page.locator("#occupation-select").selectOption("journalist");
   await occupationField.locator('[data-save="profile:occupation"]').click();
-  await expect(occupationField.locator(".value-button")).toHaveText("記者");
+  await expect(occupationField.locator(".value-button")).toHaveText("新聞記者");
 
   await occupationField.locator('[data-copy="profile:occupation"]').click();
-  await expect.poll(()=>page.evaluate(()=>window.__copiedText)).toBe("記者（Journalist）");
+  await expect.poll(()=>page.evaluate(()=>window.__copiedText)).toBe("新聞記者（Journalist）");
 
   await page.locator("#copyAll").click();
-  await expect.poll(()=>page.evaluate(()=>window.__copiedText)).toContain("職業：記者（Journalist）");
+  await expect.poll(()=>page.evaluate(()=>window.__copiedText)).toContain("職業：新聞記者（Journalist）");
 
   const downloadPromise=page.waitForEvent("download");
   await page.locator("#export").click();
@@ -446,7 +446,7 @@ test("known occupation is bilingual in copied text and JSON export", async ({pag
   for await (const chunk of stream) exportedText+=chunk.toString("utf8");
   const exported=JSON.parse(exportedText);
   expect(exported.version).toBe(2);
-  expect(exported.profile.occupation).toBe("記者");
+  expect(exported.profile.occupation).toBe("新聞記者");
   expect(exported.profile.occupation_en).toBe("Journalist");
 });
 
@@ -548,12 +548,14 @@ test("blank background fields stay visible, full copy skips them, and single-fie
   await expect(beliefField.getByText("尚未填寫")).toBeVisible();
 
   await page.locator("#copyAll").click();
+  await expect(page.getByRole("status")).toContainText("已複製完整背景。");
   const fullText=await page.evaluate(()=>navigator.clipboard.readText());
   expect(fullText).not.toContain("信念：");
   expect(fullText).toContain("外貌描述：");
 
   await beliefField.locator('[data-copy="background:belief"]').click();
-  expect(await page.evaluate(()=>navigator.clipboard.readText())).toBe("");
+  await expect(page.getByRole("status")).toContainText("已複製欄位內容。");
+  await expect.poll(()=>page.evaluate(()=>navigator.clipboard.readText())).toBe("");
 });
 
 
