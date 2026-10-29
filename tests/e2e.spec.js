@@ -694,3 +694,31 @@ test("saved generated and manual names survive candidate cancellation and cultur
   expect(exported.profile.name).toBe("手動覆寫姓名");
 });
 
+test("name candidate omits removed helper text and remains usable on a narrow viewport", async ({page}) => {
+  await page.setViewportSize({width:375,height:812});
+  await page.goto("/");
+  for (const optionId of [
+    "neat_reliable","truth_above_comfort","family_member","family_secret",
+    "mysterious_object","mystery_wrongness","deceived_again","deceived_misunderstood",
+    "quiet_listener","hometown","knowledge_research","research_contradiction"
+  ]) {
+    await answer(page,optionId);
+  }
+  await expect(page.getByRole("heading",{name:"背景預覽"})).toBeVisible();
+  await page.locator('[data-edit="profile:name"]').click();
+
+  await expect(page.locator(".name-candidate")).toBeVisible();
+  await expect(page.locator("[data-name-candidate]")).toBeVisible();
+  await expect(page.locator(".name-tools")).not.toContainText("不需選擇性別");
+  await expect(page.locator(".name-tools")).not.toContainText("系統會一起抽選男性或女性常用名");
+  await expect(page.locator("[data-name-culture]")).toBeVisible();
+  await expect(page.locator("[data-name-cancel]")).toBeVisible();
+  await expect(page.locator("[data-name-reroll]")).toBeVisible();
+  await expect(page.locator("[data-name-confirm]")).toBeVisible();
+
+  const dimensions = await page.evaluate(() => ({
+    viewport: document.documentElement.clientWidth,
+    content: document.documentElement.scrollWidth
+  }));
+  expect(dimensions.content).toBeLessThanOrEqual(dimensions.viewport);
+});
