@@ -7,4 +7,4 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-vis
 
 .name-tools{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:10px;margin-top:12px}.name-tools .muted{grid-column:1/-1;font-size:.85rem;margin:0}.name-classification{font-size:.85rem;color:var(--muted);margin:7px 0 0}.name-candidate{margin-top:14px;padding:12px;border:1px dashed var(--line);border-radius:8px;background:#f8f3eb}.name-candidate p{margin:0 0 5px}.name-candidate [data-name-candidate]{font-size:1.15rem;font-weight:700;letter-spacing:.04em}.name-candidate .actions{justify-content:flex-start;margin-top:12px}
 
-.name-culture-control{display:flex;flex-direction:column;gap:4px;width:100%;min-width:0;max-width:none;font-size:.9rem;font-weight:600}.name-culture-control .input{font-weight:400}
+.name-culture-control{display:flex;flex-direction:column;gap:4px;width:100%;min-width:0;max-width:none;font-size:.9rem;font-weight:600}.name-culture-control .input{font-weight:400}@media(max-width:420px){.name-tools{grid-template-columns:minmax(0,1fr)}.name-tools>.btn{justify-self:start}}
