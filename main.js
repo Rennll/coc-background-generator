@@ -6,6 +6,7 @@ import { generateName } from "./lib/names.js";
 
 const app = document.querySelector("#app");
 const STORAGE_KEY = "coc-background-generator.progress.v1";
+const VALID_NAME_CULTURES = ["taiwanHan", "japanese"];
 const state = { questions:null, templates:null, occupations:null, names:null, nameDataError:"", templatesPromise:null, occupationsPromise:null, namesPromise:null, selectedNameCulture:"taiwanHan", generatedNames:new Set(), nameClassification:null, pendingName:null, answers:{}, step:0, character:null, editing:null, error:"" };
 const esc = (v) => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const get = (url) => fetch(url).then(r => { if(!r.ok) throw new Error(`載入失敗：${url}`); return r.json(); });
@@ -37,15 +38,16 @@ function restoreProgress(){
       }
     }
     if(typeof state.answers.customOccupation !== "string") delete state.answers.customOccupation;
-    state.step = Number.isInteger(saved.step) ? Math.max(0,saved.step) : 0;
-    state.selectedNameCulture = saved.selectedNameCulture === "japanese" ? "japanese" : "taiwanHan";
+    const savedStep = Number.isInteger(saved.step) ? Math.max(0,saved.step) : 0;
+    state.selectedNameCulture = VALID_NAME_CULTURES.includes(saved.selectedNameCulture) ? saved.selectedNameCulture : "taiwanHan";
     if(saved.character && typeof saved.character === "object" && saved.character.profile && saved.character.background){
       state.character = saved.character;
       if(saved.nameClassification && typeof saved.nameClassification.label === "string"){
         state.nameClassification = { label:saved.nameClassification.label, source:"generated", culture:String(saved.nameClassification.culture ?? "") };
       }
     }
-    state.step = Math.min(state.step,Math.max(0,getActiveFlow(state.answers,state.questions).length-1));
+    // Clamp the restored step after invalid answers have been removed from the active flow.
+    state.step = Math.min(savedStep,Math.max(0,getActiveFlow(state.answers,state.questions).length-1));
   } catch {
     // Ignore malformed or unavailable saved state and start with a fresh questionnaire.
   }
@@ -110,7 +112,7 @@ function renderPreview(){
   app.innerHTML=`<section class="panel"><p class="eyebrow">INVESTIGATOR BACKGROUND</p><h2 class="qtitle">背景預覽</h2><p class="muted">所有欄位都會保留顯示。你可以修改或清空任何欄位。</p><div class="toolbar"><button class="btn btn-primary" id="copyAll">複製完整背景</button><button class="btn" id="export">匯出 JSON</button><button class="btn" id="restart">重新產生</button></div><div class="grid">${fields.map(f=>renderField(f)).join("")}</div><p class="notice">角色資料會自動保存在此瀏覽器；重要資料仍建議匯出 JSON 備份。</p>${state.error?`<p role="status">${esc(state.error)}</p>`:""}</section>`;
   for(const f of fields){
     const key=`${f.section}:${f.id}`;
-    const beginEdit=async()=>{const isNameField=f.section==="profile"&&f.id==="name";if(f.section==="profile"&&f.id==="occupation"){try{await loadOccupations();}catch(e){state.error=`職業資料載入失敗：${e.message}`;renderPreview();return;}}if(isNameField){state.pendingName=null;await loadNames();}state.editing=key;if(isNameField)createNameCandidate();renderPreview();document.querySelector("#editor")?.focus();};
+    const beginEdit=async()=>{const isNameField=f.section==="profile"&&f.id==="name";if(f.section==="profile"&&f.id==="occupation"){try{await loadOccupations();}catch(e){state.error=`職業資料載入失敗：${e.message}`;renderPreview();return;}}if(isNameField){state.pendingName=null;await loadNames(); /* loadNames handles fetch errors and stores a user-facing message */}state.editing=key;if(isNameField)createNameCandidate();renderPreview();document.querySelector("#editor")?.focus();};
     document.querySelector(`[data-edit="${key}"]`)?.addEventListener("click",beginEdit);
     document.querySelector(`[data-edit-value="${key}"]`)?.addEventListener("click",beginEdit);
     document.querySelector(`[data-copy="${key}"]`)?.addEventListener("click",async()=>{const text=f.section==="profile"?String(state.character.profile[f.id]??""):buildFieldText(state.character,f.id);try{await copyText(text);state.error="已複製欄位內容。";}catch(e){state.error=`複製失敗：${e.message}`;}renderPreview();});
@@ -153,5 +155,7 @@ function occupationEditor(display){
   const groups=Object.entries(grouped).map(([category,items])=>`<optgroup label="${esc(categories[category]??category)}">${items.map(o=>`<option value="${esc(o.id)}" ${selected===o.id?"selected":""}>${esc(o.name)}（${esc(o.englishCandidate)}） ${esc(statusLabel(o))}</option>`).join("")}</optgroup>`).join("");
   return `<label class="field-label" for="occupation-select">選擇職業</label><select id="occupation-select" class="input"><option value="" ${selected===""?"selected":""}>不設定職業</option>${groups}<option value="other_custom" ${selected==="other_custom"?"selected":""}>其他：自行填寫職業</option></select><p class="muted">清單依使用者提供且已逐字與實體 Investigator Handbook 核對的英文清單整理。括號保留英文原名與手冊標籤；繁中名稱為專案工作譯名，1920 年代適用性仍須逐項確認。</p><div id="occupation-custom-wrap" ${selected==="other_custom"?"":"hidden"}><label class="field-label" for="occupation-custom">自訂職業名稱</label><input id="occupation-custom" class="input" value="${selected==="other_custom"?esc(display):""}" placeholder="例如：鐘錶匠" maxlength="120"></div>`;
 }
-function reset(){state.answers={};state.step=0;state.character=null;state.editing=null;state.error="";state.generatedNames.clear();state.nameClassification=null;state.pendingName=null;try{localStorage.removeItem(STORAGE_KEY);}catch{}renderQuestion();}
+function reset(){state.answers={};state.step=0;state.character=null;state.editing=null;state.error="";state.generatedNames.clear();state.nameClassification=null;state.pendingName=null;try{localStorage.removeItem(STORAGE_KEY);}catch{
+  // Ignore errors when browser storage is unavailable or restricted.
+}renderQuestion();}
 init();
