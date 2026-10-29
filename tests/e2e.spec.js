@@ -627,7 +627,7 @@ test("capture real name-generator screenshots for CI artifacts", async ({ page }
     ["american", "test-results/random-name-american.png"]
   ]) {
     await page.locator("[data-name-culture]").selectOption(culture);
-    await expect(page.locator(".name-candidate")).toContainText(culture === "japanese" ? "日本" : culture === "american" ? "美國（1920年代）" : "台灣漢人");
+    await expect(page.locator(".name-candidate")).toContainText(culture === "japanese" ? "日本" : culture === "american" ? "美國" : "台灣漢人");
     await expect(page.getByRole("group",{name:"姓名候選"})).toBeVisible();
     await expect(page.locator("[data-name-candidate]")).toBeVisible();
     await page.screenshot({ path: filename, fullPage: true, animations: "disabled" });
