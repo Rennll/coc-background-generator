@@ -45,7 +45,7 @@ function renderPreview(){
   app.innerHTML=`<section class="panel"><p class="eyebrow">INVESTIGATOR BACKGROUND</p><h2 class="qtitle">背景預覽</h2><p class="muted">所有欄位都會保留顯示。你可以修改或清空任何欄位。</p><div class="toolbar"><button class="btn btn-primary" id="copyAll">複製完整背景</button><button class="btn" id="export">匯出 JSON</button><button class="btn" id="restart">重新產生</button></div><div class="grid">${fields.map(f=>renderField(f)).join("")}</div><p class="notice">第一版不會自動儲存。請匯出 JSON 或複製文字保存。</p>${state.error?`<p role="status">${esc(state.error)}</p>`:""}</section>`;
   for(const f of fields){
     const key=`${f.section}:${f.id}`;
-    const beginEdit=()=>{if(f.section==="profile"&&f.id==="name")state.pendingName=null;state.editing=key;renderPreview();document.querySelector("#editor")?.focus();};
+    const beginEdit=()=>{const isNameField=f.section==="profile"&&f.id==="name";if(isNameField)state.pendingName=null;state.editing=key;if(isNameField)createNameCandidate();renderPreview();document.querySelector("#editor")?.focus();};
     document.querySelector(`[data-edit="${key}"]`)?.addEventListener("click",beginEdit);
     document.querySelector(`[data-edit-value="${key}"]`)?.addEventListener("click",beginEdit);
     document.querySelector(`[data-copy="${key}"]`)?.addEventListener("click",async()=>{const text=f.section==="profile"?String(state.character.profile[f.id]??""):buildFieldText(state.character,f.id);try{await copyText(text);state.error="已複製欄位內容。";}catch(e){state.error=`複製失敗：${e.message}`;}renderPreview();});
