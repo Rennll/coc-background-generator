@@ -569,9 +569,11 @@ test("name generator candidate can be cancelled, rerolled, confirmed, and manual
   expect(candidate).toBeTruthy();
   expect(candidate).not.toBe(firstCandidate);
   await nameField.getByRole("button",{name:"確認套用"}).click();
-  await expect(nameField.locator("#editor")).toHaveValue(candidate);
+  await expect(nameField.locator("#editor")).toHaveCount(0);
+  await expect(nameField.locator(".name-candidate")).toHaveCount(0);
+  await expect(nameField.locator('[data-save="profile:name"]')).toHaveCount(0);
+  await expect(nameField.locator(".value-button")).toHaveText(candidate);
   await expect(nameField.locator("[data-name-classification]")).toContainText(/男性常用名|女性常用名/);
-  await nameField.locator('[data-save="profile:name"]').click();
   await expect(nameField.locator("[data-name-culture]")).toHaveCount(0);
   await nameField.locator('[data-edit="profile:name"]').click();
   await page.locator("#editor").fill("手動自訂姓名");
@@ -581,9 +583,11 @@ test("name generator candidate can be cancelled, rerolled, confirmed, and manual
   await nameField.locator('[data-edit="profile:name"]').click();
   await generateCandidateByCulture(page, "japanese");
   await nameField.getByRole("button",{name:"確認套用"}).click();
-  const regeneratedName = await nameField.locator("#editor").inputValue();
+  const regeneratedName = (await nameField.locator(".value-button").textContent())?.trim();
+  expect(regeneratedName).toBeTruthy();
+  await expect(nameField.locator("#editor")).toHaveCount(0);
+  await expect(nameField.locator(".name-candidate")).toHaveCount(0);
   await expect(nameField.locator("[data-name-classification]")).toContainText(/男性常用名|女性常用名/);
-  await nameField.locator('[data-save="profile:name"]').click();
   await expect(nameField.locator(".value-button")).toHaveText(regeneratedName);
   await expect(nameField.locator("[data-name-classification]")).toContainText(/男性常用名|女性常用名/);
   await nameField.locator('[data-edit="profile:name"]').click();
