@@ -5,10 +5,10 @@ async function generateCandidateByCulture(page, targetCulture) {
   const selector = page.locator("[data-name-culture]");
   const current = await selector.inputValue();
   const target = targetCulture;
-  expect(["taiwanHan", "japanese"]).toContain(target);
+  expect(["taiwanHan", "japanese", "american"]).toContain(target);
   expect(target).not.toBe(current);
   await selector.selectOption(target);
-  await expect(page.locator(".name-candidate")).toContainText(target === "japanese" ? "日本" : "台灣漢人");
+  await expect(page.locator(".name-candidate")).toContainText(target === "japanese" ? "日本" : target === "american" ? "美國（1920年代）" : "台灣漢人");
 }
 
 async function answer(page, optionId, {customOccupation} = {}) {
@@ -623,10 +623,11 @@ test("capture real name-generator screenshots for CI artifacts", async ({ page }
   await mkdir("test-results", { recursive: true });
   for (const [culture, filename] of [
     ["japanese", "test-results/random-name-japan.png"],
-    ["taiwanHan", "test-results/random-name-taiwan.png"]
+    ["taiwanHan", "test-results/random-name-taiwan.png"],
+    ["american", "test-results/random-name-american.png"]
   ]) {
     await page.locator("[data-name-culture]").selectOption(culture);
-    await expect(page.locator(".name-candidate")).toContainText(culture === "japanese" ? "日本" : "台灣漢人");
+    await expect(page.locator(".name-candidate")).toContainText(culture === "japanese" ? "日本" : culture === "american" ? "美國（1920年代）" : "台灣漢人");
     await expect(page.getByRole("group",{name:"姓名候選"})).toBeVisible();
     await expect(page.locator("[data-name-candidate]")).toBeVisible();
     await page.screenshot({ path: filename, fullPage: true, animations: "disabled" });
