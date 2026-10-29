@@ -50,20 +50,28 @@ function restoreProgress(){
     // Ignore malformed or unavailable saved state and start with a fresh questionnaire.
   }
 }
+async function loadTemplates(){
+  if(state.templates) return state.templates;
+  if(!state.templatesPromise) state.templatesPromise = get("./data/templates.json").then(data=>state.templates=data);
+  return state.templatesPromise;
+}
 async function loadOccupations(){
   if(state.occupations) return state.occupations;
   if(!state.occupationsPromise) state.occupationsPromise = get("./data/occupations.json").then(data=>state.occupations=data);
   return state.occupationsPromise;
+}
+async function loadNames(){
+  if(state.names) return state.names;
+  if(!state.namesPromise) state.namesPromise = get("./data/names.json").then(data=>state.names=data).catch(e=>{state.nameDataError=e.message;return null;});
+  return state.namesPromise;
 }
 async function init(){
   try {
     // Only the questionnaire data blocks the first interactive screen.
     state.questions = await get("./data/questions.json");
     restoreProgress();
-    state.templatesPromise = get("./data/templates.json").then(data=>state.templates=data);
-    state.namesPromise = get("./data/names.json").then(data=>state.names=data).catch(e=>{state.nameDataError=e.message;});
     if(state.character){
-      await state.templatesPromise;
+      await loadTemplates();
       renderPreview();
     } else {
       renderQuestion();
@@ -89,7 +97,7 @@ function renderQuestion(){
     const result=validateAnswers(state.answers,state.questions);
     if(!result.valid){state.error=result.errors[0].message;return renderQuestion();}
     try{
-      await state.templatesPromise;
+      await loadTemplates();
       state.character=buildCharacter(state.answers,state.templates,state.questions);
       state.editing=null;state.error="";saveProgress();renderPreview();
     }catch(e){state.error=e.message;renderQuestion();}
@@ -102,7 +110,7 @@ function renderPreview(){
   app.innerHTML=`<section class="panel"><p class="eyebrow">INVESTIGATOR BACKGROUND</p><h2 class="qtitle">背景預覽</h2><p class="muted">所有欄位都會保留顯示。你可以修改或清空任何欄位。</p><div class="toolbar"><button class="btn btn-primary" id="copyAll">複製完整背景</button><button class="btn" id="export">匯出 JSON</button><button class="btn" id="restart">重新產生</button></div><div class="grid">${fields.map(f=>renderField(f)).join("")}</div><p class="notice">第一版不會自動儲存。請匯出 JSON 或複製文字保存。</p>${state.error?`<p role="status">${esc(state.error)}</p>`:""}</section>`;
   for(const f of fields){
     const key=`${f.section}:${f.id}`;
-    const beginEdit=async()=>{const isNameField=f.section==="profile"&&f.id==="name";if(f.section==="profile"&&f.id==="occupation"){try{await loadOccupations();}catch(e){state.error=`職業資料載入失敗：${e.message}`;renderPreview();return;}}if(isNameField){state.pendingName=null;await state.namesPromise;}state.editing=key;if(isNameField)createNameCandidate();renderPreview();document.querySelector("#editor")?.focus();};
+    const beginEdit=async()=>{const isNameField=f.section==="profile"&&f.id==="name";if(f.section==="profile"&&f.id==="occupation"){try{await loadOccupations();}catch(e){state.error=`職業資料載入失敗：${e.message}`;renderPreview();return;}}if(isNameField){state.pendingName=null;await loadNames();}state.editing=key;if(isNameField)createNameCandidate();renderPreview();document.querySelector("#editor")?.focus();};
     document.querySelector(`[data-edit="${key}"]`)?.addEventListener("click",beginEdit);
     document.querySelector(`[data-edit-value="${key}"]`)?.addEventListener("click",beginEdit);
     document.querySelector(`[data-copy="${key}"]`)?.addEventListener("click",async()=>{const text=f.section==="profile"?String(state.character.profile[f.id]??""):buildFieldText(state.character,f.id);try{await copyText(text);state.error="已複製欄位內容。";}catch(e){state.error=`複製失敗：${e.message}`;}renderPreview();});
