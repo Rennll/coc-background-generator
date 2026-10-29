@@ -416,6 +416,40 @@ test("occupation selector keeps English names and custom entry without verbose m
   await occupationField.locator('[data-save="profile:occupation"]').click();
   await expect(occupationField.getByText("鐘錶匠")).toBeVisible();
 });
+test("known occupation is bilingual in copied text and JSON export", async ({page}) => {
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator,"clipboard",{configurable:true,value:{writeText:async text=>{window.__copiedText=String(text);}}});
+  });
+  await page.goto("/");
+  for (const optionId of [
+    "neat_reliable","truth_above_comfort","family_member","family_secret",
+    "mysterious_object","mystery_wrongness","deceived_again","deceived_misunderstood",
+    "quiet_listener","hometown","knowledge_research","research_contradiction"
+  ]) await answer(page,optionId);
+  const occupationField=page.locator(".field").filter({has:page.getByRole("heading",{name:"職業",exact:true})});
+  await occupationField.locator('[data-edit="profile:occupation"]').click();
+  await page.locator("#occupation-select").selectOption("journalist");
+  await occupationField.locator('[data-save="profile:occupation"]').click();
+  await expect(occupationField.locator(".value-button")).toHaveText("記者");
+
+  await occupationField.locator('[data-copy="profile:occupation"]').click();
+  await expect.poll(()=>page.evaluate(()=>window.__copiedText)).toBe("記者（Journalist）");
+
+  await page.locator("#copyAll").click();
+  await expect.poll(()=>page.evaluate(()=>window.__copiedText)).toContain("職業：記者（Journalist）");
+
+  const downloadPromise=page.waitForEvent("download");
+  await page.locator("#export").click();
+  const download=await downloadPromise;
+  const stream=await download.createReadStream();
+  let exportedText="";
+  for await (const chunk of stream) exportedText+=chunk.toString("utf8");
+  const exported=JSON.parse(exportedText);
+  expect(exported.version).toBe(2);
+  expect(exported.profile.occupation).toBe("記者");
+  expect(exported.profile.occupation_en).toBe("Journalist");
+});
+
 test("restart confirmation preserves edits on cancel and resets on accept", async ({page}) => {
   await page.goto("/");
   await answer(page,"neat_reliable");
