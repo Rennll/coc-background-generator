@@ -693,7 +693,7 @@ test("full background text omits whitespace-only fields but preserves nonblank e
 
 test("JSON export validates the complete version-2 contract and ignores extra character data", () => {
   const character = buildCharacter(completeAnswers(), templates, questions, {
-    name: "測試角色", occupation: "研究員", age: 42, birthplace: "臺北", residence: "臺北"
+    name: "測試角色", occupation: "記者", age: 42, birthplace: "臺北", residence: "臺北"
   });
   character.rawAnswers = completeAnswers();
   character.stats = { STR: 99 };
