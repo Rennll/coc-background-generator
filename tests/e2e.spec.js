@@ -646,7 +646,7 @@ test("saved generated and manual names survive candidate cancellation and cultur
   await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
   await nameField.locator("#name-culture").selectOption("japanese");
   await expect(nameField.locator("[data-name-candidate]")).toHaveCount(0);
-  await expect(nameField.locator(".value-button")).toHaveText(savedGeneratedName);
+  await expect(nameField.locator("#editor")).toHaveValue(savedGeneratedName);
   await expect(nameField.locator("[data-name-classification]")).toHaveText(savedGeneratedClassification);
 
   await nameField.locator('[data-cancel="profile:name"]').click();
@@ -656,9 +656,11 @@ test("saved generated and manual names survive candidate cancellation and cultur
   await expect(nameField.locator(".value-button")).toHaveText("手動覆寫姓名");
   await expect(nameField.locator("[data-name-classification]")).toHaveCount(0);
 
+  await nameField.locator('[data-edit="profile:name"]').click();
   await nameField.getByRole("button",{name:"產生姓名"}).click();
   await expect(nameField.locator("[data-name-candidate]")).toBeVisible();
   await nameField.getByRole("button",{name:"取消",exact:true}).click();
+  await nameField.locator('[data-cancel="profile:name"]').click();
   await expect(nameField.locator(".value-button")).toHaveText("手動覆寫姓名");
   await expect(nameField.locator("[data-name-classification]")).toHaveCount(0);
 
