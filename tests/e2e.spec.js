@@ -462,6 +462,8 @@ test("questionnaire and preview remain free of horizontal overflow at mobile, ta
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({width, height: 900});
     await page.goto("/");
+    await page.evaluate(() => localStorage.removeItem("coc-background-generator.progress.v1"));
+    await page.reload();
     await expect(page.getByRole("heading", {name:"你的角色長什麼樣子？"})).toBeVisible();
     const questionnaireOverflow = await page.evaluate(() => ({
       viewport: window.innerWidth,
